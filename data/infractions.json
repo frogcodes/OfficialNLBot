@@ -1,0 +1,43 @@
+{
+  "strikes": [
+    {
+      "user": "592025951857147904",
+      "removalDate": "2026-01-08T20:58:16.655Z",
+      "reason": "pensacola boy"
+    },
+    {
+      "user": "592025951857147904",
+      "removalDate": "2026-07-08T19:58:16.655Z",
+      "reason": "pensacola boy"
+    },
+    {
+      "user": "1225280376826761267",
+      "removalDate": "2025-10-08T20:00:49.803Z",
+      "reason": "bot"
+    },
+    {
+      "user": "592025951857147904",
+      "removalDate": "2026-10-08T19:58:16.655Z",
+      "reason": "hahah"
+    },
+    {
+      "user": "592025951857147904",
+      "removalDate": "2027-01-08T20:58:16.655Z",
+      "reason": "test"
+    }
+  ],
+  "suspensions": [
+    {
+      "user": "592025951857147904",
+      "removalDate": "2026-07-08T19:58:16.655Z",
+      "reason": "2 strikes (automatic suspension)"
+    }
+  ],
+  "bans": [
+    {
+      "user": "592025951857147904",
+      "appealDate": "2027-04-08T19:58:16.655Z",
+      "reason": "3 strikes (automatic ban)"
+    }
+  ]
+}

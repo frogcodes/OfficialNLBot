@@ -1,0 +1,114 @@
+{
+  "Capybaras": {
+    "image": "https://i.imgur.com/o1wgtGX.png",
+    "bannerImage": "images/drafted/capybaras_banner.png",
+    "color": "#ab3d10",
+    "roleId": "1181050438909444118",
+    "emoji": "<:Capybaras:1201236885918457886>"
+  },
+  "Cardinals": {
+    "image": "https://i.imgur.com/lokJSAC.png",
+    "bannerImage": "images/drafted/cardinals_banner.png",
+    "color": "#c1112f",
+    "roleId": "1181050438909444125",
+    "emoji": "<:Cardinals:1201232829217001572>"
+  },
+  "Eagles": {
+    "image": "https://i.imgur.com/UzIyaUU.png",
+    "bannerImage": "images/drafted/eagles_banner.png",
+    "color": "#eac800",
+    "roleId": "1181050438896844818",
+    "emoji": "<:eagles:1404150100640403616>"
+  },
+  "Elephants": {
+    "image": "https://i.imgur.com/IbkWDqA.png",
+    "bannerImage": "images/drafted/elephants_banner.png",
+    "color": "#565656",
+    "roleId": "1181050438896844819",
+    "emoji": "<:Elephants:1201238216792080497>"
+  },
+  "Kangaroos": {
+    "image": "https://i.imgur.com/opGzAKX.png",
+    "bannerImage": "images/drafted/kangaroos_banner.png",
+    "color": "#8f6651",
+    "roleId": "1181050438896844815",
+    "emoji": "<:Kangaroos:1201232845130170460>"
+  },
+  "Lynx": {
+    "image": "https://i.imgur.com/YD9bRVK.png",
+    "bannerImage": "images/drafted/lynx_banner.png",
+    "color": "#99ddff",
+    "roleId": "1272806442243592192",
+    "emoji": "<:Lynx:1277366796470452234>"
+  },
+  "Narwhals": {
+    "image": "https://i.imgur.com/G69AGYw.png",
+    "bannerImage": "images/drafted/narwhals_banner.png",
+    "color": "#3599bf",
+    "roleId": "1272804311688151162",
+    "emoji": "<:Narwhals:1277366819983720501>"
+  },
+  "Owls": {
+    "image": "https://i.imgur.com/4sEy0O9.png",
+    "bannerImage": "images/drafted/owls_banner.png",
+    "color": "#593929",
+    "roleId": "1181050438909444124",
+    "emoji": "<:Owls:1201232848208810216>"
+  },
+  "Panthers": {
+    "image": "https://i.imgur.com/kTZEWyD.png",
+    "bannerImage": "images/drafted/panthers_banner.png",
+    "color": "#3f3f3f",
+    "roleId": "1181050438909444119",
+    "emoji": "<:Panthers:1343335565000704051>"
+  },
+  "Raccoons": {
+    "image": "https://i.imgur.com/GDvPF0g.png",
+    "bannerImage": "images/drafted/raccoons_banner.png",
+    "color": "#545452",
+    "roleId": "1272804635136098345",
+    "emoji": "<:Raccoons:1277366867664830465>"
+  },
+  "Sharks": {
+    "image": "https://i.imgur.com/OWVHxEN.png",
+    "bannerImage": "images/drafted/sharks_banner.png",
+    "color": "#002a91",
+    "roleId": "1181050438909444122",
+    "emoji": "<:Sharks:1234209961995665428>"
+  },
+  "Squirrels": {
+    "image": "https://i.imgur.com/bLXkpyh.png",
+    "bannerImage": "images/drafted/squirrels_banner.png",
+    "color": "#694330",
+    "roleId": "1181050438926209077",
+    "emoji": "<:Squirrels:1201238219895865495>"
+  },
+  "Stingrays": {
+    "image": "https://i.imgur.com/ndiM2W2.png",
+    "bannerImage": "images/drafted/stingrays_banner.png",
+    "color": "#adadad",
+    "roleId": "1181050438909444120",
+    "emoji": "<:Stingrays:1234209963585437696>"
+  },
+  "Turtles": {
+    "image": "https://i.imgur.com/jeydE3K.png",
+    "bannerImage": "images/drafted/turtles_banner.png",
+    "color": "#c4bba7",
+    "roleId": "1181050438909444121",
+    "emoji": "<:Turtles:1234209964688408597>"
+  },
+  "Wolves": {
+    "image": "https://i.imgur.com/BK1i5D1.png",
+    "bannerImage": "images/drafted/wolves_banner.png",
+    "color": "#525252",
+    "roleId": "1181050438896844817",
+    "emoji": "<:Wolves:1343335566464385139>"
+  },
+  "Yetis": {
+    "image": "https://i.imgur.com/EsXEBHO.png",
+    "bannerImage": "images/drafted/yetis_banner.png",
+    "color": "#baf5ff",
+    "roleId": "1272803821709557820",
+    "emoji": "<:Yetis:1277366918998659092>"
+  }
+}

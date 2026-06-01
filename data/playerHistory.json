@@ -1,0 +1,2923 @@
+{
+  "players": {
+    "351480764602515487": [
+      {
+        "tier": "Delta",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "10/07/2025",
+        "released": "10/10/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "10/12/2025",
+        "released": null
+      }
+    ],
+    "548237511395246087": [
+      {
+        "tier": "Delta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/29/2025",
+        "released": "09/30/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Cheetahs",
+        "reason": "tier_change",
+        "signed": "09/30/2025",
+        "released": null
+      }
+    ],
+    "436005972314423307": [
+      {
+        "tier": "Apex",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": "09/22/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "09/30/2025",
+        "released": "10/08/2025"
+      }
+    ],
+    "671899287646633987": [
+      {
+        "tier": "Alpha",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "09/24/2025",
+        "released": "10/05/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Turtles",
+        "reason": "tier_change",
+        "signed": "10/05/2025",
+        "released": null
+      }
+    ],
+    "483068573036838923": [
+      {
+        "tier": "Apex",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "09/06/2025",
+        "released": "10/01/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "10/21/2025",
+        "released": null
+      }
+    ],
+    "750433689724256387": [
+      {
+        "tier": "Beta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "02/25/2024",
+        "released": "02/26/2024"
+      }
+    ],
+    "333466349311492106": [
+      {
+        "tier": "Delta",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "10/01/2025",
+        "released": null
+      }
+    ],
+    "691884481539211345": [
+      {
+        "tier": "Beta",
+        "team": "Squirrels",
+        "reason": "signed",
+        "signed": "04/19/2025",
+        "released": null
+      }
+    ],
+    "528195685128994817": [
+      {
+        "tier": "Apex",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "04/28/2025",
+        "released": "09/10/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "09/15/2025",
+        "released": null
+      }
+    ],
+    "734965795632709662": [
+      {
+        "tier": "Apex",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "04/26/2025",
+        "released": null
+      }
+    ],
+    "351477339101593600": [
+      {
+        "tier": "Delta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "08/27/2025",
+        "released": null
+      }
+    ],
+    "832299214380859423": [
+      {
+        "tier": "Alpha",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "08/19/2025",
+        "released": null
+      }
+    ],
+    "559542004204306464": [
+      {
+        "tier": "Delta",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "08/19/2025",
+        "released": "08/31/2025"
+      }
+    ],
+    "656627875360800786": [
+      {
+        "tier": "Apex",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "10/01/2025",
+        "released": null
+      }
+    ],
+    "1116010957274087566": [
+      {
+        "tier": "Omega",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "09/21/2025",
+        "released": "10/01/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "10/03/2025",
+        "released": null
+      }
+    ],
+    "909228434323038218": [
+      {
+        "tier": "Alpha",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "04/28/2025",
+        "released": "05/03/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "08/19/2025",
+        "released": null
+      }
+    ],
+    "1001195370619097239": [
+      {
+        "tier": "Alpha",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": "10/04/2025"
+      }
+    ],
+    "293217413606932481": [
+      {
+        "tier": "Apex",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "10/06/2025",
+        "released": null
+      }
+    ],
+    "288872488144863232": [
+      {
+        "tier": "Delta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "09/22/2025",
+        "released": "10/07/2025"
+      }
+    ],
+    "1031712480537350175": [
+      {
+        "tier": "Apex",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "04/22/2025",
+        "released": "05/19/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/24/2025",
+        "released": "10/17/2025"
+      }
+    ],
+    "711793737826828298": [
+      {
+        "tier": "Alpha",
+        "team": "Squirrels",
+        "reason": "signed",
+        "signed": "04/21/2025",
+        "released": null
+      }
+    ],
+    "716501205211152394": [
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "08/21/2025",
+        "released": null
+      }
+    ],
+    "559910183212417034": [
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "10/11/2025",
+        "released": null
+      }
+    ],
+    "364610957621723157": [
+      {
+        "tier": "Delta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/08/2025",
+        "released": "10/11/2025"
+      }
+    ],
+    "913343467080532008": [
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "02/26/2024",
+        "released": null
+      }
+    ],
+    "622869871667052574": [
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "02/26/2024",
+        "released": null
+      },
+      {
+        "tier": "Delta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "08/25/2025",
+        "released": null
+      }
+    ],
+    "846527754307371068": [
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "02/27/2024",
+        "released": "04/27/2025"
+      }
+    ],
+    "715219130898448455": [
+      {
+        "tier": "Omega",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "09/30/2025",
+        "released": "10/02/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Wolves",
+        "reason": "tier_change",
+        "signed": "10/02/2025",
+        "released": null
+      }
+    ],
+    "460579700666793994": [
+      {
+        "tier": "Delta",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "09/10/2025",
+        "released": "10/02/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "10/03/2025",
+        "released": null
+      },
+      {
+        "tier": "Delta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "10/03/2025",
+        "released": null
+      }
+    ],
+    "627320418767994880": [
+      {
+        "tier": "Alpha",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": "09/16/2025"
+      }
+    ],
+    "228745894223282176": [
+      {
+        "tier": "Apex",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/27/2025",
+        "released": "10/01/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "10/10/2025",
+        "released": null
+      }
+    ],
+    "841867378190581770": [
+      {
+        "tier": "Omega",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "09/22/2025",
+        "released": null
+      }
+    ],
+    "563944239738912802": [
+      {
+        "tier": "Alpha",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "05/06/2025",
+        "released": null
+      }
+    ],
+    "632407363315433473": [
+      {
+        "tier": "Apex",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": "09/14/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Kangaroos",
+        "reason": "tier_change",
+        "signed": "09/14/2025",
+        "released": null
+      }
+    ],
+    "738947648328826943": [
+      {
+        "tier": "Alpha",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "10/10/2025",
+        "released": null
+      }
+    ],
+    "563121561603670044": [
+      {
+        "tier": "Omega",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/23/2025",
+        "released": null
+      }
+    ],
+    "1057644250818433135": [
+      {
+        "tier": "Omega",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/29/2025",
+        "released": null
+      }
+    ],
+    "804950598117883954": [
+      {
+        "tier": "Beta",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "10/06/2025",
+        "released": null
+      }
+    ],
+    "1201696540486533161": [
+      {
+        "tier": "Delta",
+        "team": "Gorillas",
+        "reason": "signed",
+        "signed": "10/29/2024",
+        "released": null
+      }
+    ],
+    "803987112364867615": [
+      {
+        "tier": "Omega",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "08/22/2025",
+        "released": null
+      }
+    ],
+    "895968648911519744": [
+      {
+        "tier": "Apex",
+        "team": "Lions",
+        "reason": "signed",
+        "signed": "03/03/2025",
+        "released": "04/09/2025"
+      }
+    ],
+    "318171715744169986": [
+      {
+        "tier": "Apex",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "10/21/2025",
+        "released": null
+      }
+    ],
+    "703635664528211979": [
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "04/24/2025",
+        "released": "09/09/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": null
+      }
+    ],
+    "987642378565328937": [
+      {
+        "tier": "Omega",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": "09/22/2025"
+      }
+    ],
+    "860320608775700480": [
+      {
+        "tier": "Apex",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "04/21/2025",
+        "released": null
+      }
+    ],
+    "759263387459911750": [
+      {
+        "tier": "Delta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/21/2025",
+        "released": "10/03/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "10/06/2025",
+        "released": "10/11/2025"
+      }
+    ],
+    "415300702097637386": [
+      {
+        "tier": "Apex",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "08/25/2025",
+        "released": null
+      }
+    ],
+    "473602602571923476": [
+      {
+        "tier": "Omega",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/13/2025",
+        "released": null
+      }
+    ],
+    "1124173764171677716": [
+      {
+        "tier": "Delta",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": "09/12/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/21/2025",
+        "released": "09/26/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "tier_change",
+        "signed": "09/26/2025",
+        "released": "10/06/2025"
+      }
+    ],
+    "1134260435344969738": [
+      {
+        "tier": "Omega",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/09/2025",
+        "released": "09/10/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Eagles",
+        "reason": "tier_change",
+        "signed": "09/10/2025",
+        "released": "09/13/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "09/16/2025",
+        "released": null
+      }
+    ],
+    "522547597395623962": [
+      {
+        "tier": "Alpha",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "08/27/2025",
+        "released": null
+      }
+    ],
+    "517483159097573409": [
+      {
+        "tier": "Delta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/06/2025",
+        "released": "09/07/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Squirrels",
+        "reason": "signed",
+        "signed": "09/14/2025",
+        "released": null
+      }
+    ],
+    "1236060032664338462": [
+      {
+        "tier": "Alpha",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "08/30/2025",
+        "released": "09/08/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": "09/16/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "09/16/2025",
+        "released": "10/10/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "10/18/2025",
+        "released": null
+      }
+    ],
+    "1073783252105572473": [
+      {
+        "tier": "Alpha",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "08/27/2025",
+        "released": null
+      }
+    ],
+    "577970938608615434": [
+      {
+        "tier": "Beta",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "04/22/2025",
+        "released": null
+      }
+    ],
+    "1203436545881940050": [
+      {
+        "tier": "Omega",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "09/22/2025",
+        "released": null
+      }
+    ],
+    "935208642813239356": [
+      {
+        "tier": "Beta",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "04/28/2025",
+        "released": null
+      }
+    ],
+    "471503092764901386": [
+      {
+        "tier": "Apex",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "10/17/2025",
+        "released": "10/21/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Eagles",
+        "reason": "tier_change",
+        "signed": "10/21/2025",
+        "released": null
+      }
+    ],
+    "163921445527748609": [
+      {
+        "tier": "Omega",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "09/03/2025",
+        "released": "09/19/2025"
+      }
+    ],
+    "1113593121868103740": [
+      {
+        "tier": "Apex",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "08/27/2025",
+        "released": null
+      }
+    ],
+    "195683917221593088": [
+      {
+        "tier": "Delta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "08/31/2025",
+        "released": "10/14/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Eagles",
+        "reason": "tier_change",
+        "signed": "10/14/2025",
+        "released": null
+      }
+    ],
+    "1204237726182932510": [
+      {
+        "tier": "Omega",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "08/29/2025",
+        "released": "08/30/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Raccoons",
+        "reason": "tier_change",
+        "signed": "08/30/2025",
+        "released": "09/01/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "09/03/2025",
+        "released": null
+      }
+    ],
+    "483972550435799043": [
+      {
+        "tier": "Alpha",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "09/11/2025",
+        "released": "09/11/2025"
+      }
+    ],
+    "291736479183536129": [
+      {
+        "tier": "Alpha",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "04/23/2025",
+        "released": "08/27/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "08/30/2025",
+        "released": "09/01/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "10/02/2025",
+        "released": "10/20/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Squirrels",
+        "reason": "signed",
+        "signed": "10/20/2025",
+        "released": null
+      }
+    ],
+    "135238656859308032": [
+      {
+        "tier": "Omega",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/17/2025",
+        "released": "09/18/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Eagles",
+        "reason": "tier_change",
+        "signed": "09/18/2025",
+        "released": null
+      }
+    ],
+    "1236019728422666271": [
+      {
+        "tier": "Omega",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "08/28/2025",
+        "released": null
+      }
+    ],
+    "530487595814223912": [
+      {
+        "tier": "Alpha",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "05/05/2025",
+        "released": null
+      },
+      {
+        "tier": "Alpha",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "05/05/2025",
+        "released": "09/15/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Squirrels",
+        "reason": "signed",
+        "signed": "09/19/2025",
+        "released": null
+      }
+    ],
+    "546126780973449237": [
+      {
+        "tier": "Alpha",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/05/2025",
+        "released": "09/17/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Cardinals",
+        "reason": "tier_change",
+        "signed": "09/17/2025",
+        "released": null
+      }
+    ],
+    "451440851193954337": [
+      {
+        "tier": "Delta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "10/09/2025",
+        "released": "10/12/2025"
+      }
+    ],
+    "1238243584881459250": [
+      {
+        "tier": "Alpha",
+        "team": "Owls",
+        "reason": "signed",
+        "signed": "05/04/2025",
+        "released": null
+      }
+    ],
+    "600425677707018240": [
+      {
+        "tier": "Omega",
+        "team": "Lions",
+        "reason": "signed",
+        "signed": "03/03/2025",
+        "released": "03/22/2025"
+      }
+    ],
+    "414200812756140042": [
+      {
+        "tier": "Delta",
+        "team": "Lions",
+        "reason": "signed",
+        "signed": "03/03/2025",
+        "released": null
+      }
+    ],
+    "1198665474720923682": [
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "04/19/2025",
+        "released": null
+      }
+    ],
+    "886068324637761617": [
+      {
+        "tier": "Alpha",
+        "team": "Squirrels",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": "09/23/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Squirrels",
+        "reason": "tier_change",
+        "signed": "09/23/2025",
+        "released": "10/28/2025"
+      }
+    ],
+    "936612216860454983": [
+      {
+        "tier": "Beta",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "09/29/2025",
+        "released": null
+      }
+    ],
+    "492799406324842539": [
+      {
+        "tier": "Alpha",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "09/06/2025",
+        "released": null
+      }
+    ],
+    "1189420075732717683": [
+      {
+        "tier": "Omega",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/13/2025",
+        "released": "09/13/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/14/2025",
+        "released": "09/17/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/18/2025",
+        "released": null
+      }
+    ],
+    "1079909878396620933": [
+      {
+        "tier": "Delta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "09/11/2025",
+        "released": "09/15/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "tier_change",
+        "signed": "09/15/2025",
+        "released": null
+      }
+    ],
+    "841829050098909216": [
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": "10/11/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "10/13/2025",
+        "released": null
+      }
+    ],
+    "401244045814267905": [
+      {
+        "tier": "Alpha",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/29/2025",
+        "released": null
+      }
+    ],
+    "455014675789381644": [
+      {
+        "tier": "Apex",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "09/20/2025",
+        "released": "10/16/2025"
+      }
+    ],
+    "212386993223499776": [
+      {
+        "tier": "Beta",
+        "team": "Squirrels",
+        "reason": "signed",
+        "signed": "04/21/2025",
+        "released": null
+      }
+    ],
+    "753588907316084778": [
+      {
+        "tier": "Alpha",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": null
+      }
+    ],
+    "361629674620583936": [
+      {
+        "tier": "Alpha",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "08/30/2025",
+        "released": "09/20/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "09/20/2025",
+        "released": null
+      }
+    ],
+    "446404903758462986": [
+      {
+        "tier": "Apex",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "05/06/2025",
+        "released": null
+      }
+    ],
+    "1004490650013683712": [
+      {
+        "tier": "Beta",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "09/25/2025",
+        "released": "09/30/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "10/08/2025",
+        "released": null
+      }
+    ],
+    "782112419828727811": [
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": "09/02/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/26/2025",
+        "released": null
+      }
+    ],
+    "473188766115430401": [
+      {
+        "tier": "Beta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "08/25/2025",
+        "released": null
+      }
+    ],
+    "820104817220255775": [
+      {
+        "tier": "Alpha",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "05/06/2025",
+        "released": "08/18/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Stingrays",
+        "reason": "tier_change",
+        "signed": "08/18/2025",
+        "released": "10/01/2025"
+      }
+    ],
+    "871907193878872154": [
+      {
+        "tier": "Alpha",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "08/25/2025",
+        "released": "09/01/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": "09/16/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "10/28/2025",
+        "released": null
+      }
+    ],
+    "529033246651187219": [
+      {
+        "tier": "Beta",
+        "team": "Lions",
+        "reason": "signed",
+        "signed": "03/03/2025",
+        "released": "03/19/2025"
+      }
+    ],
+    "1002272961891401828": [
+      {
+        "tier": "Beta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "08/20/2025",
+        "released": "09/29/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Capybaras",
+        "reason": "tier_change",
+        "signed": "09/29/2025",
+        "released": null
+      }
+    ],
+    "721498400973127771": [
+      {
+        "tier": "Apex",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "05/19/2025",
+        "released": null
+      }
+    ],
+    "213807609700941826": [
+      {
+        "tier": "Alpha",
+        "team": "Lions",
+        "reason": "signed",
+        "signed": "03/03/2025",
+        "released": null
+      }
+    ],
+    "485615059498696709": [
+      {
+        "tier": "Beta",
+        "team": "Squirrels",
+        "reason": "signed",
+        "signed": "08/26/2025",
+        "released": "08/26/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "08/26/2025",
+        "released": "08/29/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Turtles",
+        "reason": "tier_change",
+        "signed": "08/29/2025",
+        "released": "08/30/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "10/28/2025",
+        "released": null
+      }
+    ],
+    "1326660737002766418": [
+      {
+        "tier": "Beta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "10/01/2025",
+        "released": null
+      }
+    ],
+    "1316580957297442897": [
+      {
+        "tier": "Apex",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/15/2025",
+        "released": "10/17/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "10/18/2025",
+        "released": null
+      }
+    ],
+    "792152339317784647": [
+      {
+        "tier": "Apex",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": "09/30/2025"
+      }
+    ],
+    "827344953562103838": [
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "08/19/2025",
+        "released": "08/26/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "traded",
+        "signed": "08/26/2025",
+        "released": "09/25/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "10/04/2025",
+        "released": null
+      }
+    ],
+    "320751105401421824": [
+      {
+        "tier": "Apex",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "04/28/2025",
+        "released": null
+      }
+    ],
+    "896499892397174865": [
+      {
+        "tier": "Delta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": "09/22/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Owls",
+        "reason": "signed",
+        "signed": "09/23/2025",
+        "released": null
+      }
+    ],
+    "522527988240089108": [
+      {
+        "tier": "Omega",
+        "team": "Owls",
+        "reason": "signed",
+        "signed": "10/02/2025",
+        "released": null
+      }
+    ],
+    "498332741616664576": [
+      {
+        "tier": "Apex",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "05/19/2025",
+        "released": null
+      }
+    ],
+    "963506695831711854": [
+      {
+        "tier": "Beta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "08/26/2025",
+        "released": "10/01/2025"
+      }
+    ],
+    "1279153069061308571": [
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "04/19/2025",
+        "released": "04/27/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "08/26/2025",
+        "released": null
+      }
+    ],
+    "395363465059106817": [
+      {
+        "tier": "Beta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/09/2025",
+        "released": null
+      }
+    ],
+    "894274209579171911": [
+      {
+        "tier": "Beta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/05/2025",
+        "released": "09/06/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Cheetahs",
+        "reason": "tier_change",
+        "signed": "09/06/2025",
+        "released": "09/17/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "09/17/2025",
+        "released": "09/22/2025"
+      }
+    ],
+    "1151968668306116638": [
+      {
+        "tier": "Alpha",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "04/28/2025",
+        "released": "05/06/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "08/20/2025",
+        "released": null
+      }
+    ],
+    "758037019661435021": [
+      {
+        "tier": "Beta",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "09/26/2025",
+        "released": "10/06/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "10/20/2025",
+        "released": null
+      },
+      {
+        "tier": "Beta",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "10/20/2025",
+        "released": null
+      }
+    ],
+    "295337136914169867": [
+      {
+        "tier": "Alpha",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/10/2025",
+        "released": null
+      }
+    ],
+    "520830486310813717": [
+      {
+        "tier": "Alpha",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "05/05/2025",
+        "released": null
+      }
+    ],
+    "844307817237053460": [
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "08/18/2025",
+        "released": "09/02/2025"
+      }
+    ],
+    "491861366001369099": [
+      {
+        "tier": "Beta",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "09/17/2025",
+        "released": "10/13/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "10/14/2025",
+        "released": null
+      }
+    ],
+    "1086736353242386522": [
+      {
+        "tier": "Omega",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "08/20/2025",
+        "released": "09/18/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "09/29/2025",
+        "released": null
+      }
+    ],
+    "948281804182417498": [
+      {
+        "tier": "Delta",
+        "team": "Whales",
+        "reason": "signed",
+        "signed": "04/22/2025",
+        "released": null
+      }
+    ],
+    "1003874015003279370": [
+      {
+        "tier": "Beta",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "08/26/2025",
+        "released": "09/13/2025"
+      }
+    ],
+    "939215875230277632": [
+      {
+        "tier": "Alpha",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/16/2025",
+        "released": null
+      }
+    ],
+    "697959539655442532": [
+      {
+        "tier": "Omega",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": "09/14/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/18/2025",
+        "released": null
+      }
+    ],
+    "428864280767627264": [
+      {
+        "tier": "Omega",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "08/22/2025",
+        "released": null
+      }
+    ],
+    "394182689898364958": [
+      {
+        "tier": "Alpha",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "04/23/2025",
+        "released": "09/29/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Raccoons",
+        "reason": "tier_change",
+        "signed": "09/29/2025",
+        "released": null
+      }
+    ],
+    "345486576656056331": [
+      {
+        "tier": "Alpha",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "05/06/2025",
+        "released": null
+      }
+    ],
+    "703394530791260220": [
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "04/30/2025",
+        "released": null
+      }
+    ],
+    "1002259479036973186": [
+      {
+        "tier": "Alpha",
+        "team": "Yetis",
+        "reason": "signed",
+        "signed": "04/26/2025",
+        "released": "09/07/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/16/2025",
+        "released": null
+      }
+    ],
+    "683477712807133245": [
+      {
+        "tier": "Apex",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "04/19/2025",
+        "released": "04/27/2025"
+      }
+    ],
+    "1213995403767320587": [
+      {
+        "tier": "Alpha",
+        "team": "Yetis",
+        "reason": "signed",
+        "signed": "04/20/2025",
+        "released": "08/18/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Yetis",
+        "reason": "tier_change",
+        "signed": "08/18/2025",
+        "released": "09/03/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/17/2025",
+        "released": "09/26/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/27/2025",
+        "released": null
+      }
+    ],
+    "362414958417281025": [
+      {
+        "tier": "Beta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "10/01/2025",
+        "released": "10/07/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "10/11/2025",
+        "released": null
+      }
+    ],
+    "503007044765483018": [
+      {
+        "tier": "Omega",
+        "team": "Lions",
+        "reason": "signed",
+        "signed": "04/27/2025",
+        "released": "09/22/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Lions",
+        "reason": "tier_change",
+        "signed": "09/22/2025",
+        "released": "10/03/2025"
+      }
+    ],
+    "888472090842394624": [
+      {
+        "tier": "Beta",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "04/26/2025",
+        "released": "10/10/2025"
+      }
+    ],
+    "1023828000577425458": [
+      {
+        "tier": "Alpha",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "04/28/2025",
+        "released": null
+      }
+    ],
+    "612537818811727873": [
+      {
+        "tier": "Apex",
+        "team": "Whales",
+        "reason": "signed",
+        "signed": "04/29/2025",
+        "released": null
+      }
+    ],
+    "159757560554061824": [
+      {
+        "tier": "Apex",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "04/30/2025",
+        "released": "08/18/2025"
+      }
+    ],
+    "565682170270711829": [
+      {
+        "tier": "Alpha",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "05/05/2025",
+        "released": null
+      },
+      {
+        "tier": "Alpha",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": "10/11/2025"
+      }
+    ],
+    "706222518226255943": [
+      {
+        "tier": "Alpha",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "05/05/2025",
+        "released": "10/21/2025"
+      }
+    ],
+    "1007325308111818823": [
+      {
+        "tier": "Apex",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "05/06/2025",
+        "released": null
+      }
+    ],
+    "254896056687394816": [
+      {
+        "tier": "Alpha",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "05/06/2025",
+        "released": null
+      },
+      {
+        "tier": "Beta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/22/2025",
+        "released": null
+      }
+    ],
+    "201212334310555648": [
+      {
+        "tier": "Alpha",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "05/29/2025",
+        "released": null
+      }
+    ],
+    "251143573213282306": [
+      {
+        "tier": "Apex",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "10/01/2025",
+        "released": null
+      }
+    ],
+    "1399202692433444876": [
+      {
+        "tier": "Alpha",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": null
+      }
+    ],
+    "841853828708958208": [
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "08/17/2025",
+        "released": "08/17/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "08/18/2025",
+        "released": "08/31/2025"
+      }
+    ],
+    "754475185960255548": [
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": "10/11/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "tier_change",
+        "signed": "10/11/2025",
+        "released": null
+      }
+    ],
+    "521338458741145605": [
+      {
+        "tier": "Omega",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "08/18/2025",
+        "released": "09/02/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "10/02/2025",
+        "released": "10/03/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Panthers",
+        "reason": "tier_change",
+        "signed": "10/03/2025",
+        "released": null
+      }
+    ],
+    "1196607124004929647": [
+      {
+        "tier": "Omega",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "08/22/2025",
+        "released": "10/07/2025"
+      }
+    ],
+    "316754120499527700": [
+      {
+        "tier": "Apex",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": null
+      }
+    ],
+    "667947497108275220": [
+      {
+        "tier": "Delta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "08/18/2025",
+        "released": "10/03/2025"
+      }
+    ],
+    "790058205119774750": [
+      {
+        "tier": "Delta",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "08/26/2025",
+        "released": "09/08/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/29/2025",
+        "released": null
+      }
+    ],
+    "697295044851269642": [
+      {
+        "tier": "Delta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "08/18/2025",
+        "released": null
+      }
+    ],
+    "553993474303590410": [
+      {
+        "tier": "Alpha",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/15/2025",
+        "released": "09/15/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "09/26/2025",
+        "released": "09/29/2025"
+      }
+    ],
+    "414571328729907228": [
+      {
+        "tier": "Omega",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": "09/28/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "tier_change",
+        "signed": "09/28/2025",
+        "released": null
+      }
+    ],
+    "396458360842485762": [
+      {
+        "tier": "Alpha",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "08/19/2025",
+        "released": "09/24/2025"
+      }
+    ],
+    "1028317798113484811": [
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "10/02/2025",
+        "released": null
+      }
+    ],
+    "1114676843518382120": [
+      {
+        "tier": "Delta",
+        "team": "Owls",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": "09/22/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Owls",
+        "reason": "tier_change",
+        "signed": "09/22/2025",
+        "released": null
+      }
+    ],
+    "1072743080052150282": [
+      {
+        "tier": "Alpha",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "10/04/2025",
+        "released": null
+      }
+    ],
+    "758834552747065394": [
+      {
+        "tier": "Delta",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "08/22/2025",
+        "released": "08/31/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Lynx",
+        "reason": "traded",
+        "signed": "08/31/2025",
+        "released": null
+      }
+    ],
+    "1255342444061659156": [
+      {
+        "tier": "Beta",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "09/29/2025",
+        "released": null
+      }
+    ],
+    "370445420209373185": [
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "08/21/2025",
+        "released": "09/29/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "10/04/2025",
+        "released": null
+      }
+    ],
+    "609153935650848769": [
+      {
+        "tier": "Apex",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": "10/10/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Panthers",
+        "reason": "tier_change",
+        "signed": "10/10/2025",
+        "released": "10/18/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Panthers",
+        "reason": "tier_change",
+        "signed": "10/18/2025",
+        "released": null
+      }
+    ],
+    "781988055246176257": [
+      {
+        "tier": "Omega",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/04/2025",
+        "released": "09/14/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/15/2025",
+        "released": "09/22/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "10/07/2025",
+        "released": "10/07/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "10/07/2025",
+        "released": null
+      }
+    ],
+    "697329697716961292": [
+      {
+        "tier": "Omega",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "08/30/2025",
+        "released": null
+      }
+    ],
+    "293118161107156992": [
+      {
+        "tier": "Beta",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "08/25/2025",
+        "released": null
+      }
+    ],
+    "616443528670740480": [
+      {
+        "tier": "Beta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "08/25/2025",
+        "released": "10/14/2025"
+      }
+    ],
+    "1258254969774280724": [
+      {
+        "tier": "Omega",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "08/25/2025",
+        "released": "08/31/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": null
+      }
+    ],
+    "494281381967298582": [
+      {
+        "tier": "Beta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "08/25/2025",
+        "released": null
+      }
+    ],
+    "206146461275127808": [
+      {
+        "tier": "Alpha",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "08/25/2025",
+        "released": "10/20/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Lynx",
+        "reason": "traded",
+        "signed": "10/20/2025",
+        "released": null
+      }
+    ],
+    "1029579950216458311": [
+      {
+        "tier": "Beta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "08/25/2025",
+        "released": "09/08/2025"
+      }
+    ],
+    "1203388635164975164": [
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": null
+      }
+    ],
+    "522448434918326272": [
+      {
+        "tier": "Beta",
+        "team": "Squirrels",
+        "reason": "signed",
+        "signed": "08/26/2025",
+        "released": null
+      }
+    ],
+    "1035144019380023417": [
+      {
+        "tier": "Omega",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "08/26/2025",
+        "released": "09/02/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Blue Jays",
+        "reason": "tier_change",
+        "signed": "09/02/2025",
+        "released": null
+      }
+    ],
+    "681969857297776661": [
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "08/27/2025",
+        "released": "09/06/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "09/13/2025",
+        "released": "09/29/2025"
+      }
+    ],
+    "753640748452413452": [
+      {
+        "tier": "Beta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "08/26/2025",
+        "released": "09/13/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/23/2025",
+        "released": "09/26/2025"
+      },
+      {
+        "tier": "Beta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "10/01/2025",
+        "released": null
+      }
+    ],
+    "1408440940787531816": [
+      {
+        "tier": "Beta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "08/26/2025",
+        "released": "08/31/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/15/2025",
+        "released": null
+      }
+    ],
+    "660982876854288404": [
+      {
+        "tier": "Delta",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "09/11/2025",
+        "released": null
+      }
+    ],
+    "1204252539541917800": [
+      {
+        "tier": "Delta",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "08/31/2025",
+        "released": "09/23/2025"
+      }
+    ],
+    "299631076924456960": [
+      {
+        "tier": "Beta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "08/27/2025",
+        "released": null
+      }
+    ],
+    "765668342097772555": [
+      {
+        "tier": "Alpha",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "08/29/2025",
+        "released": "08/30/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Squirrels",
+        "reason": "signed",
+        "signed": "09/20/2025",
+        "released": null
+      }
+    ],
+    "853014093190922282": [
+      {
+        "tier": "Alpha",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "08/30/2025",
+        "released": "10/18/2025"
+      }
+    ],
+    "333647805870505984": [
+      {
+        "tier": "Omega",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "08/31/2025",
+        "released": "09/03/2025"
+      }
+    ],
+    "723729219384770581": [
+      {
+        "tier": "Alpha",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/08/2025",
+        "released": "09/16/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/26/2025",
+        "released": null
+      }
+    ],
+    "1085433747517751348": [
+      {
+        "tier": "Alpha",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "08/31/2025",
+        "released": "10/20/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Lynx",
+        "reason": "tier_change",
+        "signed": "10/20/2025",
+        "released": null
+      }
+    ],
+    "422853823619530763": [
+      {
+        "tier": "Apex",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/08/2025",
+        "released": "09/08/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "09/30/2025",
+        "released": "10/06/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "10/08/2025",
+        "released": null
+      }
+    ],
+    "312078884390830081": [
+      {
+        "tier": "Omega",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": null
+      }
+    ],
+    "1022573253388157008": [
+      {
+        "tier": "Beta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": null
+      }
+    ],
+    "1305211035472494683": [
+      {
+        "tier": "Delta",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": null
+      }
+    ],
+    "861735059965870121": [
+      {
+        "tier": "Apex",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": "10/17/2025"
+      }
+    ],
+    "399246590780375040": [
+      {
+        "tier": "Alpha",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": null
+      }
+    ],
+    "200130763746705408": [
+      {
+        "tier": "Beta",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "09/01/2025",
+        "released": null
+      }
+    ],
+    "125566570213670912": [
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": "09/02/2025"
+      }
+    ],
+    "529912299318673448": [
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": null
+      }
+    ],
+    "208995949249429504": [
+      {
+        "tier": "Beta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/02/2025",
+        "released": null
+      }
+    ],
+    "264246334133895188": [
+      {
+        "tier": "Omega",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "09/14/2025",
+        "released": null
+      }
+    ],
+    "721078268824125490": [
+      {
+        "tier": "Omega",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/06/2025",
+        "released": "09/18/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/27/2025",
+        "released": "09/27/2025"
+      }
+    ],
+    "170655059191791626": [
+      {
+        "tier": "Alpha",
+        "team": "Owls",
+        "reason": "signed",
+        "signed": "09/07/2025",
+        "released": null
+      }
+    ],
+    "1409134531029766145": [
+      {
+        "tier": "Omega",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/07/2025",
+        "released": "09/21/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "09/23/2025",
+        "released": "10/02/2025"
+      }
+    ],
+    "586029099940839429": [
+      {
+        "tier": "Apex",
+        "team": "Owls",
+        "reason": "signed",
+        "signed": "09/08/2025",
+        "released": "09/12/2025"
+      }
+    ],
+    "964907967814180884": [
+      {
+        "tier": "Beta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/08/2025",
+        "released": null
+      }
+    ],
+    "983997401792647179": [
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": "09/29/2025"
+      }
+    ],
+    "1098681641918005309": [
+      {
+        "tier": "Beta",
+        "team": "Cheetahs",
+        "reason": "signed",
+        "signed": "09/09/2025",
+        "released": null
+      }
+    ],
+    "747912514716827669": [
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "09/09/2025",
+        "released": "09/16/2025"
+      }
+    ],
+    "1105956035069485107": [
+      {
+        "tier": "Omega",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "09/10/2025",
+        "released": null
+      }
+    ],
+    "1353237519340142593": [
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": "09/12/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "tier_change",
+        "signed": "09/12/2025",
+        "released": "09/30/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Kangaroos",
+        "reason": "tier_change",
+        "signed": "09/30/2025",
+        "released": null
+      }
+    ],
+    "1263706261162299435": [
+      {
+        "tier": "Apex",
+        "team": "Owls",
+        "reason": "signed",
+        "signed": "09/12/2025",
+        "released": "09/21/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Owls",
+        "reason": "tier_change",
+        "signed": "09/21/2025",
+        "released": null
+      }
+    ],
+    "172090928377364480": [
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/14/2025",
+        "released": "09/19/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "tier_change",
+        "signed": "09/19/2025",
+        "released": null
+      }
+    ],
+    "510995941470240778": [
+      {
+        "tier": "Omega",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/13/2025",
+        "released": "09/13/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "09/15/2025",
+        "released": "09/22/2025"
+      },
+      {
+        "tier": "Omega",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "09/24/2025",
+        "released": null
+      }
+    ],
+    "1329259349301788718": [
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/26/2025",
+        "released": null
+      }
+    ],
+    "592878736291135499": [
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "10/11/2025",
+        "released": "10/11/2025"
+      },
+      {
+        "tier": "Delta",
+        "team": "Blue Jays",
+        "reason": "tier_change",
+        "signed": "10/11/2025",
+        "released": null
+      }
+    ],
+    "528702305692811265": [
+      {
+        "tier": "Apex",
+        "team": "Owls",
+        "reason": "signed",
+        "signed": "09/29/2025",
+        "released": null
+      }
+    ],
+    "1110116996173017088": [
+      {
+        "tier": "Alpha",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "09/16/2025",
+        "released": null
+      }
+    ],
+    "658154361968656395": [
+      {
+        "tier": "Alpha",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/16/2025",
+        "released": null
+      }
+    ],
+    "534483747274489897": [
+      {
+        "tier": "Delta",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "09/16/2025",
+        "released": null
+      }
+    ],
+    "326810623109365770": [
+      {
+        "tier": "Alpha",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "10/28/2025",
+        "released": null
+      }
+    ],
+    "524354972628942859": [
+      {
+        "tier": "Alpha",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "09/22/2025",
+        "released": null
+      }
+    ],
+    "517693338879524874": [
+      {
+        "tier": "Delta",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "09/22/2025",
+        "released": null
+      }
+    ],
+    "776681685982642176": [
+      {
+        "tier": "Beta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "09/24/2025",
+        "released": null
+      }
+    ],
+    "693296963235479583": [
+      {
+        "tier": "Omega",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "09/23/2025",
+        "released": null
+      }
+    ],
+    "1043122701772001281": [
+      {
+        "tier": "Beta",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "09/23/2025",
+        "released": null
+      }
+    ],
+    "248290729187737600": [
+      {
+        "tier": "Omega",
+        "team": "Lynx",
+        "reason": "signed",
+        "signed": "09/23/2025",
+        "released": null
+      }
+    ],
+    "1068704812255957002": [
+      {
+        "tier": "Apex",
+        "team": "Blue Jays",
+        "reason": "signed",
+        "signed": "09/23/2025",
+        "released": null
+      }
+    ],
+    "621438681823051797": [
+      {
+        "tier": "Omega",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "10/02/2025",
+        "released": null
+      }
+    ],
+    "184869914287276032": [
+      {
+        "tier": "Beta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "09/29/2025",
+        "released": "10/17/2025"
+      }
+    ],
+    "492533181505994772": [
+      {
+        "tier": "Alpha",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "09/29/2025",
+        "released": null
+      }
+    ],
+    "218053248328794113": [
+      {
+        "tier": "Beta",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "09/30/2025",
+        "released": null
+      }
+    ],
+    "852543619210018846": [
+      {
+        "tier": "Beta",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "09/30/2025",
+        "released": null
+      }
+    ],
+    "697129828385685505": [
+      {
+        "tier": "Omega",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "09/30/2025",
+        "released": "10/07/2025"
+      }
+    ],
+    "663966352813588517": [
+      {
+        "tier": "Delta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "10/01/2025",
+        "released": null
+      }
+    ],
+    "725758629743165471": [
+      {
+        "tier": "Alpha",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "10/03/2025",
+        "released": "10/09/2025"
+      },
+      {
+        "tier": "Alpha",
+        "team": "Cardinals",
+        "reason": "signed",
+        "signed": "10/10/2025",
+        "released": "10/17/2025"
+      }
+    ],
+    "289523485078847488": [
+      {
+        "tier": "Alpha",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "10/04/2025",
+        "released": null
+      }
+    ],
+    "913970410754818050": [
+      {
+        "tier": "Apex",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "10/05/2025",
+        "released": "10/11/2025"
+      },
+      {
+        "tier": "Apex",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "10/16/2025",
+        "released": null
+      }
+    ],
+    "409630629815255060": [
+      {
+        "tier": "Apex",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "10/06/2025",
+        "released": null
+      }
+    ],
+    "528014453254520832": [
+      {
+        "tier": "Beta",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "10/07/2025",
+        "released": null
+      }
+    ],
+    "464114322759483402": [
+      {
+        "tier": "Omega",
+        "team": "Turtles",
+        "reason": "signed",
+        "signed": "10/07/2025",
+        "released": null
+      }
+    ],
+    "854834247419035668": [
+      {
+        "tier": "Beta",
+        "team": "Narwhals",
+        "reason": "signed",
+        "signed": "10/09/2025",
+        "released": "10/14/2025"
+      }
+    ],
+    "488045680930324480": [
+      {
+        "tier": "Alpha",
+        "team": "Wolves",
+        "reason": "signed",
+        "signed": "10/10/2025",
+        "released": null
+      }
+    ],
+    "611392565853552661": [
+      {
+        "tier": "Apex",
+        "team": "Sharks",
+        "reason": "signed",
+        "signed": "10/10/2025",
+        "released": null
+      }
+    ],
+    "748631857230512159": [
+      {
+        "tier": "Alpha",
+        "team": "Capybaras",
+        "reason": "signed",
+        "signed": "10/11/2025",
+        "released": null
+      }
+    ],
+    "837935822061174814": [
+      {
+        "tier": "Delta",
+        "team": "Stingrays",
+        "reason": "signed",
+        "signed": "10/12/2025",
+        "released": null
+      }
+    ],
+    "498892292954783757": [
+      {
+        "tier": "Delta",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "10/14/2025",
+        "released": null
+      }
+    ],
+    "902889596696797225": [
+      {
+        "tier": "Alpha",
+        "team": "Panthers",
+        "reason": "signed",
+        "signed": "10/18/2025",
+        "released": null
+      }
+    ],
+    "334476299156324354": [
+      {
+        "tier": "Apex",
+        "team": "Eagles",
+        "reason": "signed",
+        "signed": "10/21/2025",
+        "released": null
+      }
+    ],
+    "861682308893376512": [
+      {
+        "tier": "Alpha",
+        "team": "Raccoons",
+        "reason": "signed",
+        "signed": "10/23/2025",
+        "released": null
+      }
+    ]
+  }
+}

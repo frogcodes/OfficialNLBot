@@ -1,0 +1,67 @@
+const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
+const fs = require("fs");
+const { createCanvas, loadImage, registerFont } = require("canvas");
+const path = "../../data/pets.json";
+
+// Optional: custom font
+// registerFont('./fonts/YourFont.ttf', { family: 'CustomFont' });
+
+function loadPets() {
+  if (!fs.existsSync(path)) return {};
+  return JSON.parse(fs.readFileSync(path));
+}
+
+function drawPetCard(ctx, pet, x, y) {
+  ctx.fillStyle = "#202225";
+  ctx.fillRect(x, y, 300, 130);
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "16px sans-serif";
+  ctx.fillText(`${pet.name} (Lv. ${pet.level})`, x + 10, y + 25);
+  ctx.fillText(`Rarity: ${pet.rarity}`, x + 10, y + 45);
+  ctx.fillText(`💪 Power: ${pet.stats.power}`, x + 10, y + 65);
+  ctx.fillText(`⚡ Speed: ${pet.stats.speed}`, x + 10, y + 85);
+  ctx.fillText(`🛡️ Defense: ${pet.stats.defense}`, x + 10, y + 105);
+  ctx.fillText(
+    `😊 Happy: ${pet.happiness} | 💤 Energy: ${pet.energy}`,
+    x + 10,
+    y + 125
+  );
+}
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("petinventoryui")
+    .setDescription("Displays a visual inventory of your pets."),
+
+  async execute(interaction) {
+    const userId = interaction.user.id;
+    const petsData = loadPets();
+    const pets = petsData[userId];
+
+    if (!pets || pets.length === 0) {
+      return interaction.reply({
+        content: "❌ You have no pets! Use `/adoptpet` first.",
+        ephemeral: true,
+      });
+    }
+
+    const canvasHeight = Math.ceil(pets.length / 2) * 150 + 20;
+    const canvas = createCanvas(640, canvasHeight);
+    const ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "#2c2f33";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < pets.length; i++) {
+      const x = i % 2 === 0 ? 20 : 330;
+      const y = Math.floor(i / 2) * 150 + 10;
+      drawPetCard(ctx, pets[i], x, y);
+    }
+
+    const attachment = new AttachmentBuilder(canvas.toBuffer("image/png"), {
+      name: "petinventory.png",
+    });
+
+    await interaction.reply({ files: [attachment] });
+  },
+};

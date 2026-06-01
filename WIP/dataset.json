@@ -1,0 +1,3194 @@
+[
+  {
+    "channel": "combine-pop",
+    "context": [
+      "<@1310466334198464602> <@287362327508942853> <@275007554533195776> <@351480764602515487> <@464536334581628928> <@710411367500218411>",
+      "good boy"
+    ],
+    "response": "beautiful frog <@351480764602515487>"
+  },
+  {
+    "channel": "combine-pop",
+    "context": [
+      "good boy",
+      "beautiful frog <@351480764602515487>"
+    ],
+    "response": "cleaning kitchen now"
+  },
+  {
+    "channel": "combine-pop",
+    "context": [
+      "Can we play this one",
+      "Thoughts"
+    ],
+    "response": "no"
+  },
+  {
+    "channel": "combine-pop",
+    "context": [
+      "lol",
+      "lol"
+    ],
+    "response": "good job beta testers"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "bro we need 6",
+      "ggs"
+    ],
+    "response": "uhhh"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "ggs",
+      "uhhh"
+    ],
+    "response": "good job frog"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "good job frog",
+      ""
+    ],
+    "response": "do you want to keep the queues hidden?"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "",
+      "do you want to keep the queues hidden?"
+    ],
+    "response": "<@351480764602515487>"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "do you want to keep the queues hidden?",
+      "<@351480764602515487>"
+    ],
+    "response": "Or is it possible to display who’s in the queue"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@351480764602515487>",
+      "Or is it possible to display who’s in the queue"
+    ],
+    "response": "nah don’t display"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Or is it possible to display who’s in the queue",
+      "nah don’t display"
+    ],
+    "response": "keep it random"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "nah don’t display",
+      "keep it random"
+    ],
+    "response": "also it’s only apex tho 😔"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "keep it random",
+      "also it’s only apex tho 😔"
+    ],
+    "response": "also can they click button without being able to type here?"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "also can they click button without being able to type here?",
+      "<@592025951857147904> yeah i could add how many people are in the queue but i dont wanna do names. Ill make this a queue only chat where they cant type and also ill have a chat channel"
+    ],
+    "response": "that’s good"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "that’s good",
+      "so when can we test"
+    ],
+    "response": "i’m ready whenever"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "so when can we test",
+      "i’m ready whenever"
+    ],
+    "response": "wbu <@1082755441836167259>"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "wbu <@1082755441836167259>",
+      "where can we find 4 people"
+    ],
+    "response": "<@351480764602515487> also"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "where can we find 4 people",
+      "<@351480764602515487> also"
+    ],
+    "response": "we need leave queue button"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@351480764602515487> also",
+      "we need leave queue button"
+    ],
+    "response": "also a cancel match report feature in case a match doesn’t start due to not being available, or a player dips mid series"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "what are we doing about replay hanbdling",
+      "cause like"
+    ],
+    "response": "just send relays in"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "cause like",
+      "just send relays in"
+    ],
+    "response": "how much is ballchasing max"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "just send relays in",
+      "how much is ballchasing max"
+    ],
+    "response": "we can buy it once"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "how much is ballchasing max",
+      "we can buy it once"
+    ],
+    "response": "for the combine month"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@592025951857147904> ^",
+      ""
+    ],
+    "response": "great job frog"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "thanks",
+      "when will we have 6"
+    ],
+    "response": "<@1082755441836167259>"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "when will we have 6",
+      "<@1082755441836167259>"
+    ],
+    "response": "<@1323873069177245706>"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@1082755441836167259>",
+      "<@1323873069177245706>"
+    ],
+    "response": "<@592025951857147904>"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@1323873069177245706>",
+      "<@592025951857147904>"
+    ],
+    "response": "<@351480764602515487>"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@592025951857147904>",
+      "<@351480764602515487>"
+    ],
+    "response": "@Nuuk"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@351480764602515487>",
+      "@Nuuk"
+    ],
+    "response": "@Solaraiz"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "I did",
+      "need 2 more"
+    ],
+    "response": "<@351480764602515487> it says i queen"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "need 2 more",
+      "<@351480764602515487> it says i queen"
+    ],
+    "response": "lmao"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@351480764602515487> it says i queen",
+      "lmao"
+    ],
+    "response": "i can keep queueing it says"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "lmao",
+      "i can keep queueing it says"
+    ],
+    "response": "idk what happens when it does"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "idk what happens when it does",
+      "Queue #00001 has popped in queue1!\nTeam Blue: <@1082755441836167259>, <@592025951857147904>, <@592025951857147904>\nTeam Orange: <@351480764602515487>, <@1310466334198464602>, <@592025951857147904>"
+    ],
+    "response": "Oh"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Queue #00001 has popped in queue1!\nTeam Blue: <@1082755441836167259>, <@592025951857147904>, <@592025951857147904>\nTeam Orange: <@351480764602515487>, <@1310466334198464602>, <@592025951857147904>",
+      "Oh"
+    ],
+    "response": "<@351480764602515487>"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@351480764602515487>",
+      ""
+    ],
+    "response": "now you have to code only 1 entry ggs"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "",
+      "now you have to code only 1 entry ggs"
+    ],
+    "response": "cuz they will def accidentally do that"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "now you have to code only 1 entry ggs",
+      "cuz they will def accidentally do that"
+    ],
+    "response": "Also we need Lobby Info"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "cuz they will def accidentally do that",
+      "Also we need Lobby Info"
+    ],
+    "response": "And who gets replays"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "And who gets replays",
+      "easy"
+    ],
+    "response": "you have aura"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "easy",
+      "you have aura"
+    ],
+    "response": "__**Queue #00001**__ has popped in queue1!\n__**Team Blue**__\n<@592025951857147904> *(Makes Lobby)*\n<@1082755441836167259> \n<@592025951857147904> \n__**Team Orange**__\n<@351480764602515487> *(Saves Replays)*\n<@1310466334198464602> \n<@592025951857147904> \n__**Lobby Info**__\n*Gouda//Spruce*"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Why are we saving replays",
+      "Or a 6 mans"
+    ],
+    "response": "for review"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Or a 6 mans",
+      "for review"
+    ],
+    "response": "GMs can use to scout"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Is this for combines",
+      "Or"
+    ],
+    "response": "Or we can use to find smurfs//match fixers"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Or",
+      "Or we can use to find smurfs//match fixers"
+    ],
+    "response": "yes"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "yes",
+      "Ohhh"
+    ],
+    "response": "yo hatch W wording"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Is this why they were deltaed",
+      "Delayed"
+    ],
+    "response": "<@351480764602515487> we could use this for matches to im not even gonna cap 😭"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@351480764602515487> we could use this for matches to im not even gonna cap 😭",
+      "Yea lowkey tuff"
+    ],
+    "response": "Like when a match time is scheduled that releases"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Yea lowkey tuff",
+      "Like when a match time is scheduled that releases"
+    ],
+    "response": "Prevents teams from not knowing who to dm etc"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Like when a match time is scheduled that releases",
+      "Prevents teams from not knowing who to dm etc"
+    ],
+    "response": "can get gms and agms pinged aswell"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Prevents teams from not knowing who to dm etc",
+      "can get gms and agms pinged aswell"
+    ],
+    "response": "YO HATCH GENIUS IDEA BRO EVEN THO YOU DIDNT SUGGEST IT"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "can get gms and agms pinged aswell",
+      "YO HATCH GENIUS IDEA BRO EVEN THO YOU DIDNT SUGGEST IT"
+    ],
+    "response": "<@351480764602515487>"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "like databases and too much",
+      "Sigma"
+    ],
+    "response": "yeah no worrues"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Sigma",
+      "yeah no worrues"
+    ],
+    "response": "i was just saying"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "bro we need 1 more",
+      "<@1082755441836167259> !!!"
+    ],
+    "response": "I just joined"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "dont queue unless you grab pc or console role in <#1225282263483420705>",
+      "<@823328530913951805> queueu here"
+    ],
+    "response": "we need 1 more"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "we need 1 more",
+      "wait i gotta play rn?"
+    ],
+    "response": "NO"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "NO",
+      "ocular is here!"
+    ],
+    "response": "ITS JUST TEATINF"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "ITS JUST TEATINF",
+      "no need to play"
+    ],
+    "response": "TESTING"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@951260805666598982> queue you test subject",
+      "W team blue"
+    ],
+    "response": "YESSSS"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "W team blue",
+      "YESSSS"
+    ],
+    "response": "WE DID ITTTT"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "or 4-0",
+      "ill report"
+    ],
+    "response": "scarlet is gc2 lmao"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "later",
+      "MMRs updated for match #00001."
+    ],
+    "response": "OMG"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "MMRs updated for match #00001.",
+      "OMG"
+    ],
+    "response": "FROG IS SO FUCKINF GOOD"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "FROG IS SO FUCKINF GOOD",
+      ""
+    ],
+    "response": "she don’t fuck with you bro"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "she fucks you?",
+      "queue again boyz"
+    ],
+    "response": "maybe try cherry"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "/queue",
+      "?queue"
+    ],
+    "response": "requeue"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "?queue",
+      "requeue"
+    ],
+    "response": "click the button"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "requeue",
+      "click the button"
+    ],
+    "response": "scroll up"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "i cant play",
+      "<@951260805666598982> all you"
+    ],
+    "response": "<@351480764602515487> after a queue pops the button needs to automate to the bottom if possible"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@351480764602515487> after a queue pops the button needs to automate to the bottom if possible",
+      "its testing"
+    ],
+    "response": "WE"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "its testing",
+      "WE"
+    ],
+    "response": "ARE"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "WE",
+      "ARE"
+    ],
+    "response": "NOT"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "NOT",
+      "i gotta play against ryandgav"
+    ],
+    "response": "OLAYING"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "i gotta play against ryandgav",
+      "OLAYING"
+    ],
+    "response": "ITS TESTING"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "yea",
+      "someone report"
+    ],
+    "response": "oh"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@592025951857147904> <@1323873069177245706>, please verify the reported score of 3-0 for match #00002.",
+      "Score verified! Updating MMRs..."
+    ],
+    "response": "<@351480764602515487> is lobby info filtering somewhere then?"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "what do you put for match idea",
+      "0000002?"
+    ],
+    "response": "?"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "yes",
+      "it asked me for match idea"
+    ],
+    "response": "so we can’t read?"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "ok",
+      "yeah we gonna have that many queues fr"
+    ],
+    "response": "__**LOBBY INFO**__"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "lets see if leave que works",
+      "ok you like how its working oke?"
+    ],
+    "response": "yes"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "can i get access to the logs",
+      "?"
+    ],
+    "response": "just have channel where scores go"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "alr",
+      "how"
+    ],
+    "response": "__**Queue #00001**__ has been reported!\n__**Team Blue:**__ *3-0*\n<@592025951857147904> *(Makes Lobby)*\n<@1082755441836167259> \n<@592025951857147904> \n__**Team Orange:**__ *0-3*\n<@351480764602515487> *(Saves Replays)*\n<@1310466334198464602> \n<@592025951857147904>"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "uh",
+      "3 okes?"
+    ],
+    "response": "it’s a example"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "brother",
+      "😭"
+    ],
+    "response": "what"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "😭",
+      "what"
+    ],
+    "response": "i’m sorry"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "what",
+      "i’m sorry"
+    ],
+    "response": "it’s not required"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "ye make it hidden tho",
+      "but give me access"
+    ],
+    "response": "preferably"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "but give me access",
+      "preferably"
+    ],
+    "response": "or it will clog up here"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "or it will clog up here",
+      "cause yk rsearch purpose"
+    ],
+    "response": "gooner you’re only a test subject"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "dont ever call me gooner",
+      "im not afraid to just drop those into people's dms"
+    ],
+    "response": "those ss are cgi"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "those ss are cgi",
+      "i made a recording"
+    ],
+    "response": "delete that"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "i pulled it all up",
+      "cant believe you were into bops"
+    ],
+    "response": "highschool oke was a gooner"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "but you went for some other girl",
+      "😔"
+    ],
+    "response": "didn’t exist at the time fr"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "oke make me a list of changes please. Im explaining stats project",
+      "she always existed"
+    ],
+    "response": "stop talking about the past"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "she always existed",
+      "stop talking about the past"
+    ],
+    "response": "okay"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "but both are dead",
+      "<@592025951857147904> are you gonna let him say this to your precious singer"
+    ],
+    "response": "- make score report channel (it can all be 1 big score report channel) \n- make combine games channel (it can all be 1 big combine game channel)\n- what does report look like on your end is it replays? \n- is lobby info gonna remain random guaranteed to avoid issues?\n- where’s mmr going? \n- are we basing combine tiers based off last season mmr ranges?"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@592025951857147904> are you gonna let him say this to your precious singer",
+      "- make score report channel (it can all be 1 big score report channel) \n- make combine games channel (it can all be 1 big combine game channel)\n- what does report look like on your end is it replays? \n- is lobby info gonna remain random guaranteed to avoid issues?\n- where’s mmr going? \n- are we basing combine tiers based off last season mmr ranges?"
+    ],
+    "response": "yo yap too"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "- make score report channel (it can all be 1 big score report channel) \n- make combine games channel (it can all be 1 big combine game channel)\n- what does report look like on your end is it replays? \n- is lobby info gonna remain random guaranteed to avoid issues?\n- where’s mmr going? \n- are we basing combine tiers based off last season mmr ranges?",
+      "yo yap too"
+    ],
+    "response": "off task"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "yo yap too",
+      "off task"
+    ],
+    "response": "<@351480764602515487>"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "lobby will be random. Ill just have to adjust the system a bit. MMR is going into sheet. tiers im not sure if we should do last or current queues. That way players know their tier a little bit",
+      "Click the buttons below to join or leave **Queue 1**!"
+    ],
+    "response": "that’s fine"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Click the buttons below to join or leave **Queue 1**!",
+      "that’s fine"
+    ],
+    "response": "good job"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "good job",
+      "@everyone"
+    ],
+    "response": "join"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "https://tenor.com/view/look-at-him-efe-omowale-assisted-living-he-look-so-funny-haha-gif-24147865",
+      "https://tenor.com/view/tire-loose-tire-accident-gif-17218518"
+    ],
+    "response": "yes"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "bro",
+      "so everyone is in?"
+    ],
+    "response": "@everyone queue bruh"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "so everyone is in?",
+      "@everyone queue bruh"
+    ],
+    "response": "if you que’d react to this"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "if you que’d react to this",
+      ""
+    ],
+    "response": "that is 5 people"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "that is 5 people",
+      "shall i just log the queueu count"
+    ],
+    "response": "does everyone have console or pc role"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "does everyone have console or pc role",
+      "whos scarlet she single"
+    ],
+    "response": "yes"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "yes",
+      "ok"
+    ],
+    "response": "i don’t remember"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "We are better haha",
+      "I also did instant"
+    ],
+    "response": "i clicked"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "I also did instant",
+      "i clicked"
+    ],
+    "response": "it’s 5 for me"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Is it cooked",
+      "it says 0"
+    ],
+    "response": "y’all suck"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "y’all suck",
+      "i never set channels for queue pop"
+    ],
+    "response": "oh"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "oh",
+      "Crash out"
+    ],
+    "response": "y’all don’t suck"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Click the buttons below to join or leave **Queue 1**!",
+      "quueue"
+    ],
+    "response": "4"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "quueue",
+      "4"
+    ],
+    "response": "@everyone"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "https://tenor.com/view/%D0%B4%D0%B6%D0%BE%D0%BA%D0%B5%D1%80-joker-jonkler-gif-2048036744282099155",
+      "1 more"
+    ],
+    "response": "okay frog i grg"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "1 more",
+      "okay frog i grg"
+    ],
+    "response": "gtg"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "okay frog i grg",
+      "gtg"
+    ],
+    "response": "sorry"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "gtg",
+      "sorry"
+    ],
+    "response": "dinner time"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "(thanks for help all)",
+      "i think wwe good"
+    ],
+    "response": "<@351480764602515487> we need an admin cancel match feature"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "i think wwe good",
+      "<@351480764602515487> we need an admin cancel match feature"
+    ],
+    "response": "uhhh"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@351480764602515487> we need an admin cancel match feature",
+      "uhhh"
+    ],
+    "response": "trying to think of other possible outcomes"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "trying to think of other possible outcomes",
+      "there is a way to cancel match?"
+    ],
+    "response": "wdym"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "wdym",
+      "the slash report has a cancel option"
+    ],
+    "response": "oh"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "the slash report has a cancel option",
+      "oh"
+    ],
+    "response": "cool"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Oh I queued",
+      "https://tenor.com/view/not-yet-troll-face-gif-27631775"
+    ],
+    "response": "no vc’s"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "no vc’s",
+      "4.."
+    ],
+    "response": "queue @everyone"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "4..",
+      "queue @everyone"
+    ],
+    "response": "^^^"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "queue time again",
+      "i gotchu"
+    ],
+    "response": "queue"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Yep",
+      "who aint in"
+    ],
+    "response": "@everyone worst beta testers in history"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "bruh",
+      "standby goats"
+    ],
+    "response": "<@1082755441836167259> what are you doing"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "<@1082755441836167259> what are you doing",
+      "Trying to queue"
+    ],
+    "response": "put the gun down"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "I think I blew the bot up",
+      "lol"
+    ],
+    "response": "gators and lakers winning"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "yea bot can’t q",
+      "says interaction failed"
+    ],
+    "response": "^"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "pop another",
+      "gotchu"
+    ],
+    "response": "WHERE IS FROG"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "hi oke",
+      "ill come back"
+    ],
+    "response": "yes"
+  },
+  {
+    "channel": "apex-announce",
+    "context": [
+      "Score verified! Updating MMRs...",
+      "MMRs updated for match #00002."
+    ],
+    "response": "good work @everyone"
+  },
+  {
+    "channel": "stats-channel",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "why did you piss brenden off"
+  },
+  {
+    "channel": "stats-channel",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "🙏"
+  },
+  {
+    "channel": "scorereport",
+    "context": [
+      "Nah bud",
+      "Unc got you on lock"
+    ],
+    "response": "think of it this way"
+  },
+  {
+    "channel": "scorereport",
+    "context": [
+      "Unc got you on lock",
+      "think of it this way"
+    ],
+    "response": "okeanoz >"
+  },
+  {
+    "channel": "scorereport",
+    "context": [
+      "",
+      "false report should be a 2-0 not a 2-1"
+    ],
+    "response": "it’s not a bo3"
+  },
+  {
+    "channel": "scorereport",
+    "context": [
+      "false report should be a 2-0 not a 2-1",
+      "it’s not a bo3"
+    ],
+    "response": "you play all games"
+  },
+  {
+    "channel": "combine-announcement",
+    "context": [
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!",
+      "@everyone queue fuckers"
+    ],
+    "response": "y’all have never seen a mexican yoshi before"
+  },
+  {
+    "channel": "modchannel",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "<@351480764602515487> ur a cooker"
+  },
+  {
+    "channel": "modchannel",
+    "context": [
+      "<@351480764602515487> ur a cooker",
+      "Thanks problem is having to bug fix this reaction thing"
+    ],
+    "response": "hmm"
+  },
+  {
+    "channel": "weekly-schedule",
+    "context": [
+      "<@&Whales> <@&Wolves> Delta Match:",
+      "<@&Whales> <@&Wolves> Omega Match:"
+    ],
+    "response": "@everyone leave the server you bums"
+  },
+  {
+    "channel": "weekly-schedule",
+    "context": [
+      "@everyone leave the server you bums",
+      "leeaked schedule"
+    ],
+    "response": "https://tenor.com/view/keifer-keifer-sanchez-pepoy-drink-water-gif-13180980"
+  },
+  {
+    "channel": "logs",
+    "context": [
+      "",
+      "<@592025951857147904>"
+    ],
+    "response": "nice"
+  },
+  {
+    "channel": "logs",
+    "context": [
+      "nice",
+      "your ban appeal is april 8 2027 💀"
+    ],
+    "response": "😂"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "<@351480764602515487> Be careful with what you say. Please keep discussions safe and respectful.",
+      "<@592025951857147904> do i keep this in a public channel or make it dms? also should mods have 3 options? say noithing, tell the user it was a little much, and tell them they have been moderated?"
+    ],
+    "response": "is it possible where you receive access to the channel when you’re warned?"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "<@592025951857147904> do i keep this in a public channel or make it dms? also should mods have 3 options? say noithing, tell the user it was a little much, and tell them they have been moderated?",
+      "is it possible where you receive access to the channel when you’re warned?"
+    ],
+    "response": "but i do also find it funny if it’s public everyone can react to it lmao"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "but i do also find it funny if it’s public everyone can react to it lmao",
+      "yeah"
+    ],
+    "response": "this looks great btw <@351480764602515487>"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "yeah",
+      "this looks great btw <@351480764602515487>"
+    ],
+    "response": "1 more hour on my shift"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "1 more hour on my shift",
+      "is mini games gonna have coins in it?"
+    ],
+    "response": "we can figure it out"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "we can figure it out",
+      "ima start it unless you want me to do scheduling"
+    ],
+    "response": "can we do it together tn"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "ima start it unless you want me to do scheduling",
+      "can we do it together tn"
+    ],
+    "response": "and you start scheduling rn"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "after 9",
+      "doosh actually did a lot I just gotta fit to what i want"
+    ],
+    "response": "ok we can go over it later tn then too"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "doosh actually did a lot I just gotta fit to what i want",
+      "ok we can go over it later tn then too"
+    ],
+    "response": "bet i got a rlcs scrim at 9 est that’s it for me"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "ok we can go over it later tn then too",
+      "bet i got a rlcs scrim at 9 est that’s it for me"
+    ],
+    "response": "no work tmr so"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "no work tmr so",
+      "i got questions about enrollment for you too"
+    ],
+    "response": "alright"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "i got questions about enrollment for you too",
+      "alright"
+    ],
+    "response": "i’m taking a nap when i get home till rlcs"
+  },
+  {
+    "channel": "warningschannel",
+    "context": [
+      "alright",
+      "i’m taking a nap when i get home till rlcs"
+    ],
+    "response": "unless you need me"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "can bella help test oke suckls",
+      "No she angy right now💀"
+    ],
+    "response": "<@769669153836761179> i’m in love with you"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "No she angy right now💀",
+      "<@769669153836761179> i’m in love with you"
+    ],
+    "response": "did you tell her about shelby?"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "<@769669153836761179> i’m in love with you",
+      "did you tell her about shelby?"
+    ],
+    "response": "💀"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "did you tell her about shelby?",
+      "💀"
+    ],
+    "response": "<:sideeye:1315277765200576582>"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "💀",
+      "<:sideeye:1315277765200576582>"
+    ],
+    "response": "<:caught:1326984608390053952>"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "<:caught:1326984608390053952>",
+      "Nah she got some sty or something💀"
+    ],
+    "response": "<:_idk:1229281529533042858>"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "Nah she got some sty or something💀",
+      "<:_idk:1229281529533042858>"
+    ],
+    "response": "STI????"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "<:_idk:1229281529533042858>",
+      "STI????"
+    ],
+    "response": "WHATTTTT"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "STI????",
+      "WHATTTTT"
+    ],
+    "response": "EWWWW"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "<@351480764602515487> what you want me to do",
+      "The **Blue Jays** have offered <@1082755441836167259> a roster spot in **Alpha**!"
+    ],
+    "response": "💀"
+  },
+  {
+    "channel": "aaaaaa",
+    "context": [
+      "The **Blue Jays** have offered <@1082755441836167259> a roster spot in **Alpha**!",
+      "💀"
+    ],
+    "response": "oh that i bet that’s fire to look at"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "<@592025951857147904>",
+      ""
+    ],
+    "response": "#1"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#1",
+      ""
+    ],
+    "response": "#2"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "",
+      "#2"
+    ],
+    "response": "#3 \n# Moderation Bot\n*(we didn’t do this yet in the server bot channel so i’ll chat gpt this later tonight frog and show you what it gives)*"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#3 \n# Moderation Bot\n*(we didn’t do this yet in the server bot channel so i’ll chat gpt this later tonight frog and show you what it gives)*",
+      ""
+    ],
+    "response": "#4"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#4",
+      ""
+    ],
+    "response": "#5"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#5",
+      ""
+    ],
+    "response": "#5 continued…"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#5 continued…",
+      ""
+    ],
+    "response": "#6"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#6",
+      ""
+    ],
+    "response": "#7"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#7",
+      ""
+    ],
+    "response": "#8"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#8",
+      ""
+    ],
+    "response": "#8 cont."
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#8 cont.",
+      ""
+    ],
+    "response": "#8 cont.."
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#8 cont..",
+      ""
+    ],
+    "response": "#9"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#9",
+      ""
+    ],
+    "response": "#10"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#10",
+      ""
+    ],
+    "response": "#1000000"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#11",
+      "# Sportsbook\n\n#1000001"
+    ],
+    "response": "Bot"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "Bot",
+      ""
+    ],
+    "response": "whenever for chess tourney testing!"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "",
+      "whenever for chess tourney testing!"
+    ],
+    "response": "#10"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "#10",
+      ""
+    ],
+    "response": "i would like if we could prioritize this but prolly like an 9 or 10/11"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "",
+      "i would like if we could prioritize this but prolly like an 9 or 10/11"
+    ],
+    "response": "https://discord.com/channels/1181050438750060584/1308342776986996807/1326455649231441953"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "https://discord.com/channels/1181050438750060584/1308342776986996807/1326455649231441953",
+      "Yip yap"
+    ],
+    "response": "lol"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "/currency"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "/rout"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "✅ Correct, <@351480764602515487>! The word was **cardinal**.\nYou won **25 coins**!",
+      "🎉 **Solved!** The word was **nature**. Winner: <@592025951857147904>"
+    ],
+    "response": "nature"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "<@275007554533195776> get ur money up bro"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "<@592025951857147904> do /enroll rq",
+      "<@592025951857147904>"
+    ],
+    "response": "ik"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "",
+      "https://rocketleague.tracker.network/rocket-league/profile/epic/okeanoz./overview\nhttps://rocketleague.tracker.network/rocket-league/profile/epic/OTOMPN/overview\nhttps://rocketleague.tracker.network/rocket-league/profile/epic/okeanoz_/overview"
+    ],
+    "response": "wrong bot"
+  },
+  {
+    "channel": "commands",
+    "context": [
+      "<@&1225307467659874396> ❗ <@351480764602515487> reported an invalid tracker:\nhttps://rocketleague.tracker.network/rocket-league/profile/epic/FrogDrivesCar/overview",
+      "✅ Tracker \"https://rocketleague.tracker.network/rocket-league/profile/epic/FrogDrivesCar/overview\" was cleared from all records."
+    ],
+    "response": "<@351480764602515487> is scarlett enrolling"
+  },
+  {
+    "channel": "replay-submit",
+    "context": [
+      "fuck you",
+      "<@592025951857147904>, please submit the replays for match #001 in this channel."
+    ],
+    "response": "https://www.instagram.com/reel/DF0TvslTJnm/?igsh=Y3YzdW42Mjk3cGc2"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Your name doesn't follow the format 'name | franchise'. Please correct it.",
+      "<@351480764602515487> is requesting a name change to: **Frogger | Frogs**"
+    ],
+    "response": "<@351480764602515487> ur working cool beanz"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487> ur working cool beanz",
+      "Huh"
+    ],
+    "response": "wdym huh"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "wdym huh",
+      "I worked like 12 hours ago and that was just a test I didn’t fix it"
+    ],
+    "response": "lol"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "lol",
+      "Please put what ever you want from ducks bot in season 3 bot channel too as I will have to remake as he is taking bot down"
+    ],
+    "response": "ok"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Please put what ever you want from ducks bot in season 3 bot channel too as I will have to remake as he is taking bot down",
+      "ok"
+    ],
+    "response": "<@351480764602515487>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "ok",
+      "<@351480764602515487>"
+    ],
+    "response": "wyd"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Why",
+      "Wyd"
+    ],
+    "response": "<@351480764602515487> vc?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487> vc?",
+      "Are you serious"
+    ],
+    "response": "kylar fell asleep"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "kylar fell asleep",
+      "Ima sound like a dead rat"
+    ],
+    "response": "so im working\\"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "<@351480764602515487> what’s this testing for?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487> what’s this testing for?",
+      "6mans!"
+    ],
+    "response": "oh"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "6mans!",
+      "oh"
+    ],
+    "response": "<@351480764602515487> idea, add a lobby user and pw"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "oh",
+      "<@351480764602515487> idea, add a lobby user and pw"
+    ],
+    "response": "and we’ll want someone to get replays ues?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487> idea, add a lobby user and pw",
+      "and we’ll want someone to get replays ues?"
+    ],
+    "response": "wait"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "and we’ll want someone to get replays ues?",
+      "wait"
+    ],
+    "response": "okay so when people submit play form"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "wait",
+      "okay so when people submit play form"
+    ],
+    "response": "they say if they’re pc or console"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "okay so when people submit play form",
+      "they say if they’re pc or console"
+    ],
+    "response": "so if you select console you’re never asked to get replays in combines"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> yo",
+      "can you bring the bot ideas into here and also prioritize them in a list"
+    ],
+    "response": "arnt they in nature league"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "can you bring the bot ideas into here and also prioritize them in a list",
+      "arnt they in nature league"
+    ],
+    "response": "sorry for back talking"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "arnt they in nature league",
+      "sorry for back talking"
+    ],
+    "response": "i’m doing it now"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "sorry for back talking",
+      "i’m doing it now"
+    ],
+    "response": "sorry"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "sorry",
+      "i need them prioritzed in a list because i dont think i can do it all before launch"
+    ],
+    "response": "can i just forward it?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "i need them prioritzed in a list because i dont think i can do it all before launch",
+      "can i just forward it?"
+    ],
+    "response": "because some of the stuff"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "can i just forward it?",
+      "because some of the stuff"
+    ],
+    "response": "copying gonna be rough"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "do you need a channel here",
+      ""
+    ],
+    "response": "yeah go ahead"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "yeah go ahead"
+    ],
+    "response": "make one"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "yeah go ahead",
+      "make one"
+    ],
+    "response": "and i’ll start"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "i guess unless #1 and #2 mean prioriyy",
+      "soeey"
+    ],
+    "response": "wtf"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "soeey",
+      "wtf"
+    ],
+    "response": "yes that’s what i’m doing :)"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "yes that’s what i’m doing :)",
+      "Sorry!"
+    ],
+    "response": "ur fine"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Sorry!",
+      "ur fine"
+    ],
+    "response": "i’m done <@351480764602515487>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "6mans before or after news",
+      "can we rename #bans to #extinctions? <@592025951857147904>"
+    ],
+    "response": "yeah we could do that"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "can we rename #bans to #extinctions? <@592025951857147904>",
+      "yeah we could do that"
+    ],
+    "response": "before that’s why news is 1000000"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "yeah we could do that",
+      "before that’s why news is 1000000"
+    ],
+    "response": "or put them at the same"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> BRO WHAT DO YOU WANT \"welcome-base.png\" to be",
+      ""
+    ],
+    "response": "wdym?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "this work",
+      ""
+    ],
+    "response": "just keep it like this lol"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "just keep it like this lol"
+    ],
+    "response": "or you could do this custom"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "or you could do this custom",
+      "so you want a defualt"
+    ],
+    "response": "it says “Welcome {User}!” and then include pfp"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "so you want a defualt",
+      "it says “Welcome {User}!” and then include pfp"
+    ],
+    "response": "<@915334990315806791>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "it says “Welcome {User}!” and then include pfp",
+      "<@915334990315806791>"
+    ],
+    "response": "jeanty just picked up a first down on 3rd and 21"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "jeanty just picked up a first down on 3rd and 21",
+      "yeah i have it on"
+    ],
+    "response": "dude"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "yeah i have it on",
+      "dude"
+    ],
+    "response": "coach and qb sold"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "dude",
+      "coach and qb sold"
+    ],
+    "response": "they didn’t run the ball on 3rd and 24"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "coach and qb sold",
+      "they didn’t run the ball on 3rd and 24"
+    ],
+    "response": "to set up for the field goal"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "they didn’t run the ball on 3rd and 24",
+      "to set up for the field goal"
+    ],
+    "response": "and then threw a pick"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "to set up for the field goal",
+      "and then threw a pick"
+    ],
+    "response": "so angry"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "and then threw a pick",
+      "so angry"
+    ],
+    "response": "would be a 7 point game rn"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "would be a 7 point game rn",
+      ""
+    ],
+    "response": "<@915334990315806791>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "<@915334990315806791>"
+    ],
+    "response": "i’ll work with you after new years"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@915334990315806791>",
+      "i’ll work with you after new years"
+    ],
+    "response": "instead of stream"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "i gotta go to neighbors in 30",
+      "then ill be back"
+    ],
+    "response": "yeah"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "then ill be back",
+      "yeah"
+    ],
+    "response": "ur new years is before mine"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "yeah",
+      "ur new years is before mine"
+    ],
+    "response": "so it’s fine"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "so it’s fine",
+      "if i make a 2025 daily goals list you able to keep me accountable"
+    ],
+    "response": "yes"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "yes",
+      "ok"
+    ],
+    "response": "<@915334990315806791> jeanty is the heisman"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "ok",
+      "<@915334990315806791> jeanty is the heisman"
+    ],
+    "response": "omg"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "what happened",
+      "i walke awy two secxonds"
+    ],
+    "response": "he just ran through the whole defense for a first down"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "he just ran through the whole defense for a first down",
+      "w!"
+    ],
+    "response": "it was like 10 yards"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "w!",
+      "it was like 10 yards"
+    ],
+    "response": "lmao"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "it was like 10 yards",
+      "lmao"
+    ],
+    "response": "he’s at 95 yards now"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "lmao",
+      "he’s at 95 yards now"
+    ],
+    "response": "i pray for at least an OT"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "he’s at 95 yards now",
+      "i pray for at least an OT"
+    ],
+    "response": "or a jeanty win bro"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "i pray for at least an OT",
+      "or a jeanty win bro"
+    ],
+    "response": "<@915334990315806791> are we hopping on alts"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "#3 sucks",
+      "why"
+    ],
+    "response": "cuz ur on whatever toadzers is"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "this kicker stinks",
+      "<@592025951857147904>"
+    ],
+    "response": "😂"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "Welcome <@915334990315806791> to Nature League!\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\nNature League Season 2 starts soon! To signup, head over to <#1222700404572164126>. Make sure to check out <#1181050439689568370>, <#1181050439689568369>, and <#1181050440612319347>. \nHave a good day! :NLMainLogo:"
+    ],
+    "response": "looks good paragraph wise"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> its over kiss fish",
+      "toadzers for admin"
+    ],
+    "response": "yeah you won’t be hearing from okeanoz"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "yeah you won’t be hearing from okeanoz",
+      "get your alt in here"
+    ],
+    "response": "Charybdis incoming for admin"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "new years part time bywe",
+      "bot you are timed out learn from your mistakles"
+    ],
+    "response": "😂"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Sorry bot wasn’t up",
+      "lmao"
+    ],
+    "response": "you single?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Welcome <@915334990315806791> to Nature League!",
+      "I wasnt running the updated code for 2 hours!"
+    ],
+    "response": "hey"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "hey",
+      "so i was confdused why it didnt change"
+    ],
+    "response": "NOOOOO"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "so i was confdused why it didnt change",
+      "NOOOOO"
+    ],
+    "response": "that sucks"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "NOOOOO",
+      "that sucks"
+    ],
+    "response": ":("
+  },
+  {
+    "channel": "general",
+    "context": [
+      ":(",
+      "now i can fginally work"
+    ],
+    "response": "yay <3"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "Welcome <@915334990315806791> to Nature League!"
+    ],
+    "response": "progress"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "Welcome <@915334990315806791> to Nature League!"
+    ],
+    "response": "<@915334990315806791> delicious"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Welcome <@915334990315806791> to Nature League!",
+      "<@915334990315806791> delicious"
+    ],
+    "response": "<@351480764602515487> delicious"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "<@592025951857147904> OMG"
+    ],
+    "response": "good idraaaa"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> OMG",
+      "good idraaaa"
+    ],
+    "response": "NICEEE"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "<@351480764602515487> wake up"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> lmk in <#1323840165868994642> what I should get done before the bot launch",
+      "like are all needed or should I launch with just xyz commands etc"
+    ],
+    "response": "wdym?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "like are all needed or should I launch with just xyz commands etc",
+      "wdym?"
+    ],
+    "response": "oh"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "wdym?",
+      "oh"
+    ],
+    "response": "launch whenever you would like"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "oh",
+      "launch whenever you would like"
+    ],
+    "response": "i’d just say when launch have it named nature league bot"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "launch whenever you would like",
+      "i’d just say when launch have it named nature league bot"
+    ],
+    "response": "with our beautiful logo"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "bully",
+      "bully"
+    ],
+    "response": "how old are you"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "how old are you",
+      "22"
+    ],
+    "response": "are you single"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "are you single",
+      "maybe"
+    ],
+    "response": "bully"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "y7jh",
+      "<@592025951857147904>"
+    ],
+    "response": "YO NICEEEE"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "YIPPPEEE",
+      "<@592025951857147904> we can do custom timeout lengths now"
+    ],
+    "response": "<@351480764602515487> hi"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487> hi",
+      "<@592025951857147904> Counting channel function in NL bot"
+    ],
+    "response": "yes"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> Counting channel function in NL bot",
+      "yes"
+    ],
+    "response": "mini games bot"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "yes",
+      "mini games bot"
+    ],
+    "response": "please"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "mini games bot",
+      "please"
+    ],
+    "response": "i’ll get on it"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "I’m grinding code tonight",
+      "Till 11:30 then bed"
+    ],
+    "response": "yes"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "@ducky",
+      "<@592025951857147904> Are you around 10-12 to work or no"
+    ],
+    "response": "yes"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Welcome <@1323873069177245706> to Nature League!\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\nNature League Season 3 starts shortly! To signup, head over to <#1222700404572164126>. Make sure to check out <#1181050439689568370>, <#1181050439689568369>, and <#1181050440612319347>. \nHave a good day! :NLMainLogo:",
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!"
+    ],
+    "response": "AURA"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!",
+      "AURA"
+    ],
+    "response": "<@1082755441836167259>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> my issue was he didnt have explicit perms to speak in <#1337198802343432313>",
+      "works here i guess"
+    ],
+    "response": "lmfao"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!",
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!"
+    ],
+    "response": "hmm"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "hmm",
+      "Why the bot yapping"
+    ],
+    "response": "cuz frog is rerunning ur doing tests"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!",
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!"
+    ],
+    "response": "<@351480764602515487> i fell asleep how’s it going"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "BRo",
+      "<@592025951857147904> its gonna run again at 3:32 react then because it should actually work now"
+    ],
+    "response": "okay"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "okay",
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!"
+    ],
+    "response": "<@351480764602515487> i can’t hop on alt btw i only have phone"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487> i can’t hop on alt btw i only have phone",
+      "np"
+    ],
+    "response": "so to form a lobby you’ll need 3 others if it’s me you scarlett and <@1082755441836167259>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "np",
+      "so to form a lobby you’ll need 3 others if it’s me you scarlett and <@1082755441836167259>"
+    ],
+    "response": "<@1082755441836167259>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> idk why im so bad that it took this long to bug fix but i got channel unlocks working so now its just queuing and reporting",
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!"
+    ],
+    "response": "oh my goshies"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "oh my goshies",
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!"
+    ],
+    "response": "<@1082755441836167259> console react"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!",
+      "<@1082755441836167259> console react"
+    ],
+    "response": "where is everyone"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Why is there a computer and a controller",
+      "<@592025951857147904>"
+    ],
+    "response": "<@1082755441836167259>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904>",
+      "<@1082755441836167259>"
+    ],
+    "response": "Controller players can’t get replays"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!",
+      "<@1310466334198464602> <@951260805666598982> <@592025951857147904> <@287362327508942853> react then queue"
+    ],
+    "response": "@everyone someone grab console"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@1310466334198464602> <@951260805666598982> <@592025951857147904> <@287362327508942853> react then queue",
+      "@everyone someone grab console"
+    ],
+    "response": "<@1310466334198464602> <@951260805666598982>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "@everyone someone grab console",
+      "<@1310466334198464602> <@951260805666598982>"
+    ],
+    "response": "1 go console 1 go pc"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@1310466334198464602> <@951260805666598982>",
+      "1 go console 1 go pc"
+    ],
+    "response": "<@351480764602515487> ur guinea pigs suck"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@951260805666598982> <@1310466334198464602>",
+      "<@951260805666598982> <@1310466334198464602>"
+    ],
+    "response": "bro"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@951260805666598982> <@1310466334198464602>",
+      "bro"
+    ],
+    "response": "ima crash out"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "bro",
+      "ima crash out"
+    ],
+    "response": "y’all never getting a staff role in nature league ever"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "ima crash out",
+      "y’all never getting a staff role in nature league ever"
+    ],
+    "response": "i bet they’re mid rl game"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "y’all never getting a staff role in nature league ever",
+      "i bet they’re mid rl game"
+    ],
+    "response": "<@351480764602515487> we need 2 bro"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@823328530913951805> react with console",
+      "done"
+    ],
+    "response": "<@351480764602515487> OCULAR REACTED TO BOTH"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "done",
+      "<@351480764602515487> OCULAR REACTED TO BOTH"
+    ],
+    "response": "WHAT A FREAK"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!"
+    ],
+    "response": "@everyone"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "React with 🖥️ or 🎮 to sign up for combines tonight. Remember you have to play 7 to be eligible!",
+      "@everyone"
+    ],
+    "response": "y’all are fuckers"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Wym by 7",
+      "Question mark"
+    ],
+    "response": "don’t worry about it"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "MMRs updated for match #001.",
+      "<@592025951857147904> do we want the mmrs udated to not exist"
+    ],
+    "response": "what does that bean"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> do we want the mmrs udated to not exist",
+      "what does that bean"
+    ],
+    "response": "man"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "what does that bean",
+      "man"
+    ],
+    "response": "mean"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "lke the mmrs updated message",
+      "i can make it not exist"
+    ],
+    "response": "up to you it’s fine"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "up to you it’s fine",
+      "so we all good? besides crashes"
+    ],
+    "response": "no idea"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@1225280376826761267> you gonna work hard today!",
+      "<@951260805666598982> what a name"
+    ],
+    "response": "i love you <@769669153836761179>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@951260805666598982> what a name",
+      "i love you <@769669153836761179>"
+    ],
+    "response": "i love you <@769669153836761179>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "<@592025951857147904> do you want exact same as last season or no"
+    ],
+    "response": "what do you think?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Alright",
+      "W take"
+    ],
+    "response": "no"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "W take",
+      "no"
+    ],
+    "response": "i’m asking you"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "no",
+      "i’m asking you"
+    ],
+    "response": "WHAT DO YOU THINK"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "WHAT DO YOU THINK",
+      "I don’t care it look fine"
+    ],
+    "response": "i love you <@769669153836761179>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "i love you <@769669153836761179>",
+      "<@592025951857147904> What should score report look like? Also should I figure out how to make it so our players don’t have to upload to ballchasing?"
+    ],
+    "response": "i mean can you make ballchasing upload automatic?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> What should score report look like? Also should I figure out how to make it so our players don’t have to upload to ballchasing?",
+      "i mean can you make ballchasing upload automatic?"
+    ],
+    "response": "if we pay for it?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "if we pay for it?",
+      "If we pay the subscription monthly yeah"
+    ],
+    "response": "can the bot do something like that lmao"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "If we pay the subscription monthly yeah",
+      "can the bot do something like that lmao"
+    ],
+    "response": "but yeah if it’s just replay files"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "can the bot do something like that lmao",
+      "but yeah if it’s just replay files"
+    ],
+    "response": "and then it uploads to ballchasing"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "and then it uploads to ballchasing",
+      "Then there should be no complaints"
+    ],
+    "response": "we’ll need to make a steam or something"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Then there should be no complaints",
+      "we’ll need to make a steam or something"
+    ],
+    "response": "Nature League Official Replays"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "About I don’t got a ballchasing account",
+      "Just call it nature league"
+    ],
+    "response": "or that"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "<@592025951857147904> welcome lil bro bison"
+    ],
+    "response": "he’s cute"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "he’s cute",
+      "Congratulations <@592025951857147904>!"
+    ],
+    "response": "thanks babe"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Congratulations <@592025951857147904>!",
+      "Indeed I have"
+    ],
+    "response": "/draft"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "/draft",
+      "Real"
+    ],
+    "response": "ladies <@769669153836761179> <@1323873069177245706>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Real",
+      "ladies <@769669153836761179> <@1323873069177245706>"
+    ],
+    "response": "https://discord.gg/RhFBEVMDSf"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Why my name yes💀",
+      "Idk"
+    ],
+    "response": "<@1082755441836167259> leave"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Idk",
+      "<@1082755441836167259> leave"
+    ],
+    "response": "so it’s just me frog and the ladies"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Nah",
+      "I would but I like to watch the bot"
+    ],
+    "response": "ima tell bella you’re in a server with 2 girls"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "The bot is delayed until okeanoz bot",
+      "And then I’ll just tell her you’re an idiot and that it’s bots"
+    ],
+    "response": "bots? 💀"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Those accounts are ai",
+      "<@1344053272478089227> is my favorite ngl"
+    ],
+    "response": "wtf"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@1344053272478089227> is my favorite ngl",
+      "wtf"
+    ],
+    "response": "what gave you that idea"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Isn’t it your alts or smth",
+      "Lol77 you know what lil bro bison does"
+    ],
+    "response": "no"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "They aren’t actual ai💀",
+      "I’m just saying they like ai broski"
+    ],
+    "response": "those are real people"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "The **Blue Jays** have offered <@351480764602515487> a roster spot in **Alpha**!",
+      "It works"
+    ],
+    "response": "suck cherry’s clit"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487>",
+      ""
+    ],
+    "response": "<@769669153836761179> this true?"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "<@769669153836761179> this true?"
+    ],
+    "response": "🤡"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "Congratulations <@1082755441836167259>! The **Blue Jays** have offered you a roster spot in **Apex**! ✅ to accept or ❌ to decline. This will expire in 12 hours.",
+      "<@351480764602515487> <@592025951857147904! Are you sure the **Blue Jays** want to drop okeanoz. **PLAYER DECISION**"
+    ],
+    "response": "<@769669153836761179> im in love with you"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "**Minionese Translation:**\ntav bay",
+      "**Minionese Translation:**\ntav bay"
+    ],
+    "response": "🌌"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "okeanoz"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "okeanoz"
+    ],
+    "response": "bully"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> roulette and slots may be ready",
+      "slots is low return tho"
+    ],
+    "response": "cool beans"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "slots is low return tho",
+      "cool beans"
+    ],
+    "response": "probably add different multipliers"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "probably add different multipliers",
+      ""
+    ],
+    "response": "like combination of symbols in the same category earn you money"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "like combination of symbols in the same category earn you money"
+    ],
+    "response": "just less"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "<@351480764602515487> like this would be a win"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      "<@351480764602515487> like this would be a win"
+    ],
+    "response": "in my multiplier system"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487> like this would be a win",
+      "in my multiplier system"
+    ],
+    "response": "but low multiplier for it"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "but low multiplier for it",
+      "go to nl server"
+    ],
+    "response": "yk what i mean"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "go to nl server",
+      "yk what i mean"
+    ],
+    "response": "like a 1.2 or something"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> const symbols = [\n  // Common symbols (fruits) - ~65% total weight\n  { emoji: \"🍒\", multiplier: 3, weight: 16, group: \"fruits\" },\n  { emoji: \"🍋\", multiplier: 3, weight: 16, group: \"fruits\" },\n  { emoji: \"🍊\", multiplier: 4, weight: 12, group: \"fruits\" },\n  { emoji: \"🍇\", multiplier: 4, weight: 12, group: \"fruits\" },\n  { emoji: \"🍉\", multiplier: 5, weight: 9, group: \"fruits\" },\n  { emoji: \"🥭\", multiplier: 6, weight: 7, group: \"fruits\" },\n\n  // Special symbols - ~22% total weight\n  { emoji: \"⭐\", multiplier: 12, weight: 8, group: \"special\" },\n  { emoji: \"🔔\", multiplier: 15, weight: 6, group: \"special\" },\n  { emoji: \"🎯\", multiplier: 20, weight: 4, group: \"special\" },\n  { emoji: \"🐃\", multiplier: 25, weight: 4, group: \"misc\" },\n\n  // Premium symbols - ~9% total weight\n  { emoji: \"💎\", multiplier: 40, weight: 3, group: \"premium\" },\n  { emoji: \"👑\", multiplier: 60, weight: 2.5, group: \"premium\" },\n  { emoji: \"🎪\", multiplier: 80, weight: 2, group: \"premium\" },\n\n  // Legendary symbols - ~4% total weight\n  { emoji: \"🌟\", multiplier: 150, weight: 1.5, group: \"legendary\" },\n  { emoji: \"🏆\", multiplier: 250, weight: 1, group: \"legendary\" },\n  { emoji: \"🍀\", multiplier: 500, weight: 0.5, group: \"legendary\" },\n];",
+      "getGroupMultiplier(group) {\n  const multipliers = {\n    fruits: 8,\n    special: 15,\n    premium: 30,\n    legendary: 100,"
+    ],
+    "response": "<@351480764602515487> i need that admin salary"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "getGroupMultiplier(group) {\n  const multipliers = {\n    fruits: 8,\n    special: 15,\n    premium: 30,\n    legendary: 100,",
+      "<@351480764602515487> i need that admin salary"
+    ],
+    "response": "cool beans <@351480764602515487>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487> i need that admin salary",
+      "cool beans <@351480764602515487>"
+    ],
+    "response": "2/3 shouldn’t win i don’t think"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "cool beans <@351480764602515487>",
+      "2/3 shouldn’t win i don’t think"
+    ],
+    "response": "<@351480764602515487> how’s hourly daily"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487> how’s hourly daily",
+      "bro im trying to get scheduling bot done"
+    ],
+    "response": "and spin"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "bro im trying to get scheduling bot done",
+      "and spin"
+    ],
+    "response": "and duel"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "and spin",
+      "and duel"
+    ],
+    "response": "good"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "and duel",
+      "good"
+    ],
+    "response": "<@351480764602515487> delete the evidence i need my 2701786 back"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "good",
+      "<@351480764602515487> delete the evidence i need my 2701786 back"
+    ],
+    "response": "i was only testing for you"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@351480764602515487> delete the evidence i need my 2701786 back",
+      "i was only testing for you"
+    ],
+    "response": "<:caught:1275130366759534644>"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "youll get 20000",
+      "at like 8 am"
+    ],
+    "response": "oh no my 2 million gone"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "oh no my 2 million gone",
+      "An error occurred while registering the team."
+    ],
+    "response": "<@351480764602515487> might as well add admin commands"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> get me the balance when possible",
+      "or whatever changes"
+    ],
+    "response": "prolly leave the same"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "prolly leave the same",
+      "<@592025951857147904> im pretty sure those slot multis are different from actual code"
+    ],
+    "response": "i know"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "<@592025951857147904> im pretty sure those slot multis are different from actual code",
+      "i know"
+    ],
+    "response": "im just lazy"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "im just lazy",
+      "are those the percent you want? cause rn its 8x if you get 3 fruits"
+    ],
+    "response": "nah"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "are those the percent you want? cause rn its 8x if you get 3 fruits",
+      "nah"
+    ],
+    "response": "chat gpt did that"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "nah",
+      "chat gpt did that"
+    ],
+    "response": "not me"
+  },
+  {
+    "channel": "general",
+    "context": [
+      "",
+      ""
+    ],
+    "response": "LMAO"
+  }
+]
