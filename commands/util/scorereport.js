@@ -231,18 +231,31 @@ module.exports = {
       const game6 = interaction.options.getString("g6");
       const game7 = interaction.options.getString("g7");
 
-      const winner = seriesWinner(
+      // Validate the series result before doing any heavy work.
+      // Every game must have a winner (no ties/handshakes), and the series
+      // winner must reach the required number of game wins:
+      //   - Regular season (best-of-5): at least 3 wins
+      //   - Playoffs (best-of-7): at least 4 wins
+      const validation = validateSeries(
         team1,
         team2,
-        game1,
-        game2,
-        game3,
-        game4,
-        game5,
-        game6,
-        game7,
+        [game1, game2, game3, game4, game5, game6, game7],
+        gameday,
       );
 
+      if (!validation.valid) {
+        try {
+          return await interaction.editReply({
+            content: `${validation.reason}`,
+            flags: MessageFlags.Ephemeral,
+          });
+        } catch (error) {
+          console.error("Error sending validation reply:", error);
+          return;
+        }
+      }
+
+      const winner = validation.winner;
       console.log(winner);
       // Check if the ballchasing link is valid
       const groupID = getIdFromBCLink(ballchasing);
@@ -864,48 +877,97 @@ function parseTrackerLink(link) {
   return null;
 }
 
-function seriesWinner(
-  team1,
-  team2,
-  g1,
-  g2,
-  g3,
-  g4 = null,
-  g5 = null,
-  g6 = null,
-  g7 = null,
-) {
+// Determine the winner of a single game.
+// Returns 1 (team1 wins), 2 (team2 wins), "tie", "invalid", or null (empty slot).
+function parseGameWinner(game) {
+  if (game === null || game === undefined || `${game}`.trim() === "") {
+    return null; // empty/unused game slot
+  }
+
+  const parts = `${game}`.split("-").map((s) => s.trim());
+  if (parts.length < 2 || parts[0] === "" || parts[1] === "") {
+    return "invalid";
+  }
+
+  const aFF = parts[0].toUpperCase() === "FF";
+  const bFF = parts[1].toUpperCase() === "FF";
+
+  // Forfeit handling: the side marked "FF" loses
+  if (aFF && bFF) return "invalid";
+  if (aFF) return 2; // team1 forfeited -> team2 wins
+  if (bFF) return 1; // team2 forfeited -> team1 wins
+
+  const aScore = parseInt(parts[0], 10);
+  const bScore = parseInt(parts[1], 10);
+  if (Number.isNaN(aScore) || Number.isNaN(bScore)) return "invalid";
+
+  if (aScore === bScore) return "tie"; // handshake / draw - not allowed
+  return aScore > bScore ? 1 : 2;
+}
+
+/**
+ * Validate a submitted series.
+ * - Every provided game must have a clear winner (no ties/handshakes).
+ * - The winner must reach the required number of game wins:
+ *     Playoffs (best-of-7): 4 wins. Regular season (best-of-5): 3 wins.
+ *
+ * @returns {{ valid: boolean, reason?: string, winner?: string, t1?: number, t2?: number }}
+ */
+function validateSeries(team1, team2, games, gameday) {
+  const isPlayoffs = gameday === "Playoffs";
+  const requiredWins = isPlayoffs ? 4 : 3;
+  const seriesLabel = isPlayoffs
+    ? "best-of-7 (first to 4)"
+    : "best-of-5 (first to 3)";
+
   let t1 = 0;
   let t2 = 0;
+  let gameCount = 0;
 
-  // Process all available games
-  const games = [g1, g2, g3, g4, g5, g6, g7].filter(
-    (game) => game !== null && game !== undefined && game !== 0,
-  );
+  for (let i = 0; i < games.length; i++) {
+    const result = parseGameWinner(games[i]);
+    if (result === null) continue; // unused slot
 
-  for (const game of games) {
-    try {
-      const score = game.split("-");
-      const team1Score = parseInt(score[0]);
-      const team2Score = parseInt(score[1]);
+    gameCount++;
 
-      if (team1Score > team2Score) {
-        t1 += 1;
-      } else if (team2Score > team1Score) {
-        t2 += 1;
-      }
-    } catch (error) {
-      console.error(`Error processing game score: ${game}`, error);
-      // Continue with other games if one fails
+    if (result === "tie") {
+      return {
+        valid: false,
+        reason: `Game ${i + 1} (\`${games[i]}\`) is a tie. Every game must have a winner. Please redo the report.`,
+      };
     }
+
+    if (result === "invalid") {
+      return {
+        valid: false,
+        reason: `Game ${i + 1} (\`${games[i]}\`) is not a valid score. Use \`team1-team2\` (e.g. \`3-2\`) or a forfeit (\`FF-W\` / \`W-FF\`). Please redo the report.`,
+      };
+    }
+
+    if (result === 1) t1++;
+    else t2++;
   }
 
-  // Return the winner
-  if (t1 > t2) {
-    return team1;
-  } else {
-    return team2;
+  if (gameCount === 0) {
+    return { valid: false, reason: "No game scores were provided." };
   }
+
+  const winnerWins = Math.max(t1, t2);
+  if (winnerWins < requiredWins) {
+    return {
+      valid: false,
+      reason: `No team reached ${requiredWins} game wins (currently ${team1} ${t1} - ${t2} ${team2}). A ${seriesLabel} series needs a winner with at least ${requiredWins} games won. Please redo the report.`,
+    };
+  }
+
+  if (t1 === t2) {
+    return {
+      valid: false,
+      reason: `The series is tied ${team1} ${t1} - ${t2} ${team2}. There must be a clear winner. Please redo the report.`,
+    };
+  }
+
+  return { valid: true, winner: t1 > t2 ? team1 : team2, t1, t2 };
 }
 
 function getGameResults(team1, team2, games) {
@@ -915,10 +977,22 @@ function getGameResults(team1, team2, games) {
     if (!game) return; // Skip if game doesn't exist
 
     const score = game.split("-");
+    let winnerEmoji = "";
+
+    // check for single game forfeit
+    if (score[0].toString() === "FF") {
+      winnerEmoji = teams[team2].emoji; // Forfeit win for team2
+      resultsText += `Game ${index + 1}: ${game} ${winnerEmoji}\n`;
+      return resultsText;
+    } else if (score[1].toString() === "FF") {
+      winnerEmoji = teams[team1].emoji; // Forfeit win for team1
+      resultsText += `Game ${index + 1}: ${game} ${winnerEmoji}\n`;
+      return resultsText;
+    }
+
     const team1Score = parseInt(score[0]);
     const team2Score = parseInt(score[1]);
 
-    let winnerEmoji = "";
     if (team1Score > team2Score) {
       winnerEmoji = teams[team1].emoji || "🏆"; // Use team1's emoji or default
     } else if (team2Score > team1Score) {
