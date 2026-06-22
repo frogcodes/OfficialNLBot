@@ -55,9 +55,12 @@ class EnrollmentTracker {
   // Initialize the tracker (call this when bot starts)
   initialize() {
     // Set up periodic cleanup (every hour)
-    setInterval(() => {
-      this.cleanup(24); // Clean sessions older than 24 hours
-    }, 60 * 60 * 1000);
+    setInterval(
+      () => {
+        this.cleanup(24); // Clean sessions older than 24 hours
+      },
+      60 * 60 * 1000,
+    );
 
     console.log("Enrollment tracker initialized (in-memory only)");
   }

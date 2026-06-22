@@ -33,6 +33,16 @@ const auth = new google.auth.GoogleAuth({
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
+// Helper: button shown when a user's enrollment session has expired or was lost
+function getRestartButton() {
+  return new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId("restart_enrollment")
+      .setLabel("🔄 Restart Enrollment")
+      .setStyle(ButtonStyle.Primary),
+  );
+}
+
 // Helper function to create review embed and buttons
 function getReviewEmbed(index, link, totalCount) {
   const embed = new EmbedBuilder()
@@ -342,6 +352,9 @@ async function handleButtonInteraction(interaction) {
       case "add_tracker":
         return await handleAddTracker(interaction);
 
+      case "restart_enrollment":
+        return await handleRestartEnrollment(interaction);
+
       case "tracker_invalid":
         return await handleTrackerInvalid(interaction);
 
@@ -386,8 +399,9 @@ async function handleConfirmTrackers(interaction) {
 
   if (!trackers || trackers.length === 0) {
     return await interaction.editReply({
-      content: "❌ No trackers found to review. Please restart enrollment.",
-      components: [],
+      content:
+        "❌ Your enrollment session expired or timed out. Click below to re-enter your tracker links and continue.",
+      components: [getRestartButton()],
       embeds: [],
     });
   }
@@ -444,8 +458,9 @@ async function handleReviewTrackers(interaction) {
 
   if (!trackers || trackers.length === 0) {
     return await interaction.editReply({
-      content: "❌ No trackers found to review. Please restart enrollment.",
-      components: [],
+      content:
+        "❌ Your enrollment session expired or timed out. Click below to re-enter your tracker links and continue.",
+      components: [getRestartButton()],
       embeds: [],
     });
   }
@@ -484,14 +499,122 @@ async function handleAddTracker(interaction) {
   return await interaction.showModal(modal);
 }
 
+// Restart the enrollment flow from scratch: re-check the database for the
+// user's saved trackers, exactly like the /enroll command does.
+async function handleRestartEnrollment(interaction) {
+  await interaction.deferUpdate();
+
+  const playerID = interaction.user.id;
+
+  // Already enrolled? Nothing to restart.
+  if (interaction.member.roles.cache.has(ENROLLED_ROLE_ID)) {
+    return await interaction.editReply({
+      content:
+        "You have already enrolled. If you need to make any changes, please open an admissions ticket in https://discord.com/channels/1181050438750060584/1238989734886244352/1389490865440821288.",
+      components: [],
+      embeds: [],
+    });
+  }
+
+  const addTrackerButton = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId("add_tracker")
+      .setLabel("➕ Add Tracker")
+      .setStyle(ButtonStyle.Primary),
+  );
+
+  const authClient = await auth.getClient();
+  const idColumn = await sheets.spreadsheets.values.get({
+    auth: authClient,
+    spreadsheetId: DB_ID,
+    range: "Database!A:A",
+  });
+
+  const idRows = idColumn.data.values || [];
+  const rowIndex = idRows.findIndex((row) => row[0] === playerID);
+
+  if (rowIndex === -1) {
+    return await interaction.editReply({
+      content:
+        "It seems you have not enrolled before.\n\nPlease click the **Add Tracker** button and paste all your Rocket League tracker links **separated by commas**.\n\n**Example:**\n```\nhttps://rocketleague.tracker.network/profile/epic/User1, https://rocketleague.tracker.network/profile/steam/User2\n```",
+      components: [addTrackerButton],
+      embeds: [],
+    });
+  }
+
+  const sheetRow = rowIndex + 1;
+  const rowResponse = await sheets.spreadsheets.values.get({
+    auth: authClient,
+    spreadsheetId: DB_ID,
+    range: `Database!A${sheetRow}:I${sheetRow}`,
+  });
+
+  const row = rowResponse.data.values?.[0] || [];
+  const trackers = row.filter(
+    (cell) =>
+      typeof cell === "string" && cell.includes("rocketleague.tracker"),
+  );
+
+  // Reset enrollment state for a fresh review
+  await enrollmentTracker.set(interaction.user.id, {
+    trackers,
+    current: 0,
+    reviewed: [],
+  });
+
+  if (trackers.length === 0) {
+    return await interaction.editReply({
+      content:
+        "It seems we have no trackers saved for you.\n\nPlease click the **Add Tracker** button and paste all your Rocket League tracker links **separated by commas**.\n\n**Example:**\n```\nhttps://rocketleague.tracker.network/profile/epic/User1, https://rocketleague.tracker.network/profile/steam/User2\n```",
+      components: [addTrackerButton],
+      embeds: [],
+    });
+  }
+
+  const embed = new EmbedBuilder()
+    .setTitle("📋 Enrollment Tracker Confirmation")
+    .setDescription(
+      "Please confirm the following tracker links are all yours and valid:",
+    )
+    .addFields(
+      trackers.map((link, i) => ({
+        name: `Tracker ${i + 1}`,
+        value: `${link}`,
+      })),
+    )
+    .setColor("Green");
+
+  const buttons = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId("confirm_trackers")
+      .setLabel("✅ Yes")
+      .setStyle(ButtonStyle.Success),
+    new ButtonBuilder()
+      .setCustomId("review_trackers")
+      .setLabel("❌ No")
+      .setStyle(ButtonStyle.Danger),
+    new ButtonBuilder()
+      .setCustomId("add_tracker")
+      .setLabel("➕ Add More")
+      .setStyle(ButtonStyle.Primary),
+  );
+
+  return await interaction.editReply({
+    content: "",
+    embeds: [embed],
+    components: [buttons],
+  });
+}
+
 async function handleTrackerInvalid(interaction) {
   await interaction.deferUpdate();
   const state = await enrollmentTracker.get(interaction.user.id);
 
   if (!state || !state.trackers || state.trackers.length === 0) {
     return await interaction.editReply({
-      content: "❌ No tracker data found. Please restart enrollment.",
-      components: [],
+      content:
+        "❌ Your enrollment session expired or timed out. Click below to re-enter your tracker links and continue.",
+      components: [getRestartButton()],
       embeds: [],
     });
   }
@@ -534,13 +657,10 @@ async function handleTrackerInvalid(interaction) {
     });
   }
 
-  // Adjust current index if it's now out of bounds
-  if (updatedState.current >= updatedTrackers.length) {
-    updatedState.current = updatedTrackers.length - 1;
-    await enrollmentTracker.set(interaction.user.id, updatedState);
-  }
-
-  // Check if we've reviewed all trackers
+  // Removing a tracker shifts the next one into the current index, so we do
+  // NOT advance `current`. If `current` is now past the end, it means we just
+  // removed the last tracker and everything remaining has already been
+  // reviewed -> go straight to the summary (don't re-show a reviewed tracker).
   if (updatedState.current >= updatedTrackers.length) {
     const { embed, buttons } = createTrackerSummary(updatedTrackers);
     return await interaction.editReply({
@@ -549,21 +669,21 @@ async function handleTrackerInvalid(interaction) {
       embeds: [embed],
       components: [buttons],
     });
-  } else {
-    // Show next tracker (or current if we're at the same position)
-    const { embed, buttons } = getReviewEmbed(
-      updatedState.current,
-      updatedTrackers[updatedState.current],
-      updatedTrackers.length,
-    );
-    return await interaction.editReply({
-      content: `❌ Tracker removed. Showing tracker ${
-        updatedState.current + 1
-      } of ${updatedTrackers.length}...`,
-      embeds: [embed],
-      components: [buttons],
-    });
   }
+
+  // Otherwise show the tracker that shifted into the current position
+  const { embed, buttons } = getReviewEmbed(
+    updatedState.current,
+    updatedTrackers[updatedState.current],
+    updatedTrackers.length,
+  );
+  return await interaction.editReply({
+    content: `❌ Tracker removed. Showing tracker ${
+      updatedState.current + 1
+    } of ${updatedTrackers.length}...`,
+    embeds: [embed],
+    components: [buttons],
+  });
 }
 
 async function handleTrackerValid(interaction) {
@@ -572,8 +692,9 @@ async function handleTrackerValid(interaction) {
 
   if (!state || !state.trackers || state.trackers.length === 0) {
     return await interaction.editReply({
-      content: "❌ No tracker data found. Please restart enrollment.",
-      components: [],
+      content:
+        "❌ Your enrollment session expired or timed out. Click below to re-enter your tracker links and continue.",
+      components: [getRestartButton()],
       embeds: [],
     });
   }
@@ -633,14 +754,17 @@ async function handleSocialModal(interaction) {
 
     if (finalTrackers.length === 0) {
       return await interaction.editReply({
-        content: "❌ No trackers found to submit. Please restart enrollment.",
-        components: [],
+        content:
+          "❌ Your enrollment session expired or timed out. Click below to re-enter your tracker links and continue.",
+        components: [getRestartButton()],
         embeds: [],
       });
     }
 
     const authClient = await auth.getClient();
-    const admitValues = [[interaction.user.id, "", "", ...finalTrackers]];
+    const admitValues = [
+      ["", interaction.user.id, "", "", "", ...finalTrackers],
+    ];
     const dbValues = [
       [interaction.user.id, twitter, instagram, ...finalTrackers],
     ];

@@ -41,21 +41,21 @@ module.exports = {
       // Tracker Database Check
       const authClient = await auth.getClient();
 
-      const response = await sheets.spreadsheets.values.get({
+      const idColumn = await sheets.spreadsheets.values.get({
         auth: authClient,
         spreadsheetId: DB_ID,
-        range: "Database!A:I",
+        range: "Database!A:A",
       });
 
-      const rows = response.data.values || [];
-      const matchingRows = rows.filter((row) => row[0] === playerID);
+      const idRows = idColumn.data.values || [];
+      const rowIndex = idRows.findIndex((row) => row[0] === playerID);
 
-      if (matchingRows.length === 0) {
+      if (rowIndex === -1) {
         const buttons = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("add_tracker")
             .setLabel("➕ Add Tracker")
-            .setStyle(ButtonStyle.Primary)
+            .setStyle(ButtonStyle.Primary),
         );
 
         await interaction.editReply({
@@ -67,10 +67,17 @@ module.exports = {
         return;
       }
 
-      const row = matchingRows[0];
+      const sheetRow = rowIndex + 1;
+      const rowResponse = await sheets.spreadsheets.values.get({
+        auth: authClient,
+        spreadsheetId: DB_ID,
+        range: `Database!A${sheetRow}:I${sheetRow}`,
+      });
+
+      const row = rowResponse.data.values?.[0] || [];
       const trackers = row.filter(
         (cell) =>
-          typeof cell === "string" && cell.includes("rocketleague.tracker")
+          typeof cell === "string" && cell.includes("rocketleague.tracker"),
       );
 
       // Initialize enrollment state
@@ -85,7 +92,7 @@ module.exports = {
           new ButtonBuilder()
             .setCustomId("add_tracker")
             .setLabel("➕ Add Tracker")
-            .setStyle(ButtonStyle.Primary)
+            .setStyle(ButtonStyle.Primary),
         );
 
         await interaction.editReply({
@@ -100,13 +107,13 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setTitle("📋 Enrollment Tracker Confirmation")
         .setDescription(
-          "Please confirm the following tracker links are all yours and valid:"
+          "Please confirm the following tracker links are all yours and valid:",
         )
         .addFields(
           trackers.map((link, i) => ({
             name: `Tracker ${i + 1}`,
             value: `${link}`,
-          }))
+          })),
         )
         .setColor("Green");
 
@@ -122,7 +129,7 @@ module.exports = {
         new ButtonBuilder()
           .setCustomId("add_tracker")
           .setLabel("➕ Add More")
-          .setStyle(ButtonStyle.Primary)
+          .setStyle(ButtonStyle.Primary),
       );
 
       await interaction.editReply({
