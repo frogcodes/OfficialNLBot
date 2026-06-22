@@ -8,7 +8,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("balance")
     .setDescription(
-      "Check your wallet or create one if you don't have one yet"
+      "Check your wallet or create one if you don't have one yet",
     ),
 
   async execute(interaction) {

@@ -32,7 +32,7 @@ module.exports = {
       option
         .setName("wager")
         .setDescription("The amount to wager")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addStringOption((option) =>
       option
@@ -42,8 +42,8 @@ module.exports = {
         .addChoices(
           { name: "✊", value: "rock" },
           { name: "✋", value: "paper" },
-          { name: "✌️", value: "scissors" }
-        )
+          { name: "✌️", value: "scissors" },
+        ),
     ),
 
   async execute(interaction) {
@@ -107,7 +107,7 @@ module.exports = {
           value: `${moveEmoji[aiMove]} ${aiMove}`,
           inline: true,
         },
-        { name: "Result", value: outcomeText }
+        { name: "Result", value: outcomeText },
       )
       .setColor(color)
       .setFooter({ text: `Your new balance: $${balance}` });

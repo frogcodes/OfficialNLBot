@@ -88,7 +88,10 @@ module.exports = {
     .setName("roulette")
     .setDescription("Bet on a roulette spin!")
     .addIntegerOption((option) =>
-      option.setName("amount").setDescription("Amount to bet").setRequired(true)
+      option
+        .setName("amount")
+        .setDescription("Amount to bet")
+        .setRequired(true),
     )
     .addStringOption((option) =>
       option
@@ -104,14 +107,14 @@ module.exports = {
           { name: "2nd Third (13-24)", value: "range-13-24" },
           { name: "3rd Third (25-36)", value: "range-25-36" },
           { name: "Low (1-18)", value: "range-1-18" },
-          { name: "High (19-36)", value: "range-19-36" }
-        )
+          { name: "High (19-36)", value: "range-19-36" },
+        ),
     )
     .addStringOption((option) =>
       option
         .setName("value")
         .setDescription("Value to bet on (required for color/number bets)")
-        .setRequired(false)
+        .setRequired(false),
     ),
   async execute(interaction) {
     const userId = interaction.user.id;
@@ -323,7 +326,7 @@ module.exports = {
           name: "💰 Wager",
           value: `$${betAmount}`,
           inline: true,
-        }
+        },
       );
 
     if (won) {

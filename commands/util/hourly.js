@@ -37,7 +37,7 @@ module.exports = {
       const minutes = Math.floor(timeLeft / 60000);
       const seconds = Math.floor((timeLeft % 60000) / 1000);
       return interaction.reply(
-        `⏳ You already claimed! Try again in **${minutes}m ${seconds}s**.`
+        `⏳ You already claimed! Try again in **${minutes}m ${seconds}s**.`,
       );
     }
 
@@ -53,7 +53,7 @@ module.exports = {
     writeJSON(cooldowns);
 
     return interaction.reply(
-      `💰 You claimed your hourly reward of **$${reward}**!`
+      `💰 You claimed your hourly reward of **$${reward}**!`,
     );
   },
 };

@@ -138,7 +138,7 @@ module.exports = {
       option
         .setName("bet")
         .setDescription("Amount of coins to bet (0 for free play)")
-        .setRequired(true)
+        .setRequired(true),
     ),
 
   async execute(interaction) {

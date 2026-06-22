@@ -63,13 +63,13 @@ module.exports = {
       option
         .setName("player")
         .setDescription("Select the player to offer")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addIntegerOption((option) =>
       option
         .setName("wager")
         .setDescription("Amount to wager")
-        .setRequired(true)
+        .setRequired(true),
     ),
 
   async execute(interaction) {

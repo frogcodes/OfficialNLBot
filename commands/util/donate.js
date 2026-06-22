@@ -12,13 +12,13 @@ module.exports = {
       option
         .setName("player")
         .setDescription("Select the player to donate to")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addIntegerOption((option) =>
       option
         .setName("amount")
         .setDescription("Amount to donate")
-        .setRequired(true)
+        .setRequired(true),
     ),
 
   async execute(interaction) {

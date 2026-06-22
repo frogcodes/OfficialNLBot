@@ -13,13 +13,13 @@ module.exports = {
       option
         .setName("player")
         .setDescription("Select the player to donate to")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addIntegerOption((option) =>
       option
         .setName("amount")
         .setDescription("Amount to donate")
-        .setRequired(true)
+        .setRequired(true),
     ),
 
   async execute(interaction) {
@@ -47,7 +47,7 @@ module.exports = {
       try {
         await interaction.client.users.send(
           player.id,
-          `You have been given $${amount} NL Coin`
+          `You have been given $${amount} NL Coin`,
         );
       } catch (dmError) {
         console.warn(`Failed to DM ${player.tag}:`, dmError);

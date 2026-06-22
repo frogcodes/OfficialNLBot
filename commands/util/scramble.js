@@ -112,9 +112,9 @@ module.exports = {
         .addChoices(
           { name: "Easy", value: "easy" },
           { name: "Medium", value: "medium" },
-          { name: "Hard", value: "hard" }
+          { name: "Hard", value: "hard" },
         )
-        .setRequired(true)
+        .setRequired(true),
     ),
 
   async execute(interaction) {
@@ -150,10 +150,10 @@ module.exports = {
       collector.stop("solved");
       changePlayerBalance(msg.author.id, prize);
       msg.reply(
-        `✅ Correct, ${msg.author}! The word was **${originalWord}**.\nYou won **${prize} coins**!`
+        `✅ Correct, ${msg.author}! The word was **${originalWord}**.\nYou won **${prize} coins**!`,
       );
       gameMessage.edit(
-        `🎉 **Solved!** The word was **${originalWord}**. Winner: ${msg.author}`
+        `🎉 **Solved!** The word was **${originalWord}**. Winner: ${msg.author}`,
       );
       isScrambleActive = false;
     });
@@ -162,7 +162,7 @@ module.exports = {
       if (reason !== "solved") {
         isScrambleActive = false;
         gameMessage.edit(
-          `⏱️ Time’s up! No one got it. The word was **${originalWord}**.`
+          `⏱️ Time’s up! No one got it. The word was **${originalWord}**.`,
         );
       }
     });
