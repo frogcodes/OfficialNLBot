@@ -23,7 +23,7 @@ const LOG_CHANNEL_ID = "1393293384558448720";
 const DEV_USER_ID = "351480764602515487";
 const ENROLLED_ROLE_ID = "1337883747629928611";
 const NEW_PERSON_ROLE_ID = "1190802857939709984";
-const PREVIOUS_ENROLLEE_ROLE_ID = "1453588292405694606";
+const PREVIOUS_ENROLLEE_ROLE_ID = "1504896008377860177";
 const NO_REQS_ROLE_ID = "1225307467659874396";
 
 // Google Sheets setup
@@ -551,8 +551,7 @@ async function handleRestartEnrollment(interaction) {
 
   const row = rowResponse.data.values?.[0] || [];
   const trackers = row.filter(
-    (cell) =>
-      typeof cell === "string" && cell.includes("rocketleague.tracker"),
+    (cell) => typeof cell === "string" && cell.includes("rocketleague.tracker"),
   );
 
   // Reset enrollment state for a fresh review
@@ -821,7 +820,6 @@ async function handleSocialModal(interaction) {
     // Update user roles
     try {
       await interaction.member.roles.add(ENROLLED_ROLE_ID);
-      await interaction.member.roles.add(NO_REQS_ROLE_ID);
       await interaction.member.roles.remove(NEW_PERSON_ROLE_ID);
       await interaction.member.roles.remove(PREVIOUS_ENROLLEE_ROLE_ID);
     } catch (roleError) {

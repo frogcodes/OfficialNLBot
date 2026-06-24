@@ -85,23 +85,22 @@ module.exports = {
     let tierRoleToGive = leagueRoles[tier];
     let FArole = faRoles[tier];
 
-    await player.roles.add(rfaRole);
+    //await player.roles.add(rfaRole);
     await player.roles.add(PROCESSED_ROLE);
     await player.roles.add(tierRoleToGive);
-    await player.roles.add(faLeagueRole);
     await player.roles.remove(noReqsRole);
-    //await player.roles.add(FArole);
+    await player.roles.add(FArole);
 
-    const today = new Date();
-    const day = today.getDay(); // 0=Sunday, 1=Monday, ...
-    const daysUntilMonday = (8 - day) % 7 || 7; // always pushes to the *next* Monday
-    const nextMonday = new Date(today);
-    nextMonday.setDate(today.getDate() + daysUntilMonday);
+    // const today = new Date();
+    // const day = today.getDay(); // 0=Sunday, 1=Monday, ...
+    // const daysUntilMonday = (8 - day) % 7 || 7; // always pushes to the *next* Monday
+    // const nextMonday = new Date(today);
+    // nextMonday.setDate(today.getDate() + daysUntilMonday);
 
     // Format as MM/DD with leading zeros
-    const month = String(nextMonday.getMonth() + 1).padStart(2, "0");
-    const date = String(nextMonday.getDate()).padStart(2, "0");
-    const formatted = `${month}/${date}`;
+    // const month = String(nextMonday.getMonth() + 1).padStart(2, "0");
+    // const date = String(nextMonday.getDate()).padStart(2, "0");
+    // const formatted = `${month}/${date}`;
 
     // Remove any existing RFA tag, preserve everything else
     const withoutRFA = player.displayName.replace(
@@ -115,7 +114,9 @@ module.exports = {
     const trailingEmojis = match && match[2] ? match[2] : "";
 
     // Build new nickname
-    const newNickname = `${baseName} | RFA ${formatted}${trailingEmojis ? " " + trailingEmojis : ""}`;
+
+    const newNickname = `${baseName} | FA ${trailingEmojis ? " " + trailingEmojis : ""}`; // until draft ends
+    //const newNickname = `${baseName} | RFA ${formatted}${trailingEmojis ? " " + trailingEmojis : ""}`;
     try {
       await player.setNickname(newNickname);
     } catch (err) {
