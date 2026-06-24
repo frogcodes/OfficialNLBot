@@ -109,13 +109,13 @@ module.exports = {
     );
 
     // Extract base name and trailing emojis
-    const match = withoutRFA.match(/^(.*?)\s*([⭐🏆]+)?\s*$/);
+    const match = withoutRFA.match(/^(.*?)\s*([🌟🏆]+)?\s*$/);
     const baseName = match ? match[1].trim() : withoutRFA.trim();
     const trailingEmojis = match && match[2] ? match[2] : "";
 
     // Build new nickname
 
-    const newNickname = `${baseName} | FA ${trailingEmojis ? " " + trailingEmojis : ""}`; // until draft ends
+    const newNickname = `${baseName} | FA${trailingEmojis ? " " + trailingEmojis : ""}`; // until draft ends
     //const newNickname = `${baseName} | RFA ${formatted}${trailingEmojis ? " " + trailingEmojis : ""}`;
     try {
       await player.setNickname(newNickname);
