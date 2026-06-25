@@ -107,7 +107,7 @@ async function TierAdjustment(client) {
         // Validate salary value
         if (typeof salValue !== "number" || isNaN(salValue)) {
           console.warn(
-            `Invalid salary value for player ${playerId}: ${salValue}`
+            `Invalid salary value for player ${playerId}: ${salValue}`,
           );
           errorCount++;
           continue;
@@ -122,11 +122,11 @@ async function TierAdjustment(client) {
 
         // Get current tier roles
         const memberTierRoles = Object.values(tierRoles).filter((roleId) =>
-          member.roles.cache.has(roleId)
+          member.roles.cache.has(roleId),
         );
 
         const memberFaRoles = Object.values(tierFAroles).filter((roleId) =>
-          member.roles.cache.has(roleId)
+          member.roles.cache.has(roleId),
         );
 
         // Determine correct tier
@@ -151,7 +151,7 @@ async function TierAdjustment(client) {
           await member.roles.add([correctTierRoleId, correctFaRoleId]);
 
           console.log(
-            `Updated ${member.user.tag} (${playerId}) to ${tier} tier (sal: ${salValue})`
+            `Updated ${member.user.tag} (${playerId}) to ${tier} tier (sal: ${salValue})`,
           );
           updatedCount++;
 
@@ -165,7 +165,7 @@ async function TierAdjustment(client) {
     }
 
     console.log(
-      `Tier adjustment complete: ${updatedCount} updated, ${skippedCount} skipped, ${errorCount} errors`
+      `Tier adjustment complete: ${updatedCount} updated, ${skippedCount} skipped, ${errorCount} errors`,
     );
   } catch (err) {
     console.error("Error during tier adjustment:", err);
@@ -199,7 +199,7 @@ module.exports = {
       {
         scheduled: true,
         timezone: "America/New_York", // Adjust to your timezone
-      }
+      },
     );
 
     console.log("Tier adjustment scheduled to run daily at midnight");
