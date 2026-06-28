@@ -18,7 +18,8 @@ function delay(ms) {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("peak-recheck")
-    .setDescription("Process all rows with no sal"),
+    .setDescription("Process all rows with no sal")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
   async execute(interaction) {
     const i = await interaction.guild.members.fetch(interaction.user.id);
