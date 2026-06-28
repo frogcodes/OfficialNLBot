@@ -82,7 +82,9 @@ module.exports = {
     const lines = [];
 
     if (currentSeason) {
-      lines.push(`• ${currentSeason} games this current season`);
+      lines.push(
+        `• ${currentSeason} competitive games this current season in one mode (2s or 3s)`,
+      );
     }
     if (past5) {
       lines.push(`• ${past5} combined 2s and 3s games in the past 5 seasons`);
