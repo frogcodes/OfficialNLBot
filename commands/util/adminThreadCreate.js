@@ -1,11 +1,20 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
-const schedule = require("../../data/schedule.json");
+const {
+  SlashCommandBuilder,
+  PermissionFlagsBits,
+} = require("discord.js");
 const { captainRoles } = require("../../data/roles.json");
 const teams = require("../../data/teams.json");
-const fs = require("fs");
-const path = require("path");
-
-const schedulePath = path.join(__dirname, "../../data/schedule.json");
+const {
+  refreshSchedulingControlMessage,
+} = require("../../utils/scheduling/controlMessage.js");
+const {
+  normalizeWeekStartDate,
+} = require("../../utils/scheduling/dateUtils.js");
+const { ensureAvailabilitySession } = require("../../utils/scheduling/service.js");
+const {
+  loadSchedule,
+  setMatchThreadId,
+} = require("../../utils/scheduling/scheduleStore.js");
 
 const SCHEDULING_TEAM_ID = "1273103635294982246";
 const zookeeperID = "1181050438926209076";
@@ -28,12 +37,28 @@ module.exports = {
         .setName("week-number")
         .setDescription("The week number for threads")
         .setRequired(true),
+    )
+    .addStringOption((option) =>
+      option
+        .setName("week-start-date")
+        .setDescription("Monday date for this scheduling week (MM/DD/YYYY)")
+        .setRequired(false),
     ),
 
   async execute(interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     const weekNum = interaction.options.getInteger("week-number");
+    const weekStartInput = interaction.options.getString("week-start-date");
+    let weekStartDate;
+
+    try {
+      weekStartDate = normalizeWeekStartDate(weekStartInput);
+    } catch (error) {
+      return await interaction.editReply(error.message);
+    }
+
+    const schedule = loadSchedule();
     let week = schedule.weeks[weekNum];
 
     try {
@@ -119,10 +144,14 @@ module.exports = {
               console.error("Failed to add scheduling team members:", error);
             }
 
-            //update thread id
-            match.tiers[tier].threadID = thread.id;
-
-            fs.writeFileSync(schedulePath, JSON.stringify(schedule, null, 2));
+            //update thread id (serialized + atomic through the schedule store)
+            await setMatchThreadId({
+              weekIndex: weekNum,
+              gamedayNum: gameday.gamedayNum,
+              teams: match.teams,
+              tier,
+              threadId: thread.id,
+            });
 
             //team hosting procedure
             const team1_is_home = Math.random() < 0.5;
@@ -130,19 +159,38 @@ module.exports = {
 
             const team1_location = team1_is_home ? "HOME" : "AWAY";
             const team2_location = team2_is_home ? "HOME" : "AWAY";
+            const homeRole = team1_is_home ? team1Role : team2Role;
+            const welcomeIntro =
+              `Welcome <@&${team1Role}> (${team1_location}) and ` +
+              `<@&${team2Role}> (${team2_location})! This thread is for ` +
+              `your ${tier} GD ${gameday.gamedayNum} match.`;
+            const welcomeMessage = [
+              welcomeIntro,
+              "",
+              "- The **HOME** team creates the lobby.",
+              "- The **AWAY** team must report the match within 24 hours of finishing.",
+              "*The game window is Monday–Sunday. All games are due by Sunday.",
+              "IMPORTANT: Games must be scheduled by **WEDNESDAY**.",
+              "",
+              "If you need an extension, you must request it by **WEDNESDAY**.",
+              "",
+              "Use the scheduling controls below to submit availability.",
+            ].join("\n");
 
             // send welcome message
-            await thread.send(
-              `Welcome <@&${team1Role}> (${team1_location}) and <@&${team2Role}> (${team2_location})! This thread is for your ${tier} GD ${gameday.gamedayNum} match.\n
-- The **HOME** team creates the lobby.\n- The **AWAY** team must report the match within 24 hours of finishing.\n*The game window is Monday–Sunday. All games are due by Sunday.\nIMPORTANT: Games must be scheduled by **WEDNESDAY**.
-\nIf you need an extension, you must request it by **WEDNESDAY**.\n
-Please post your availability immediately to get this finalized. Example:\n
-Team Name Availability (EST):\n
-Mon: 8pm - 10pm\n
-Tue: 7pm - 9pm\n
-Sat: 2pm - 5pm\n
-Confirm the final time once agreed upon with **/schedule**. Good luck!`,
-            );
+            await thread.send({
+              content: welcomeMessage,
+            });
+
+            ensureAvailabilitySession({
+              threadId: thread.id,
+              tier,
+              teamRoleIds: [team1Role, team2Role],
+              homeRoleId: homeRole,
+              weekStartDate,
+            });
+
+            await refreshSchedulingControlMessage(thread, thread.id);
             await new Promise((resolve) => setTimeout(resolve, 500));
           }
         }

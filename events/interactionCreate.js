@@ -12,6 +12,7 @@ const {
 const { google } = require("googleapis");
 const { enrollmentTracker } = require("../utils/enrollmentTracker.js");
 const autoSalary = require("../utils/autoSal.js");
+const schedulingInteractions = require("../utils/scheduling/interactionHandlers.js");
 
 // Configuration constants
 const ADMISSIONS_ID = "1225307467659874396";
@@ -246,9 +247,22 @@ module.exports = {
         return await handleSlashCommand(interaction);
       }
 
+      if (
+        (interaction.isButton() || interaction.isStringSelectMenu()) &&
+        schedulingInteractions.isSchedulingInteraction(interaction)
+      ) {
+        return await schedulingInteractions.handle(interaction);
+      }
+
       // Handle button interactions
       if (interaction.isButton()) {
         return await handleButtonInteraction(interaction);
+      }
+
+      // Handle select menu interactions
+      if (interaction.isStringSelectMenu()) {
+        console.log(`Unhandled select menu interaction: ${interaction.customId}`);
+        return;
       }
 
       // Handle modal submissions
