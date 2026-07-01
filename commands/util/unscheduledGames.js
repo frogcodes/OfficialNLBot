@@ -1,6 +1,9 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const schedule = require("../../data/schedule.json");
 const teams = require("../../data/teams.json");
+const {
+  refreshSchedulingControlMessage,
+} = require("../../utils/scheduling/controlMessage.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -37,13 +40,15 @@ module.exports = {
           await thread.send(
             `<@&${team1Role}> and <@&${team2Role}>! ${tier} GD ${gameday.gamedayNum}
 
-It’s been 2 days since your match thread opened, and we still haven’t seen a time scheduled using /schedule.
+It’s been 2 days since your match thread opened, and we still haven’t seen a confirmed match time.
 
-👉 Please confirm your match time as soon as possible.
+Please use the scheduling controls in this thread to submit availability or finalize a proposed time.
 If you do not provide a time, the Scheduling Team will step in and assist to finalize it.
 
 Thank you for your cooperation!`
           );
+
+          await refreshSchedulingControlMessage(thread, thread.id);
         }
       }
     }
