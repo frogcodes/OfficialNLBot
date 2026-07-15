@@ -12,7 +12,7 @@ module.exports = {
       option
         .setName("new_name")
         .setDescription('The new part of your name (before "|")')
-        .setRequired(true)
+        .setRequired(true),
     ),
 
   async execute(interaction) {
@@ -116,7 +116,7 @@ module.exports = {
       console.log(
         `Member: ${member.user.tag}, Roles: ${member.roles.cache
           .map((role) => role.name)
-          .join(", ")}`
+          .join(", ")}`,
       );
 
       // Check if the reaction emoji is ✅ or ❌ and if the member has the required role
@@ -143,12 +143,12 @@ module.exports = {
         // Approve the name change
         await interaction.member.setNickname(newFullName);
         await requestChannel.send(
-          `${interaction.user}'s name has been changed to ${newFullName} from ${userDisplayName}.`
+          `${interaction.user}'s name has been changed to ${newFullName} from ${userDisplayName}.`,
         );
       } else if (reaction.emoji.name === "❌") {
         // Decline the name change
         await requestChannel.send(
-          `${interaction.user}'s name change request to ${newFullName} has been declined.`
+          `${interaction.user}'s name change request to ${newFullName} has been declined.`,
         );
       }
     } catch (err) {

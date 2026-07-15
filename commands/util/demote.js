@@ -21,7 +21,7 @@ module.exports = {
       option
         .setName("player")
         .setDescription("Select the player to demote")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addStringOption((option) =>
       option
@@ -33,20 +33,20 @@ module.exports = {
           { name: "Alpha", value: "Alpha" },
           { name: "Beta", value: "Beta" },
           { name: "Delta", value: "Delta" },
-          { name: "Omega", value: "Omega" }
-        )
+          { name: "Omega", value: "Omega" },
+        ),
     )
     .addBooleanOption((option) =>
       option
         .setName("captain")
         .setDescription("Remove captain role from this player?")
-        .setRequired(false)
+        .setRequired(false),
     )
     .addBooleanOption((option) =>
       option
         .setName("demotion")
         .setDescription("Demote this player down a tier?")
-        .setRequired(false)
+        .setRequired(false),
     ),
   async execute(interaction) {
     try {
@@ -68,15 +68,15 @@ module.exports = {
       }
 
       const captainRoleEntry = Object.entries(captainRoles).find(
-        ([_, roleId]) => member.roles.cache.has(roleId)
+        ([_, roleId]) => member.roles.cache.has(roleId),
       );
 
       const leagueRolesEntry = Object.entries(leagueRoles).find(([_, roleId]) =>
-        member.roles.cache.has(roleId)
+        member.roles.cache.has(roleId),
       );
 
       const offeringTeamEntry = Object.entries(teams).find(([_, teamData]) =>
-        interaction.member.roles.cache.has(teamData.roleId)
+        interaction.member.roles.cache.has(teamData.roleId),
       );
 
       if (!offeringTeamEntry) {
@@ -154,7 +154,7 @@ module.exports = {
       // ------------------------------------ Captain Demotion -----------------------------------------------------------------------------------------------
       if (captainDemotion) {
         const message = await offerChannel.send(
-          `<@${transactionCreator.id}> are you sure you want to remove <@${player.id}> from **${offeringTeamName} ${tier} Captain**? ✅ to confirm or ❌ to cancel. This will expire in 12 hours.`
+          `<@${transactionCreator.id}> are you sure you want to remove <@${player.id}> from **${offeringTeamName} ${tier} Captain**? ✅ to confirm or ❌ to cancel. This will expire in 12 hours.`,
         );
 
         await message.react("✅");
@@ -177,11 +177,11 @@ module.exports = {
             if (reaction.emoji.name === "✅") {
               collector.stop();
               const transactionVerify = client.channels.cache.get(
-                transactionVerifyChannel
+                transactionVerifyChannel,
               );
               if (transactionVerify) {
                 const message2 = await transactionVerify.send(
-                  `The **${offeringTeamName}** have removed <@${player.id}> from **${tier} Captain**!`
+                  `The **${offeringTeamName}** have removed <@${player.id}> from **${tier} Captain**!`,
                 );
 
                 await message2.react("✅");
@@ -189,7 +189,7 @@ module.exports = {
 
                 const filter2 = async (reaction, user) => {
                   const member = await reaction.message.guild.members.fetch(
-                    user.id
+                    user.id,
                   );
                   return (
                     ["✅", "❌"].includes(reaction.emoji.name) &&
@@ -207,17 +207,17 @@ module.exports = {
                     if (user.bot) return;
                     if (reaction.emoji.name === "✅") {
                       const officialTransaction = client.channels.cache.get(
-                        officialTransactionChannel
+                        officialTransactionChannel,
                       );
                       if (officialTransaction) {
                         const embed = new EmbedBuilder()
                           .setColor(0xff0000)
                           .setTitle(
-                            `${offeringTeamName} demote ${player.username}`
+                            `${offeringTeamName} demote ${player.username}`,
                           )
                           .setThumbnail(offeringTeamData.image)
                           .setDescription(
-                            `<@${player.id}> is removed from ${offeringTeamName} ${tier} Captain`
+                            `<@${player.id}> is removed from ${offeringTeamName} ${tier} Captain`,
                           )
                           .setTimestamp()
                           .setFooter({
@@ -245,14 +245,14 @@ module.exports = {
                   } catch (error) {
                     console.error(
                       "Error in captain demotion verification collector:",
-                      error
+                      error,
                     );
                   }
                 });
               }
             } else if (reaction.emoji.name === "❌") {
               await offerChannel.send(
-                `The captain demotion for <@${player.id}> has been **cancelled**.`
+                `The captain demotion for <@${player.id}> has been **cancelled**.`,
               );
               collector.stop();
             }
@@ -264,7 +264,7 @@ module.exports = {
         collector.on("end", async (collected, reason) => {
           if (reason === "time") {
             await offerChannel.send(
-              `The captain demotion for <@${player.id}> has **expired**.`
+              `The captain demotion for <@${player.id}> has **expired**.`,
             );
           }
         });
@@ -278,7 +278,7 @@ module.exports = {
       // -------------------------------------------------------------------- Tier Demotion -------------------------------------------------------------------------------------
       else if (tierDemotion) {
         const message = await offerChannel.send(
-          `<@${transactionCreator.id}> are you sure you want to demote <@${player.id}> to **${offeringTeamName} ${tier}**? ✅ to confirm or ❌ to cancel. This will expire in 12 hours.`
+          `<@${transactionCreator.id}> are you sure you want to demote <@${player.id}> to **${offeringTeamName} ${tier}**? ✅ to confirm or ❌ to cancel. This will expire in 12 hours.`,
         );
 
         await message.react("✅");
@@ -301,11 +301,11 @@ module.exports = {
             if (reaction.emoji.name === "✅") {
               collector.stop();
               const transactionVerify = client.channels.cache.get(
-                transactionVerifyChannel
+                transactionVerifyChannel,
               );
               if (transactionVerify) {
                 const message2 = await transactionVerify.send(
-                  `The **${offeringTeamName}** have demoted <@${player.id}> to **${tier}**!`
+                  `The **${offeringTeamName}** have demoted <@${player.id}> to **${tier}**!`,
                 );
 
                 await message2.react("✅");
@@ -313,7 +313,7 @@ module.exports = {
 
                 const filter2 = async (reaction, user) => {
                   const member = await reaction.message.guild.members.fetch(
-                    user.id
+                    user.id,
                   );
                   return (
                     ["✅", "❌"].includes(reaction.emoji.name) &&
@@ -331,17 +331,17 @@ module.exports = {
                     if (user.bot) return;
                     if (reaction.emoji.name === "✅") {
                       const officialTransaction = client.channels.cache.get(
-                        officialTransactionChannel
+                        officialTransactionChannel,
                       );
                       if (officialTransaction) {
                         const embed = new EmbedBuilder()
                           .setColor(0xff0000)
                           .setTitle(
-                            `${offeringTeamName} demote ${player.username}`
+                            `${offeringTeamName} demote ${player.username}`,
                           )
                           .setThumbnail(offeringTeamData.image)
                           .setDescription(
-                            `<@${player.id}> is demoted to ${offeringTeamName} ${tier}!`
+                            `<@${player.id}> is demoted to ${offeringTeamName} ${tier}!`,
                           )
                           .setTimestamp()
                           .setFooter({
@@ -376,14 +376,14 @@ module.exports = {
                   } catch (error) {
                     console.error(
                       "Error in tier demotion verification collector:",
-                      error
+                      error,
                     );
                   }
                 });
               }
             } else if (reaction.emoji.name === "❌") {
               await offerChannel.send(
-                `The tier demotion for <@${player.id}> has been **cancelled**.`
+                `The tier demotion for <@${player.id}> has been **cancelled**.`,
               );
               collector.stop();
             }
@@ -395,7 +395,7 @@ module.exports = {
         collector.on("end", async (collected, reason) => {
           if (reason === "time") {
             await offerChannel.send(
-              `The tier demotion for <@${player.id}> has **expired**.`
+              `The tier demotion for <@${player.id}> has **expired**.`,
             );
           }
         });

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const teams = require("../../data/teams.json");
-const leagueRoles = require("../../data/roles.json");
+const { leagueRoles } = require("../../data/roles.json");
 
 // Configuration
 const CONFIG = {
@@ -37,14 +37,14 @@ function validatePermissions(interaction) {
 
   if (!isOrgStaff) {
     throw new TradeError(
-      "You must be a zookeeper or handler to initiate trades!"
+      "You must be a zookeeper or handler to initiate trades!",
     );
   }
 }
 
 function validateTeamRole(interaction) {
   const teamEntry = Object.entries(teams).find(([_, teamData]) =>
-    interaction.member.roles.cache.has(teamData.roleId)
+    interaction.member.roles.cache.has(teamData.roleId),
   );
 
   if (!teamEntry) {
@@ -63,7 +63,7 @@ function validatePlayers(guild, players) {
     const member = guild.members.cache.get(player.id);
     if (!member) {
       throw new TradeError(
-        `Player ${player.username} not found in this server!`
+        `Player ${player.username} not found in this server!`,
       );
     }
 
@@ -79,7 +79,7 @@ function validatePlayerTeams(validatedPlayers, teams) {
   for (const { user, member } of validatedPlayers) {
     // Find which team this player belongs to
     const playerTeamEntry = Object.entries(teams).find(([_, teamData]) =>
-      member.roles.cache.has(teamData.roleId)
+      member.roles.cache.has(teamData.roleId),
     );
 
     if (!playerTeamEntry) {
@@ -90,7 +90,7 @@ function validatePlayerTeams(validatedPlayers, teams) {
 
     // Find player's league tier
     const leagueRoleEntry = Object.entries(CONFIG.leagueRoles).find(
-      ([_, roleId]) => member.roles.cache.has(roleId)
+      ([_, roleId]) => member.roles.cache.has(roleId),
     );
 
     if (!leagueRoleEntry) {
@@ -122,22 +122,22 @@ function validateTradeTeams(playerTeamInfo) {
 
   // Group players by team
   const team1Players = playerTeamInfo.filter(
-    (p) => p.teamName === teamsInvolved[0]
+    (p) => p.teamName === teamsInvolved[0],
   );
   const team2Players = playerTeamInfo.filter(
-    (p) => p.teamName === teamsInvolved[1]
+    (p) => p.teamName === teamsInvolved[1],
   );
 
   // Validate each team has 1-3 players
   if (team1Players.length === 0 || team1Players.length > 3) {
     throw new TradeError(
-      `${teamsInvolved[0]} must have 1-3 players in the trade!`
+      `${teamsInvolved[0]} must have 1-3 players in the trade!`,
     );
   }
 
   if (team2Players.length === 0 || team2Players.length > 3) {
     throw new TradeError(
-      `${teamsInvolved[1]} must have 1-3 players in the trade!`
+      `${teamsInvolved[1]} must have 1-3 players in the trade!`,
     );
   }
 
@@ -179,13 +179,13 @@ async function updatePlayerNickname(member, newTeamName) {
       await member.setNickname(newFullName);
     } else {
       console.log(
-        `Nickname too long for ${member.user.username}: ${newFullName}`
+        `Nickname too long for ${member.user.username}: ${newFullName}`,
       );
     }
   } catch (error) {
     console.error(
       `Error updating nickname for ${member.user.username}:`,
-      error
+      error,
     );
   }
 }
@@ -227,7 +227,7 @@ function createTradeEmbed(
   team1Players,
   team2Players,
   transactionCreator,
-  approver
+  approver,
 ) {
   const team1Name = team1Players[0].teamName;
   const team2Name = team2Players[0].teamName;
@@ -250,7 +250,7 @@ function createTradeEmbed(
         name: `${team2Name} receives:`,
         value: team1PlayerList,
         inline: true,
-      }
+      },
     )
     .setTimestamp()
     .setFooter({
@@ -267,41 +267,45 @@ module.exports = {
       option
         .setName("player1")
         .setDescription("First player in the trade")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addUserOption((option) =>
       option
         .setName("player2")
         .setDescription("Second player in the trade")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addUserOption((option) =>
       option
         .setName("player3")
         .setDescription("Third player in the trade (optional)")
-        .setRequired(false)
+        .setRequired(false),
     )
     .addUserOption((option) =>
       option
         .setName("player4")
         .setDescription("Fourth player in the trade (optional)")
-        .setRequired(false)
+        .setRequired(false),
     )
     .addUserOption((option) =>
       option
         .setName("player5")
         .setDescription("Fifth player in the trade (optional)")
-        .setRequired(false)
+        .setRequired(false),
     )
     .addUserOption((option) =>
       option
         .setName("player6")
         .setDescription("Sixth player in the trade (optional)")
-        .setRequired(false)
+        .setRequired(false),
     ),
 
   async execute(interaction) {
     try {
+      // Acknowledge immediately — the flow below sends messages and adds
+      // reactions, which can exceed Discord's 3s interaction window.
+      await interaction.deferReply({ ephemeral: true });
+
       const { client, guild } = interaction;
 
       // Get all player options
@@ -352,7 +356,7 @@ module.exports = {
         `🔄 **TRADE PROPOSAL** 🔄\n\n` +
           `**${team1Name}** trades: ${team1PlayerList}\n` +
           `**${team2Name}** trades: ${team2PlayerList}\n\n` +
-          `<@${interaction.user.id}> ✅ to confirm or ❌ to cancel. This will expire in 12 hours.`
+          `<@${interaction.user.id}> ✅ to confirm or ❌ to cancel. This will expire in 12 hours.`,
       );
 
       await message.react("✅");
@@ -377,7 +381,7 @@ module.exports = {
 
             // Proceed to verification
             const transactionVerify = client.channels.cache.get(
-              CONFIG.channels.transactionVerify
+              CONFIG.channels.transactionVerify,
             );
             if (!transactionVerify) {
               throw new TradeError("Verification channel not found!");
@@ -387,7 +391,7 @@ module.exports = {
               `🔄 **TRADE VERIFICATION** 🔄\n\n` +
                 `**${team1Name}** trades: ${team1PlayerList}\n` +
                 `**${team2Name}** trades: ${team2PlayerList}\n\n` +
-                `Transaction team members, react to approve or deny.`
+                `Transaction team members, react to approve or deny.`,
             );
 
             await verifyMessage.react("✅");
@@ -396,7 +400,7 @@ module.exports = {
             const verifyFilter = async (reaction, user) => {
               try {
                 const member = await reaction.message.guild.members.fetch(
-                  user.id
+                  user.id,
                 );
                 return (
                   ["✅", "❌"].includes(reaction.emoji.name) &&
@@ -425,14 +429,14 @@ module.exports = {
 
                   // Post to official transaction channel
                   const officialTransaction = client.channels.cache.get(
-                    CONFIG.channels.officialTransaction
+                    CONFIG.channels.officialTransaction,
                   );
                   if (officialTransaction) {
                     const embed = createTradeEmbed(
                       team1Players,
                       team2Players,
                       interaction.user,
-                      user
+                      user,
                     );
 
                     await officialTransaction.send({ embeds: [embed] });
@@ -447,12 +451,12 @@ module.exports = {
                   }
 
                   await offerChannel.send(
-                    `✅ **TRADE COMPLETED** between **${team1Name}** and **${team2Name}**!`
+                    `✅ **TRADE COMPLETED** between **${team1Name}** and **${team2Name}**!`,
                   );
                 } else if (reaction.emoji.name === "❌") {
                   verifyCollector.stop();
                   await offerChannel.send(
-                    `❌ The trade between **${team1Name}** and **${team2Name}** has been **denied** by ${user.username}!`
+                    `❌ The trade between **${team1Name}** and **${team2Name}** has been **denied** by ${user.username}!`,
                   );
                 }
               } catch (error) {
@@ -464,14 +468,14 @@ module.exports = {
             verifyCollector.on("end", async (collected, reason) => {
               if (reason === "time") {
                 await offerChannel.send(
-                  `⏰ Trade verification between **${team1Name}** and **${team2Name}** has **expired**.`
+                  `⏰ Trade verification between **${team1Name}** and **${team2Name}** has **expired**.`,
                 );
               }
             });
           } else if (reaction.emoji.name === "❌") {
             collector.stop();
             await offerChannel.send(
-              `❌ Trade between **${team1Name}** and **${team2Name}** has been **cancelled**.`
+              `❌ Trade between **${team1Name}** and **${team2Name}** has been **cancelled**.`,
             );
           }
         } catch (error) {
@@ -483,14 +487,13 @@ module.exports = {
       collector.on("end", async (collected, reason) => {
         if (reason === "time") {
           await offerChannel.send(
-            `⏰ Trade proposal between **${team1Name}** and **${team2Name}** has **expired**.`
+            `⏰ Trade proposal between **${team1Name}** and **${team2Name}** has **expired**.`,
           );
         }
       });
 
-      await interaction.reply({
+      await interaction.editReply({
         content: `Trade proposal initiated between **${team1Name}** and **${team2Name}**!`,
-        ephemeral: true,
       });
     } catch (error) {
       console.error("Error in trade command:", error);
@@ -503,9 +506,13 @@ module.exports = {
       const ephemeral = error instanceof TradeError ? error.ephemeral : true;
 
       if (interaction.replied || interaction.deferred) {
-        await interaction.followUp({ content: errorMessage, ephemeral });
+        await interaction
+          .editReply({ content: errorMessage })
+          .catch(() => {});
       } else {
-        await interaction.reply({ content: errorMessage, ephemeral });
+        await interaction
+          .reply({ content: errorMessage, ephemeral })
+          .catch(() => {});
       }
     }
   },

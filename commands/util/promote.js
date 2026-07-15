@@ -21,7 +21,7 @@ module.exports = {
       option
         .setName("player")
         .setDescription("Select the player to promote")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addStringOption((option) =>
       option
@@ -33,20 +33,20 @@ module.exports = {
           { name: "Alpha", value: "Alpha" },
           { name: "Beta", value: "Beta" },
           { name: "Delta", value: "Delta" },
-          { name: "Omega", value: "Omega" }
-        )
+          { name: "Omega", value: "Omega" },
+        ),
     )
     .addBooleanOption((option) =>
       option
         .setName("captain")
         .setDescription("Promote this player to captain?")
-        .setRequired(false)
+        .setRequired(false),
     )
     .addBooleanOption((option) =>
       option
         .setName("promotion")
         .setDescription("Promote this player up a tier?")
-        .setRequired(false)
+        .setRequired(false),
     ),
   async execute(interaction) {
     try {
@@ -69,15 +69,15 @@ module.exports = {
       }
 
       const captainRoleEntry = Object.entries(captainRoles).find(
-        ([_, roleId]) => member.roles.cache.has(roleId)
+        ([_, roleId]) => member.roles.cache.has(roleId),
       );
 
       const leagueRolesEntry = Object.entries(leagueRoles).find(([_, roleId]) =>
-        member.roles.cache.has(roleId)
+        member.roles.cache.has(roleId),
       );
 
       const offeringTeamEntry = Object.entries(teams).find(([_, teamData]) =>
-        interaction.member.roles.cache.has(teamData.roleId)
+        interaction.member.roles.cache.has(teamData.roleId),
       );
 
       if (!offeringTeamEntry) {
@@ -157,7 +157,7 @@ module.exports = {
       // ------------------------------------ Captain Promotion -----------------------------------------------------------------------------------------------
       if (captainPromotion) {
         const message = await offerChannel.send(
-          `<@${transactionCreator.id}> wants to promote <@${player.id}> to **${offeringTeamName} ${tier} Captain**!\n\n**Transaction Creator**: <@${transactionCreator.id}> - React ✅ to confirm or ❌ to cancel\n**Player**: <@${player.id}> - React ✅ to accept or ❌ to decline\n\nBoth parties must confirm for this promotion to proceed. This will expire in 12 hours.`
+          `<@${transactionCreator.id}> wants to promote <@${player.id}> to **${offeringTeamName} ${tier} Captain**!\n\n**Transaction Creator**: <@${transactionCreator.id}> - React ✅ to confirm or ❌ to cancel\n**Player**: <@${player.id}> - React ✅ to accept or ❌ to decline\n\nBoth parties must confirm for this promotion to proceed. This will expire in 12 hours.`,
         );
 
         await message.react("✅");
@@ -185,7 +185,7 @@ module.exports = {
           try {
             if (reaction.emoji.name === "❌") {
               await offerChannel.send(
-                `The captain promotion for <@${player.id}> has been **cancelled** by <@${user.id}>.`
+                `The captain promotion for <@${player.id}> has been **cancelled** by <@${user.id}>.`,
               );
               collector.stop();
               return;
@@ -198,11 +198,11 @@ module.exports = {
               if (confirmations.size === requiredUsers.length) {
                 collector.stop();
                 const transactionVerify = client.channels.cache.get(
-                  transactionVerifyChannel
+                  transactionVerifyChannel,
                 );
                 if (transactionVerify) {
                   const message2 = await transactionVerify.send(
-                    `The **${offeringTeamName}** have promoted <@${player.id}> to **${tier} Captain**!`
+                    `The **${offeringTeamName}** have promoted <@${player.id}> to **${tier} Captain**!`,
                   );
 
                   await message2.react("✅");
@@ -227,17 +227,17 @@ module.exports = {
                       if (user.bot) return;
                       if (reaction.emoji.name === "✅") {
                         const officialTransaction = client.channels.cache.get(
-                          officialTransactionChannel
+                          officialTransactionChannel,
                         );
                         if (officialTransaction) {
                           const embed = new EmbedBuilder()
                             .setColor(0x00ff00)
                             .setTitle(
-                              `${offeringTeamName} promote ${player.username}`
+                              `${offeringTeamName} promote ${player.username}`,
                             )
                             .setThumbnail(offeringTeamData.image)
                             .setDescription(
-                              `<@${player.id}> is promoted to ${offeringTeamName} ${tier} Captain`
+                              `<@${player.id}> is promoted to ${offeringTeamName} ${tier} Captain`,
                             )
                             .setTimestamp()
                             .setFooter({
@@ -274,7 +274,7 @@ module.exports = {
                     } catch (error) {
                       console.error(
                         "Error in captain promotion verification collector:",
-                        error
+                        error,
                       );
                     }
                   });
@@ -282,10 +282,10 @@ module.exports = {
               } else {
                 // Update message to show partial confirmation
                 const confirmedUsers = requiredUsers.filter((id) =>
-                  confirmations.has(id)
+                  confirmations.has(id),
                 );
                 const pendingUsers = requiredUsers.filter(
-                  (id) => !confirmations.has(id)
+                  (id) => !confirmations.has(id),
                 );
 
                 await message.edit(
@@ -296,8 +296,8 @@ module.exports = {
                     .join(", ")}\n**Pending**: ${pendingUsers
                     .map((id) => `<@${id}>`)
                     .join(
-                      ", "
-                    )}\n\nBoth parties must confirm for this promotion to proceed. This will expire in 12 hours.`
+                      ", ",
+                    )}\n\nBoth parties must confirm for this promotion to proceed. This will expire in 12 hours.`,
                 );
               }
             }
@@ -309,7 +309,7 @@ module.exports = {
         collector.on("end", async (collected, reason) => {
           if (reason === "time") {
             await offerChannel.send(
-              `The captain promotion for <@${player.id}> has **expired**.`
+              `The captain promotion for <@${player.id}> has **expired**.`,
             );
           }
         });
@@ -323,7 +323,7 @@ module.exports = {
       // -------------------------------------------------------------------- Tier Promotion -------------------------------------------------------------------------------------
       else if (tierPromotion) {
         const message = await offerChannel.send(
-          `<@${transactionCreator.id}> wants to promote <@${player.id}> to **${offeringTeamName} ${tier}**!\n\n**Transaction Creator**: <@${transactionCreator.id}> - React ✅ to confirm or ❌ to cancel\n**Player**: <@${player.id}> - React ✅ to accept or ❌ to decline\n\nBoth parties must confirm for this promotion to proceed. This will expire in 12 hours.`
+          `<@${transactionCreator.id}> wants to promote <@${player.id}> to **${offeringTeamName} ${tier}**!\n\n**Transaction Creator**: <@${transactionCreator.id}> - React ✅ to confirm or ❌ to cancel\n**Player**: <@${player.id}> - React ✅ to accept or ❌ to decline\n\nBoth parties must confirm for this promotion to proceed. This will expire in 12 hours.`,
         );
 
         await message.react("✅");
@@ -351,7 +351,7 @@ module.exports = {
           try {
             if (reaction.emoji.name === "❌") {
               await offerChannel.send(
-                `The tier promotion for <@${player.id}> has been **cancelled** by <@${user.id}>.`
+                `The tier promotion for <@${player.id}> has been **cancelled** by <@${user.id}>.`,
               );
               collector.stop();
               return;
@@ -364,11 +364,11 @@ module.exports = {
               if (confirmations.size === requiredUsers.length) {
                 collector.stop();
                 const transactionVerify = client.channels.cache.get(
-                  transactionVerifyChannel
+                  transactionVerifyChannel,
                 );
                 if (transactionVerify) {
                   const message2 = await transactionVerify.send(
-                    `The **${offeringTeamName}** have promoted <@${player.id}> to **${tier}**!`
+                    `The **${offeringTeamName}** have promoted <@${player.id}> to **${tier}**!`,
                   );
 
                   await message2.react("✅");
@@ -376,7 +376,7 @@ module.exports = {
 
                   const filter2 = async (reaction, user) => {
                     const member = await reaction.message.guild.members.fetch(
-                      user.id
+                      user.id,
                     );
                     return (
                       ["✅", "❌"].includes(reaction.emoji.name) &&
@@ -394,17 +394,17 @@ module.exports = {
                       if (user.bot) return;
                       if (reaction.emoji.name === "✅") {
                         const officialTransaction = client.channels.cache.get(
-                          officialTransactionChannel
+                          officialTransactionChannel,
                         );
                         if (officialTransaction) {
                           const embed = new EmbedBuilder()
                             .setColor(0x00ff00)
                             .setTitle(
-                              `${offeringTeamName} promote ${player.username}`
+                              `${offeringTeamName} promote ${player.username}`,
                             )
                             .setThumbnail(offeringTeamData.image)
                             .setDescription(
-                              `<@${player.id}> is promoted to ${offeringTeamName} ${tier}!`
+                              `<@${player.id}> is promoted to ${offeringTeamName} ${tier}!`,
                             )
                             .setTimestamp()
                             .setFooter({
@@ -448,7 +448,7 @@ module.exports = {
                     } catch (error) {
                       console.error(
                         "Error in tier promotion verification collector:",
-                        error
+                        error,
                       );
                     }
                   });
@@ -456,10 +456,10 @@ module.exports = {
               } else {
                 // Update message to show partial confirmation
                 const confirmedUsers = requiredUsers.filter((id) =>
-                  confirmations.has(id)
+                  confirmations.has(id),
                 );
                 const pendingUsers = requiredUsers.filter(
-                  (id) => !confirmations.has(id)
+                  (id) => !confirmations.has(id),
                 );
 
                 await message.edit(
@@ -470,8 +470,8 @@ module.exports = {
                     .join(", ")}\n**Pending**: ${pendingUsers
                     .map((id) => `<@${id}>`)
                     .join(
-                      ", "
-                    )}\n\nBoth parties must confirm for this promotion to proceed. This will expire in 12 hours.`
+                      ", ",
+                    )}\n\nBoth parties must confirm for this promotion to proceed. This will expire in 12 hours.`,
                 );
               }
             }
@@ -483,7 +483,7 @@ module.exports = {
         collector.on("end", async (collected, reason) => {
           if (reason === "time") {
             await offerChannel.send(
-              `The tier promotion for <@${player.id}> has **expired**.`
+              `The tier promotion for <@${player.id}> has **expired**.`,
             );
           }
         });
