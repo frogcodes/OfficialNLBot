@@ -10,23 +10,23 @@ module.exports = {
         .setDescription("Select a franchise")
         .setRequired(true)
         .addChoices(
-          { name: "Blue Jays", value: "blue jays" },
-          { name: "Cardinals", value: "cardinals" },
           { name: "Capybaras", value: "capybaras" },
+          { name: "Cardinals", value: "cardinals" },
           { name: "Cheetahs", value: "cheetahs" },
           { name: "Eagles", value: "eagles" },
-          { name: "Kangaroos", value: "kangaroos" },
+          { name: "Elephants", value: "elephants" },
+          { name: "Huskies", value: "huskies" },
           { name: "Lynx", value: "lynx" },
           { name: "Narwhals", value: "narwhals" },
           { name: "Owls", value: "owls" },
-          { name: "Panthers", value: "panthers" },
+          { name: "Pandas", value: "pandas" },
           { name: "Raccoons", value: "raccoons" },
-          { name: "Sharks", value: "sharks" },
           { name: "Squirrels", value: "squirrels" },
           { name: "Stingrays", value: "stingrays" },
           { name: "Turtles", value: "turtles" },
-          { name: "Wolves", value: "wolves" }
-        )
+          { name: "Wolves", value: "wolves" },
+          { name: "Yetis", value: "yetis" },
+        ),
     ),
   async execute(interaction) {
     const franchiseLinks = {
@@ -35,10 +35,13 @@ module.exports = {
       capybaras: "https://discord.gg/bURfAZgVXe",
       cheetahs: "https://discord.gg/SE6jjQxc2y",
       eagles: "https://discord.gg/KKpvxVwEJz",
+      elephants: "https://discord.gg/Y3RxyWapXx",
+      huskies: "https://discord.gg/dHZzE3rUKB",
       kangaroos: "https://discord.gg/hFaY35aKFE",
       lynx: "https://discord.gg/weaKUVqxr6",
       narwhals: "https://discord.gg/SbJZ9nhGeu",
       owls: "https://discord.gg/Y9UNszM6nw",
+      pandas: "https://discord.gg/mwaD4Mha9g",
       panthers: "https://discord.gg/NJFgpCmAkD",
       raccoons: "https://discord.gg/YXqKpBJmHC",
       sharks: "https://discord.gg/EXjkkPuwD4",
@@ -46,6 +49,7 @@ module.exports = {
       stingrays: "https://discord.gg/55bfZKWtCk",
       turtles: "https://discord.gg/zrTSEdz2G2",
       wolves: "https://discord.gg/xAP76N6MyS",
+      yetis: "https://discord.gg/NKrAd8YJJE",
     };
 
     const franchiseName = interaction.options
@@ -57,7 +61,7 @@ module.exports = {
       await interaction.reply(
         `Here's the link for **${
           franchiseName.charAt(0).toUpperCase() + franchiseName.slice(1)
-        }**: ${link}`
+        }**: ${link}`,
       );
     } else {
       await interaction.reply({
