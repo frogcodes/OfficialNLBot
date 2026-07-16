@@ -56,7 +56,7 @@ async function sendLeaderboard(client) {
   const channelId = "1407787654459818145";
   const messageId = "1407790261085536357";
 
-  //const channel = await client.channels.fetch(channelId);
+  const channel = await client.channels.fetch(channelId);
 
   const balances = readBalances();
 
