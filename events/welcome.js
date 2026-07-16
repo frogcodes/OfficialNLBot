@@ -1,5 +1,6 @@
 const { Events, AttachmentBuilder } = require("discord.js");
 const Canvas = require("canvas");
+const { syncMemberAwards } = require("../utils/awardSync.js");
 
 const CHANNEL_ID = process.env.welcomeChannel; // Replace with the welcome channel ID
 
@@ -20,7 +21,7 @@ module.exports = {
         extension: "png",
         size: 1024,
         forceStatic: true,
-      })
+      }),
     );
     const avatarSize = 200; // Diameter of the avatar circle
     const avatarX = canvas.width / 2 - avatarSize / 2; // Center the avatar horizontally
@@ -34,7 +35,7 @@ module.exports = {
       avatarSize / 2 + 2,
       0,
       Math.PI * 2,
-      true
+      true,
     ); // Border circle
     context.fillStyle = "#ffffff"; // Border color (white)
     context.fill();
@@ -49,7 +50,7 @@ module.exports = {
       avatarSize / 2,
       0,
       Math.PI * 2,
-      true
+      true,
     );
     context.closePath();
     context.clip();
@@ -70,12 +71,12 @@ module.exports = {
     context.fillText(
       `${member.user.username}`,
       canvas.width / 2,
-      avatarY + avatarSize + 95
+      avatarY + avatarSize + 95,
     );
     context.strokeText(
       `${member.user.username}`,
       canvas.width / 2,
-      avatarY + avatarSize + 95
+      avatarY + avatarSize + 95,
     );
 
     const attachment = new AttachmentBuilder(canvas.toBuffer(), {
@@ -89,5 +90,10 @@ module.exports = {
         files: [attachment],
       });
     }
+
+    // Sync award roles and nickname emojis for rejoining members
+    syncMemberAwards(member).catch((err) =>
+      console.error("[Awards] Error syncing new member awards:", err)
+    );
   },
 };

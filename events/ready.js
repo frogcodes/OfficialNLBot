@@ -1,6 +1,8 @@
 const { Events } = require("discord.js");
 const { enrollmentTracker } = require("../utils/enrollmentTracker.js");
-const { startLeaderboardUpdater } = require("../commands/util/leaderboard.js");
+const { startLeaderboardUpdater } = require("../utils/leaderboard.js");
+const { startAwardScheduler } = require("../utils/awardSync.js");
+const { uploadRoster } = require("../commands/util/upload-roster.js");
 
 async function cacheGuildMembers(guild) {
   let lastMemberId = undefined;
@@ -53,7 +55,7 @@ module.exports = {
 
     console.log("✅ Year Check Scheduler started.");
 
-    //startLeaderboardUpdater(client);
+    startLeaderboardUpdater(client);
 
     const checkAnniversaries = async () => {
       const guild = client.guilds.cache.get(GUILD_ID);
@@ -104,6 +106,8 @@ module.exports = {
     // Run immediately on bot start
     checkAnniversaries();
     scheduleMidnightCheck(client);
+    startAwardScheduler(client);
+    scheduleRosterUpload(client);
 
     // Then every 24 hours
     setInterval(checkAnniversaries, 1000 * 60 * 60 * 24); // 24 hrs
@@ -255,4 +259,46 @@ function scheduleMidnightCheck(client) {
     // After the first midnight hit, repeat every 24 hours
     setInterval(() => checkAndReleaseRFA(client), 24 * 60 * 60 * 1000);
   }, delay);
+}
+
+// How often the roster sheet refreshes. Change this one value to re-tune.
+const ROSTER_UPLOAD_INTERVAL_MS = 30 * 60 * 1000; // 30 minutes
+
+function scheduleRosterUpload(client) {
+  // setInterval doesn't wait for the previous run, so a slow upload could overlap
+  // the next one and interleave writes to the same sheet. Skip if still running.
+  let running = false;
+
+  const run = async () => {
+    if (running) {
+      console.warn(
+        "[Roster Scheduler] Previous upload still running — skipping this tick.",
+      );
+      return;
+    }
+    const guild = client.guilds.cache.get(GUILD_ID);
+    if (!guild) {
+      console.error("[Roster Scheduler] Guild not found.");
+      return;
+    }
+    running = true;
+    try {
+      await uploadRoster(guild);
+    } catch (err) {
+      console.error("[Roster Scheduler] Upload failed:", err);
+    } finally {
+      running = false;
+    }
+  };
+
+  // Hold off on the first run so the startup member cache (above) can finish —
+  // uploading mid-cache would write an incomplete roster.
+  setTimeout(() => {
+    run();
+    setInterval(run, ROSTER_UPLOAD_INTERVAL_MS);
+  }, ROSTER_UPLOAD_INTERVAL_MS);
+
+  console.log(
+    `[Roster Scheduler] Roster upload scheduled (every ${ROSTER_UPLOAD_INTERVAL_MS / 60000} minutes).`,
+  );
 }
