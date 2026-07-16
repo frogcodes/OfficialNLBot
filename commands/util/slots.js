@@ -3,6 +3,7 @@ const {
   getPlayerBalance,
   changePlayerBalance,
 } = require("../../utils/balanceManager");
+const { roundMoney, formatMoney, checkBet } = require("../../utils/money");
 
 // Symbol groups for grouping wins
 const symbolGroups = {
@@ -134,24 +135,17 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("slots")
     .setDescription("Spin the slot machine!")
-    .addIntegerOption((option) =>
+    .addNumberOption((option) =>
       option
         .setName("bet")
-        .setDescription("Amount of coins to bet (0 for free play)")
+        .setDescription("Amount to bet — cents allowed, e.g. 2.50 (0 for free play)")
+        .setMinValue(0)
         .setRequired(true),
     ),
 
   async execute(interaction) {
     const userId = interaction.user.id;
-    const betAmount = interaction.options.getInteger("bet");
-
-    // Allow negative bets check
-    if (betAmount < 0) {
-      return interaction.reply({
-        content: "❌ Bet amount cannot be negative.",
-        ephemeral: true,
-      });
-    }
+    const betAmount = interaction.options.getNumber("bet");
 
     // Get current balance
     const balance = getPlayerBalance(userId);
@@ -164,12 +158,9 @@ module.exports = {
       });
     }
 
-    // Check balance only if betting real money
-    if (betAmount > 0 && betAmount > balance) {
-      return interaction.reply({
-        content: `❌ You don't have enough coins! Your balance is $${balance}.`,
-        ephemeral: true,
-      });
+    const betError = checkBet(betAmount, balance);
+    if (betError) {
+      return interaction.reply({ content: betError, ephemeral: true });
     }
 
     // Deduct bet first (only if betting real money)
@@ -191,7 +182,7 @@ module.exports = {
 
     // Three of a kind (highest priority)
     if (reel1.emoji === reel2.emoji && reel2.emoji === reel3.emoji) {
-      payout = betAmount * reel1.multiplier;
+      payout = roundMoney(betAmount * reel1.multiplier);
       winType = `Triple ${reel1.emoji}`;
       isWin = true;
     }
@@ -206,7 +197,7 @@ module.exports = {
           reel1.emoji !== reel3.emoji;
 
         if (allDifferent) {
-          payout = betAmount * getGroupMultiplier(groupMatch);
+          payout = roundMoney(betAmount * getGroupMultiplier(groupMatch));
           winType = `${
             groupMatch.charAt(0).toUpperCase() + groupMatch.slice(1)
           } Group`;
@@ -227,7 +218,9 @@ module.exports = {
           else if (reel2.emoji === reel3.emoji) matchingSymbol = reel2;
           else matchingSymbol = reel1;
 
-          payout = Math.floor(betAmount * (matchingSymbol.multiplier * 0.2)); // 20% of full multiplier
+          // 20% of full multiplier (rounded to the cent, not floored to whole
+          // dollars — flooring would wipe out small/cent bets entirely).
+          payout = roundMoney(betAmount * (matchingSymbol.multiplier * 0.2));
           winType = `Double ${matchingSymbol.emoji}`;
           isWin = true;
         }
@@ -251,7 +244,7 @@ module.exports = {
       .setDescription(slotDisplay)
       .addFields({
         name: "💰 Bet",
-        value: betAmount === 0 ? "Free Play" : `$${betAmount}`,
+        value: betAmount === 0 ? "Free Play" : formatMoney(betAmount),
         inline: true,
       })
       .setColor(isWin ? 0x00ff00 : 0xff0000);
@@ -260,7 +253,7 @@ module.exports = {
       embed.addFields({
         name: "🎉 Result",
         value: `**${winType}!**\n${
-          betAmount === 0 ? "Practice win!" : `Won $${payout}`
+          betAmount === 0 ? "Practice win!" : `Won ${formatMoney(payout)}`
         }`,
         inline: true,
       });
@@ -276,7 +269,7 @@ module.exports = {
     if (betAmount > 0) {
       embed.addFields({
         name: "💳 New Balance",
-        value: `$${getPlayerBalance(userId)}`,
+        value: formatMoney(getPlayerBalance(userId)),
         inline: true,
       });
     }

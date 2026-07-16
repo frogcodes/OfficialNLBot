@@ -3,6 +3,7 @@ const {
   getPlayerBalance,
   changePlayerBalance,
 } = require("../../utils/balanceManager");
+const { roundMoney, formatMoney, checkBet } = require("../../utils/money");
 
 const rouletteWheel = [
   { number: "00", color: "green" },
@@ -87,10 +88,11 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("roulette")
     .setDescription("Bet on a roulette spin!")
-    .addIntegerOption((option) =>
+    .addNumberOption((option) =>
       option
         .setName("amount")
-        .setDescription("Amount to bet")
+        .setDescription("Amount to bet — cents allowed, e.g. 2.50")
+        .setMinValue(0)
         .setRequired(true),
     )
     .addStringOption((option) =>
@@ -122,15 +124,7 @@ module.exports = {
     const rawValue = interaction.options.getString("value")
       ? interaction.options.getString("value").toLowerCase().trim()
       : null;
-    const betAmount = interaction.options.getInteger("amount");
-
-    // Validate minimum bet amount
-    if (betAmount < 0) {
-      return interaction.reply({
-        content: "❌ You cannot bet a negative amount.",
-        ephemeral: true,
-      });
-    }
+    const betAmount = interaction.options.getNumber("amount");
 
     // Check if player has a wallet
     const balance = getPlayerBalance(userId);
@@ -141,12 +135,9 @@ module.exports = {
       });
     }
 
-    // Check if player has enough balance (skip check for $0 bets)
-    if (betAmount > 0 && betAmount > balance) {
-      return interaction.reply({
-        content: `❌ Insufficient funds! Your current balance is ${balance}.`,
-        ephemeral: true,
-      });
+    const betError = checkBet(betAmount, balance);
+    if (betError) {
+      return interaction.reply({ content: betError, ephemeral: true });
     }
 
     // Validate bet input
@@ -181,10 +172,10 @@ module.exports = {
           won = true;
           if (rawValue === "green") {
             multiplier = 17; // 17:1 for green (covers both 0 and 00)
-            payout = betAmount * (multiplier + 1); // +1 to include original bet
+            payout = roundMoney(betAmount * (multiplier + 1)); // +1 to include original bet
           } else {
             multiplier = 1; // 1:1 for red/black
-            payout = betAmount * 2;
+            payout = roundMoney(betAmount * 2);
           }
         }
         break;
@@ -203,7 +194,7 @@ module.exports = {
         if (numberMatches) {
           won = true;
           multiplier = 35; // 35:1 for single number
-          payout = betAmount * (multiplier + 1);
+          payout = roundMoney(betAmount * (multiplier + 1));
         }
         break;
 
@@ -215,7 +206,7 @@ module.exports = {
         ) {
           won = true;
           multiplier = 1; // 1:1
-          payout = betAmount * 2;
+          payout = roundMoney(betAmount * 2);
         }
         break;
 
@@ -227,7 +218,7 @@ module.exports = {
         ) {
           won = true;
           multiplier = 1; // 1:1
-          payout = betAmount * 2;
+          payout = roundMoney(betAmount * 2);
         }
         break;
 
@@ -239,7 +230,7 @@ module.exports = {
         ) {
           won = true;
           multiplier = 2; // 2:1
-          payout = betAmount * 3;
+          payout = roundMoney(betAmount * 3);
         }
         break;
 
@@ -251,7 +242,7 @@ module.exports = {
         ) {
           won = true;
           multiplier = 2; // 2:1
-          payout = betAmount * 3;
+          payout = roundMoney(betAmount * 3);
         }
         break;
 
@@ -263,7 +254,7 @@ module.exports = {
         ) {
           won = true;
           multiplier = 2; // 2:1
-          payout = betAmount * 3;
+          payout = roundMoney(betAmount * 3);
         }
         break;
 
@@ -275,7 +266,7 @@ module.exports = {
         ) {
           won = true;
           multiplier = 1; // 1:1
-          payout = betAmount * 2;
+          payout = roundMoney(betAmount * 2);
         }
         break;
 
@@ -287,7 +278,7 @@ module.exports = {
         ) {
           won = true;
           multiplier = 1; // 1:1
-          payout = betAmount * 2;
+          payout = roundMoney(betAmount * 2);
         }
         break;
     }
@@ -295,7 +286,7 @@ module.exports = {
     // Update player balance (skip balance changes for $0 bets)
     if (betAmount > 0) {
       if (won) {
-        changePlayerBalance(userId, payout - betAmount); // Add winnings minus original bet
+        changePlayerBalance(userId, roundMoney(payout - betAmount)); // Add winnings minus original bet
       } else {
         changePlayerBalance(userId, -betAmount); // Subtract bet amount
       }
@@ -324,21 +315,21 @@ module.exports = {
         },
         {
           name: "💰 Wager",
-          value: `$${betAmount}`,
+          value: formatMoney(betAmount),
           inline: true,
         },
       );
 
     if (won) {
-      const winnings = payout - betAmount;
+      const winnings = roundMoney(payout - betAmount);
       resultEmbed.addFields({
         name: "🎉 Result",
-        value: `**YOU WON!** 🎊\nWinnings: **$${winnings}** (${multiplier}:1)`,
+        value: `**YOU WON!** 🎊\nWinnings: **${formatMoney(winnings)}** (${multiplier}:1)`,
       });
     } else {
       resultEmbed.addFields({
         name: "💸 Result",
-        value: `You lost $${betAmount}. Better luck next spin!`,
+        value: `You lost ${formatMoney(betAmount)}. Better luck next spin!`,
       });
     }
 

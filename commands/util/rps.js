@@ -4,6 +4,7 @@ const {
   updatePlayerBalance,
   changePlayerBalance,
 } = require("../../utils/balanceManager");
+const { roundMoney, formatMoney, checkBet } = require("../../utils/money");
 
 // Helper function for random AI move
 function selectAutoMove() {
@@ -28,10 +29,11 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("rps")
     .setDescription("Play Rock, Paper, Scissors vs an AI")
-    .addIntegerOption((option) =>
+    .addNumberOption((option) =>
       option
         .setName("wager")
-        .setDescription("The amount to wager")
+        .setDescription("The amount to wager — cents allowed, e.g. 2.50")
+        .setMinValue(0)
         .setRequired(true),
     )
     .addStringOption((option) =>
@@ -47,7 +49,7 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    const wagerAmount = interaction.options.getInteger("wager");
+    const wagerAmount = interaction.options.getNumber("wager");
     const playerMove = interaction.options.getString("move");
 
     // Placeholder balance logic
@@ -60,11 +62,9 @@ module.exports = {
       });
     }
 
-    if (wagerAmount < 0 || wagerAmount > balance) {
-      return interaction.reply({
-        content: `❌ You must bet a positive amount within your balance. Your current balance is $${balance}.`,
-        ephemeral: true,
-      });
+    const betError = checkBet(wagerAmount, balance);
+    if (betError) {
+      return interaction.reply({ content: betError, ephemeral: true });
     }
 
     const aiMove = selectAutoMove();
@@ -74,14 +74,14 @@ module.exports = {
     let color;
 
     if (result === "win") {
-      outcomeText = `You won and earned $${wagerAmount}! 🎉`;
+      outcomeText = `You won and earned ${formatMoney(wagerAmount)}! 🎉`;
       color = 0x00ff00;
-      balance += wagerAmount;
+      balance = roundMoney(balance + wagerAmount);
       changePlayerBalance(interaction.user.id, wagerAmount);
     } else if (result === "lose") {
-      outcomeText = `You lost $${wagerAmount}! 😢`;
+      outcomeText = `You lost ${formatMoney(wagerAmount)}! 😢`;
       color = 0xff0000;
-      balance -= wagerAmount;
+      balance = roundMoney(balance - wagerAmount);
       changePlayerBalance(interaction.user.id, -wagerAmount);
     } else {
       outcomeText = `It's a tie! Your balance stays the same.`;
@@ -110,7 +110,7 @@ module.exports = {
         { name: "Result", value: outcomeText },
       )
       .setColor(color)
-      .setFooter({ text: `Your new balance: $${balance}` });
+      .setFooter({ text: `Your new balance: ${formatMoney(balance)}` });
 
     await interaction.reply({ embeds: [resultEmbed] });
   },
