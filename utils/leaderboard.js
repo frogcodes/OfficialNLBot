@@ -6,6 +6,7 @@
 const fs = require("fs");
 const path = require("path");
 const { EmbedBuilder } = require("discord.js");
+const { formatMoney } = require("./money");
 
 const balancesFile = path.join(__dirname, "../data", "playerBalances.json");
 
@@ -18,19 +19,11 @@ function readBalances() {
   return JSON.parse(fs.readFileSync(balancesFile, "utf8"));
 }
 
-// Money with thousands separators AND cents: 1234.5 -> "1,234.50"
-function formatBalance(amount) {
-  return Number(amount).toLocaleString("en-US", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-}
-
 // Function to build leaderboard embed
 function buildLeaderboardEmbed(sortedBalances) {
   const lines = sortedBalances.map(
     (entry, index) =>
-      `**#${index + 1}** <@${entry.user}> — 💰 $${formatBalance(entry.balance)}`,
+      `**#${index + 1}** <@${entry.user}> — 💰 ${formatMoney(entry.balance)}`,
   );
 
   // An embed description caps at 4096 chars; 100 ranked lines can exceed that,

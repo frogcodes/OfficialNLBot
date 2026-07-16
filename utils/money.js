@@ -20,9 +20,17 @@ function roundMoney(amount) {
   return fromCents(toCents(amount));
 }
 
-// Display form, always 2 decimals: 5 -> "$5.00", 1.5 -> "$1.50"
+// Display form. Whole dollars drop the decimals, anything with cents keeps two:
+//   5 -> "$5"        1.5 -> "$1.50"      0.01 -> "$0.01"
+//   1234 -> "$1,234" 1234.5 -> "$1,234.50"
+// toLocaleString also keeps very large payouts out of exponential notation.
 function formatMoney(amount) {
-  return `$${roundMoney(amount).toFixed(2)}`;
+  const cents = toCents(amount);
+  const hasCents = cents % 100 !== 0;
+  return `$${fromCents(cents).toLocaleString("en-US", {
+    minimumFractionDigits: hasCents ? 2 : 0,
+    maximumFractionDigits: 2,
+  })}`;
 }
 
 /**
