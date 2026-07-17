@@ -3,6 +3,39 @@ const { enrollmentTracker } = require("../utils/enrollmentTracker.js");
 const { startLeaderboardUpdater } = require("../utils/leaderboard.js");
 const { startAwardScheduler } = require("../utils/awardSync.js");
 const { uploadRoster } = require("../commands/util/upload-roster.js");
+const {
+  listSessionThreadIds,
+  removeSchedulingSession,
+} = require("../utils/scheduling/stateStore.js");
+
+// Drop availability sessions whose threads no longer exist (e.g. deleted while
+// the bot was offline, so the ThreadDelete event never fired). Only removes on a
+// definitive "Unknown Channel" so a transient fetch failure can't wipe live data.
+async function pruneOrphanedSchedulingSessions(client) {
+  const threadIds = listSessionThreadIds();
+  let removed = 0;
+
+  for (const threadId of threadIds) {
+    try {
+      await client.channels.fetch(threadId);
+    } catch (error) {
+      if (error?.code === 10003) {
+        if (removeSchedulingSession(threadId)) {
+          removed += 1;
+        }
+      } else {
+        console.error(
+          `Could not verify scheduling thread ${threadId}:`,
+          error?.message ?? error,
+        );
+      }
+    }
+  }
+
+  if (removed > 0) {
+    console.log(`Pruned ${removed} orphaned scheduling session(s) on startup.`);
+  }
+}
 
 async function cacheGuildMembers(guild) {
   let lastMemberId = undefined;
@@ -52,6 +85,11 @@ module.exports = {
           console.error(`❌ Failed to cache ${guild.name}:`, err.message);
         });
     }
+
+    // Best-effort cleanup of orphaned scheduling sessions (don't block startup).
+    pruneOrphanedSchedulingSessions(client).catch((err) => {
+      console.error("❌ Failed to prune orphaned scheduling sessions:", err);
+    });
 
     console.log("✅ Year Check Scheduler started.");
 
