@@ -164,7 +164,15 @@ async function deletePreviousControlMessage(channel, messageId) {
   });
 }
 
-async function refreshSchedulingControlMessage(channel, threadId) {
+// `silent: true` renders the team role mentions as plain text but suppresses the
+// notification — used by the periodic sticky re-post so bumping the panel never
+// pings the teams. Action-driven refreshes (submit/propose) leave it false so a
+// real state change can still nudge the relevant team.
+async function refreshSchedulingControlMessage(
+  channel,
+  threadId,
+  { silent = false } = {},
+) {
   const session = getAvailabilitySession(threadId);
 
   if (!session || !channel?.send) {
@@ -179,7 +187,9 @@ async function refreshSchedulingControlMessage(channel, threadId) {
     return null;
   }
 
-  const message = await channel.send(payload);
+  const message = await channel.send(
+    silent ? { ...payload, allowedMentions: { parse: [] } } : payload,
+  );
   setSchedulingControlMessageId(threadId, message.id);
 
   return message;

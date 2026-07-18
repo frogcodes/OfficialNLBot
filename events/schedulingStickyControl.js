@@ -56,7 +56,10 @@ module.exports = {
     lastBumpAt.set(threadId, now);
 
     try {
-      await refreshSchedulingControlMessage(message.channel, threadId);
+      // silent: the 12h bump re-posts the panel but never pings the teams.
+      await refreshSchedulingControlMessage(message.channel, threadId, {
+        silent: true,
+      });
     } catch (error) {
       console.error(
         `Failed to bump scheduling control panel in thread ${threadId}:`,

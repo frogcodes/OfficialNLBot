@@ -356,22 +356,47 @@ module.exports = {
         .map((p) => p.user.username)
         .join(", ");
 
-      // Create confirmation message
+      // ─── Stage 1: both teams' management agree in the transactions-request
+      // channel. Mirrors offer.js's player + manager step, but here it's the two
+      // teams' managers signing off on the trade. Only then does it move to the
+      // transaction-verify channel for staff to process.
+      const team1Data = team1Players[0].teamData;
+      const team2Data = team2Players[0].teamData;
+      const { zookeeper, handler } = CONFIG.roles;
+
+      // The team a member manages (team role + zookeeper/handler), or null.
+      const managedTeamKey = (member) => {
+        const isManagement =
+          member.roles.cache.has(zookeeper) || member.roles.cache.has(handler);
+        if (!isManagement) return null;
+        if (member.roles.cache.has(team1Data.roleId)) return "team1";
+        if (member.roles.cache.has(team2Data.roleId)) return "team2";
+        return null;
+      };
+
       const message = await offerChannel.send(
         `🔄 **TRADE PROPOSAL** 🔄\n\n` +
           `**${team1Name}** trades: ${team1PlayerList}\n` +
           `**${team2Name}** trades: ${team2PlayerList}\n\n` +
-          `<@${interaction.user.id}> ✅ to confirm or ❌ to cancel. This will expire in 12 hours.`,
+          `Both teams' management must react ✅ to approve (❌ to cancel). Expires in 12 hours.\n` +
+          `• **${team1Name}**: <@&${team1Data.roleId}>\n` +
+          `• **${team2Name}**: <@&${team2Data.roleId}>`,
       );
 
       await message.react("✅");
       await message.react("❌");
 
-      const filter = (reaction, user) => {
-        return (
-          ["✅", "❌"].includes(reaction.emoji.name) &&
-          user.id === interaction.user.id
-        );
+      const approvals = { team1: null, team2: null };
+
+      const filter = async (reaction, user) => {
+        if (!["✅", "❌"].includes(reaction.emoji.name) || user.bot) return false;
+        try {
+          const member = await reaction.message.guild.members.fetch(user.id);
+          return managedTeamKey(member) !== null;
+        } catch (error) {
+          console.error("Error in trade proposal filter:", error);
+          return false;
+        }
       };
 
       const collector = message.createReactionCollector({
@@ -381,170 +406,138 @@ module.exports = {
 
       collector.on("collect", async (reaction, user) => {
         try {
-          if (reaction.emoji.name === "✅") {
-            collector.stop();
+          if (user.bot) return;
+          const member = await reaction.message.guild.members.fetch(user.id);
+          const key = managedTeamKey(member);
+          if (!key) return;
 
-            // Proceed to verification
-            const transactionVerify = client.channels.cache.get(
-              CONFIG.channels.transactionVerify,
-            );
-            if (!transactionVerify) {
-              throw new TradeError("Verification channel not found!");
-            }
-
-            // Both teams' management (team role + zookeeper/handler) AND the
-            // transaction team must each approve before the trade executes.
-            const team1Data = team1Players[0].teamData;
-            const team2Data = team2Players[0].teamData;
-            const { zookeeper, handler, transactionTeam } = CONFIG.roles;
-
-            // Which approvals a member is allowed to give (they may hold more
-            // than one; a team's manager can only approve for their own team).
-            const approvalKeysFor = (member) => {
-              const keys = [];
-              const isManagement =
-                member.roles.cache.has(zookeeper) ||
-                member.roles.cache.has(handler);
-              if (isManagement && member.roles.cache.has(team1Data.roleId))
-                keys.push("team1");
-              if (isManagement && member.roles.cache.has(team2Data.roleId))
-                keys.push("team2");
-              if (member.roles.cache.has(transactionTeam)) keys.push("staff");
-              return keys;
-            };
-
-            const approvals = { team1: null, team2: null, staff: null };
-            const statusText = () => {
-              const mark = (key) => (approvals[key] ? `✅ ${approvals[key]}` : "⏳ pending");
-              return (
-                `🔄 **TRADE VERIFICATION** 🔄\n\n` +
-                `**${team1Name}** trades: ${team1PlayerList}\n` +
-                `**${team2Name}** trades: ${team2PlayerList}\n\n` +
-                `All three must approve (react ✅ to approve, ❌ to deny):\n` +
-                `• **${team1Name}** management: ${mark("team1")}\n` +
-                `• **${team2Name}** management: ${mark("team2")}\n` +
-                `• Transaction team: ${mark("staff")}`
-              );
-            };
-
-            const verifyMessage = await transactionVerify.send(statusText());
-            await verifyMessage.react("✅");
-            await verifyMessage.react("❌");
-
-            const verifyFilter = async (reaction, user) => {
-              if (!["✅", "❌"].includes(reaction.emoji.name) || user.bot) {
-                return false;
-              }
-              try {
-                const member = await reaction.message.guild.members.fetch(user.id);
-                return approvalKeysFor(member).length > 0;
-              } catch (error) {
-                console.error("Error in verification filter:", error);
-                return false;
-              }
-            };
-
-            const verifyCollector = verifyMessage.createReactionCollector({
-              filter: verifyFilter,
-              time: CONFIG.timers.verificationExpiry,
-            });
-
-            verifyCollector.on("collect", async (reaction, user) => {
-              try {
-                if (user.bot) return;
-                const member = await reaction.message.guild.members.fetch(user.id);
-                const keys = approvalKeysFor(member);
-                if (keys.length === 0) return;
-
-                if (reaction.emoji.name === "❌") {
-                  verifyCollector.stop("denied");
-                  await offerChannel.send(
-                    `❌ The trade between **${team1Name}** and **${team2Name}** was **denied** by ${user.username}.`,
-                  );
-                  return;
-                }
-
-                // Record this member's approval for each role they hold.
-                let changed = false;
-                for (const key of keys) {
-                  if (!approvals[key]) {
-                    approvals[key] = user.username;
-                    changed = true;
-                  }
-                }
-                if (changed && verifyMessage.editable) {
-                  await verifyMessage.edit(statusText()).catch(() => {});
-                }
-
-                if (!(approvals.team1 && approvals.team2 && approvals.staff)) {
-                  return; // still waiting on other approvals
-                }
-
-                verifyCollector.stop("approved");
-
-                // Execute the trade
-                await executePlayerTrade(team1Players, team2Players);
-
-                // Post to official transaction channel
-                const officialTransaction = client.channels.cache.get(
-                  CONFIG.channels.officialTransaction,
-                );
-                if (officialTransaction) {
-                  const { embed, files } = createTradeEmbed(
-                    team1Players,
-                    team2Players,
-                    interaction.user,
-                    user,
-                  );
-
-                  await officialTransaction.send({ embeds: [embed], files });
-                }
-
-                // Clean up messages
-                try {
-                  if (message.deletable) await message.delete();
-                  if (verifyMessage.deletable) await verifyMessage.delete();
-                } catch (error) {
-                  console.error("Error deleting messages:", error);
-                }
-
-                await offerChannel.send(
-                  `✅ **TRADE COMPLETED** between **${team1Name}** and **${team2Name}**!`,
-                );
-              } catch (error) {
-                console.error("Error in trade verification collector:", error);
-              }
-            });
-
-            verifyCollector.on("end", async (collected, reason) => {
-              if (reason === "time") {
-                await offerChannel.send(
-                  `⏰ Trade verification between **${team1Name}** and **${team2Name}** **expired** before all approvals were collected.`,
-                );
-              }
-            });
-          } else if (reaction.emoji.name === "❌") {
-            collector.stop();
+          // Either team's management can cancel the proposal.
+          if (reaction.emoji.name === "❌") {
+            collector.stop("denied");
             await offerChannel.send(
-              `❌ Trade between **${team1Name}** and **${team2Name}** has been **cancelled**.`,
+              `❌ Trade between **${team1Name}** and **${team2Name}** was **cancelled** by ${user.username}.`,
             );
+            return;
           }
+
+          if (!approvals[key]) approvals[key] = user.username;
+          if (!(approvals.team1 && approvals.team2)) {
+            return; // wait for the other team's management
+          }
+
+          collector.stop("approved");
+
+          // ─── Stage 2: send to transaction-verify for staff to process. Plain
+          // text, no role mention, so the transaction team is NOT pinged. ───────
+          const transactionVerify = client.channels.cache.get(
+            CONFIG.channels.transactionVerify,
+          );
+          if (!transactionVerify) {
+            console.error("Trade: transaction verify channel not found.");
+            await offerChannel.send(
+              "⚠️ Verification channel not found — please contact an admin.",
+            );
+            return;
+          }
+
+          const verifyMessage = await transactionVerify.send(
+            `🔄 **TRADE VERIFICATION** 🔄\n\n` +
+              `**${team1Name}** trades: ${team1PlayerList}\n` +
+              `**${team2Name}** trades: ${team2PlayerList}\n\n` +
+              `Both teams' management approved (${approvals.team1} & ${approvals.team2}). ` +
+              `Transaction team, react ✅ to process or ❌ to deny.`,
+          );
+          await verifyMessage.react("✅");
+          await verifyMessage.react("❌");
+
+          const verifyFilter = async (reaction, user) => {
+            if (!["✅", "❌"].includes(reaction.emoji.name) || user.bot) {
+              return false;
+            }
+            try {
+              const staff = await reaction.message.guild.members.fetch(user.id);
+              return staff.roles.cache.has(CONFIG.roles.transactionTeam);
+            } catch (error) {
+              console.error("Error in verification filter:", error);
+              return false;
+            }
+          };
+
+          const verifyCollector = verifyMessage.createReactionCollector({
+            filter: verifyFilter,
+            time: CONFIG.timers.verificationExpiry,
+          });
+
+          verifyCollector.on("collect", async (reaction, user) => {
+            try {
+              if (user.bot) return;
+
+              if (reaction.emoji.name === "❌") {
+                verifyCollector.stop("denied");
+                await offerChannel.send(
+                  `❌ The trade between **${team1Name}** and **${team2Name}** was **denied** by ${user.username}.`,
+                );
+                return;
+              }
+
+              verifyCollector.stop("approved");
+
+              // Execute the trade
+              await executePlayerTrade(team1Players, team2Players);
+
+              // Post to official transaction channel
+              const officialTransaction = client.channels.cache.get(
+                CONFIG.channels.officialTransaction,
+              );
+              if (officialTransaction) {
+                const { embed, files } = createTradeEmbed(
+                  team1Players,
+                  team2Players,
+                  interaction.user,
+                  user,
+                );
+
+                await officialTransaction.send({ embeds: [embed], files });
+              }
+
+              // Clean up messages
+              try {
+                if (message.deletable) await message.delete();
+                if (verifyMessage.deletable) await verifyMessage.delete();
+              } catch (error) {
+                console.error("Error deleting messages:", error);
+              }
+
+              await offerChannel.send(
+                `✅ **TRADE COMPLETED** between **${team1Name}** and **${team2Name}**!`,
+              );
+            } catch (error) {
+              console.error("Error in trade verification collector:", error);
+            }
+          });
+
+          verifyCollector.on("end", async (collected, reason) => {
+            if (reason === "time") {
+              await offerChannel.send(
+                `⏰ Trade verification between **${team1Name}** and **${team2Name}** **expired**.`,
+              );
+            }
+          });
         } catch (error) {
-          console.error("Error in trade collector:", error);
-          collector.stop();
+          console.error("Error in trade proposal collector:", error);
         }
       });
 
       collector.on("end", async (collected, reason) => {
         if (reason === "time") {
           await offerChannel.send(
-            `⏰ Trade proposal between **${team1Name}** and **${team2Name}** has **expired**.`,
+            `⏰ Trade proposal between **${team1Name}** and **${team2Name}** **expired** before both teams approved.`,
           );
         }
       });
 
       await interaction.editReply({
-        content: `Trade proposal initiated between **${team1Name}** and **${team2Name}**!`,
+        content: `Trade proposal sent — waiting on both teams' management to approve.`,
       });
     } catch (error) {
       console.error("Error in trade command:", error);

@@ -5,6 +5,9 @@ const {
   MessageFlags,
 } = require("discord.js");
 const teams = require("../../data/teams.json");
+const { teamImage } = require("../../utils/teamImage.js");
+const { leagueRoles } = require("../../data/roles.json");
+const subUpTracker = require("../../utils/subUpTracker.js");
 
 const axios = require("axios");
 const dotenv = require("dotenv");
@@ -14,8 +17,12 @@ const schedule = require("../../data/schedule.json");
 
 const { google } = require("googleapis");
 
-const SHEET_ID = "1jtF0CZRliwxl2r8MdNz-CfJ6-Wbm3AESGAeN7kpdzXA";
+const SHEET_ID = "1UTmWePLT_FUer83spyuUCucqghM3WZmDPCuRRf88e50";
 const CREDENTIALS = process.env.credentials;
+
+// The main league guild where tier/league roles live. Member roles are always
+// read from here so sub-up detection works regardless of where the command runs.
+const LEAGUE_GUILD_ID = "1181050438750060584";
 
 const sheets = google.sheets("v4");
 const auth = new google.auth.GoogleAuth({
@@ -50,6 +57,23 @@ const tierChoices = tiers.map((tier) => ({
   value: tier,
 }));
 
+// Tier ranking, lowest -> highest. Used to detect sub-ups (a player whose
+// league tier is lower than the reported match tier).
+const TIER_ORDER = ["Omega", "Delta", "Beta", "Alpha", "Apex"];
+
+// Return the league tier a guild member belongs to (via their league role),
+// or null if they don't have one. Returns the lowest tier if they have several.
+function getMemberLeagueTier(member) {
+  if (!member) return null;
+  for (const tierName of TIER_ORDER) {
+    const roleId = leagueRoles[tierName];
+    if (roleId && member.roles.cache.has(roleId)) {
+      return tierName;
+    }
+  }
+  return null;
+}
+
 // Helper function to sleep for a specified time
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -67,6 +91,10 @@ function formatGameday(gamedayNumber) {
   if (gamedayNumber === "Playoffs") {
     return "Playoffs";
   }
+
+  // Preseason gamedays are stored as "P1" / "P2".
+  if (gamedayNumber === "P1") return "Preseason 1";
+  if (gamedayNumber === "P2") return "Preseason 2";
 
   // Convert to number and pad with leading zero
   const num = parseInt(gamedayNumber);
@@ -111,6 +139,8 @@ module.exports = {
         .setDescription("Gameday Number of the match")
         .setRequired(true)
         .addChoices(
+          { name: "Preseason 1", value: "P1" },
+          { name: "Preseason 2", value: "P2" },
           { name: "Gameday 1", value: "1" },
           { name: "Gameday 2", value: "2" },
           { name: "Gameday 3", value: "3" },
@@ -190,6 +220,32 @@ module.exports = {
     const omegaReportID = "1183463475687723008";
 
     try {
+      // const statsChannel =
+      //   await interaction.guild.channels.fetch(statsChannelID);
+      // const apexReport = await interaction.guild.channels.fetch(apexReportID);
+      // const alphaReport = await interaction.guild.channels.fetch(alphaReportID);
+      // const betaReport = await interaction.guild.channels.fetch(betaReportID);
+      // const deltaReport = await interaction.guild.channels.fetch(deltaReportID);
+      // const omegaReport = await interaction.guild.channels.fetch(omegaReportID);
+
+      // if (
+      //   !statsChannel ||
+      //   !apexReport ||
+      //   !alphaReport ||
+      //   !betaReport ||
+      //   !deltaReport ||
+      //   !omegaReport
+      // ) {
+      //   try {
+      //     return await interaction.editReply({
+      //       content: "Error: A channel was not found. :(",
+      //       flags: MessageFlags.Ephemeral,
+      //     });
+      //   } catch (error) {
+      //     console.error("Error sending channel not found reply:", error);
+      //     return;
+      //   }
+      // }
 
       // Get command options
       const ballchasing = interaction.options.getString("ballchasing-link");
@@ -247,11 +303,12 @@ module.exports = {
       }
 
       let winnerData = teams[winner];
+      const { thumbnail: image, files } = teamImage(winner, winnerData);
 
       // Create embed with match info
       const matchEmbed = new EmbedBuilder()
         .setTitle(`${team1} vs ${team2} - ${tier} Tier`)
-        .setDescription(`Gameday ${gameday}`)
+        .setDescription(formatGameday(gameday))
         .setThumbnail(`https://i.imgur.com/wrdZCPe.png`)
         .addFields(
           { name: `${ballchasing}`, value: ` ` },
@@ -269,11 +326,11 @@ module.exports = {
           },
         )
         .setColor(tierColors[tier] || 0x000000) // Also fix the color to use the team's color
-        .setImage(winnerData.image) // Fix: add .image to access the image URL
+        .setImage(image)
         .setTimestamp()
         .setFooter({ text: `Reported by ${interaction.user.tag}` });
       // Fetch and add the stats
-      const statsValues = await getStats(
+      const { rows: statsValues, subUps } = await getStats(
         groupID,
         team1,
         team2,
@@ -334,12 +391,23 @@ module.exports = {
       await sheets.spreadsheets.values.append({
         auth: auth,
         spreadsheetId: SHEET_ID,
-        range: "Import Data (Per Series)!B:U",
+        range: "Import Data (Per Series)!B:W",
         valueInputOption: "RAW",
         resource: {
           values: statsValues,
         },
       });
+
+      // Now that the series is recorded, count each sub-up toward the player's
+      // season total (cap enforced by whoever reviews the sheet).
+      for (const subUpId of subUps) {
+        const total = subUpTracker.increment(subUpId);
+        if (total > subUpTracker.SUB_UP_CAP) {
+          console.warn(
+            `⚠️ Player ${subUpId} is over the sub-up cap: ${total}/${subUpTracker.SUB_UP_CAP}`,
+          );
+        }
+      }
 
       // Determine which tier channel to send the report to
       let tierChannel;
@@ -362,7 +430,7 @@ module.exports = {
       }
 
       if (tierChannel) {
-        await tierChannel.send({ embeds: [matchEmbed] });
+        await tierChannel.send({ embeds: [matchEmbed], files });
       }
 
       if (thread) {
@@ -411,133 +479,110 @@ async function initSheetsAPI() {
   return sheets;
 }
 
-// 2. Function to read tracker links from your sheet
-async function getTrackerLinksFromSheet(spreadsheetId) {
+// Map a ballchasing platform name to the tracker.gg slug used in the sheet.
+function normalizeBcPlatform(platform) {
+  const p = (platform || "").toLowerCase();
+  const map = {
+    ps4: "psn",
+    ps5: "psn",
+    playstation: "psn",
+    psn: "psn",
+    xbox: "xbl",
+    xboxlive: "xbl",
+    xbl: "xbl",
+    epic: "epic",
+    steam: "steam",
+    switch: "switch",
+  };
+  return map[p] || p;
+}
+
+// Build a normalized lookup key "platform:id" (lowercased, dashes stripped so
+// epic UUIDs match regardless of formatting).
+function makePlatformKey(platform, id) {
+  const cleanId = String(id || "")
+    .toLowerCase()
+    .replace(/-/g, "");
+  return `${normalizeBcPlatform(platform)}:${cleanId}`;
+}
+
+// Read the "Platform IDs" tab (A = Discord ID, B..Z = "platform:id" entries)
+// and build a map of normalized platform key -> Discord ID.
+async function getPlatformIdMap(spreadsheetId) {
   const sheets = await initSheetsAPI();
-
-  // Read columns D-G, rows 1-500
-  const range = "D:G"; // Adjust sheet name if needed: 'Sheet1!D1:G500'
-
   try {
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: spreadsheetId,
-      range: range,
+      spreadsheetId,
+      range: "'Platform IDs'!A:Z",
     });
 
-    const rows = response.data.values;
+    const rows = response.data.values || [];
+    const map = new Map(); // "platform:id" -> discordId
 
-    if (!rows || rows.length === 0) {
-      console.log("No data found.");
-      return [];
+    for (const row of rows) {
+      const discordId = row[0];
+      // Skip header / blank rows (Discord IDs are all digits)
+      if (!discordId || !/^\d+$/.test(String(discordId).trim())) continue;
+
+      for (let i = 1; i < row.length; i++) {
+        const cell = (row[i] || "").trim();
+        if (!cell.includes(":")) continue;
+        const idx = cell.indexOf(":");
+        const platform = cell.slice(0, idx);
+        const id = cell.slice(idx + 1);
+        map.set(makePlatformKey(platform, id), String(discordId).trim());
+      }
     }
 
-    // Extract all tracker links from columns D-G
-    const trackerLinks = [];
-
-    rows.forEach((row) => {
-      // Check each cell in columns D, E, F, G
-      for (let i = 0; i < row.length; i++) {
-        const cell = row[i];
-        // Check if cell contains a tracker link
-        if (cell && cell.includes("tracker.network")) {
-          trackerLinks.push(cell);
-        }
-      }
-    });
-
-    console.log(`Found ${trackerLinks.length} tracker links in sheet`);
-    return trackerLinks;
+    console.log(`Loaded ${map.size} platform IDs from Platform IDs tab`);
+    return map;
   } catch (error) {
-    console.error("Error reading from Google Sheets:", error);
-    return [];
+    console.error("Error reading Platform IDs tab:", error);
+    return new Map();
   }
 }
-// Modified function to read both tracker links AND IDs from column A
-async function getTrackerDataFromSheet(spreadsheetId) {
+
+// Read tracker links from the Admissions tab (B = Discord ID, F..Z = links)
+// and build a "platform:username" -> Discord ID map. This is the fallback that
+// covers platforms ballchasing only exposes by username (notably PSN, where
+// ballchasing gives the PSN online ID, not the numeric account id).
+async function getTrackerLinkMap(spreadsheetId) {
   const sheets = await initSheetsAPI();
-
-  // Read columns A through G to get both IDs and tracker links
-  const range = "A1:G500";
-
   try {
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: spreadsheetId,
-      range: range,
+      spreadsheetId,
+      range: "Admissions!A:Z",
     });
 
-    const rows = response.data.values;
+    const rows = response.data.values || [];
+    const map = new Map();
 
-    if (!rows || rows.length === 0) {
-      console.log("No data found.");
-      return [];
-    }
+    for (const row of rows) {
+      const discordId = row[1]; // column B
+      if (!discordId || !/^\d+$/.test(String(discordId).trim())) continue;
 
-    // Build a map of tracker links to Discord IDs
-    const trackerDatabase = [];
+      // Tracker links live in columns F onward (index 5+)
+      for (let i = 5; i < row.length; i++) {
+        const link = row[i];
+        if (typeof link !== "string" || !link.includes("tracker")) continue;
 
-    rows.forEach((row, index) => {
-      const discordId = row[0]; // Column A
-      const trackerLink1 = row[3]; // Column D
-      const trackerLink2 = row[4]; // Column E
-      const trackerLink3 = row[5]; // Column F
-      const trackerLink4 = row[6]; // Column G
+        const m = link.match(/profile\/([^/]+)\/([^/?#]+)/);
+        if (!m) continue;
 
-      // Add each tracker link with its associated Discord ID
-      [trackerLink1, trackerLink2, trackerLink3, trackerLink4].forEach(
-        (link) => {
-          if (link && link.includes("tracker.network")) {
-            trackerDatabase.push({
-              discordId: discordId,
-              trackerLink: link,
-              rowNumber: index + 1, // For debugging
-            });
-          }
-        },
-      );
-    });
-
-    console.log(
-      `Found ${trackerDatabase.length} tracker links with Discord IDs`,
-    );
-    return trackerDatabase;
-  } catch (error) {
-    console.error("Error reading from Google Sheets:", error);
-    return [];
-  }
-}
-
-// Helper to find Discord ID from tracker database
-function findDiscordId(trackerDatabase, platform, playerId) {
-  // Check if platform and playerId are valid
-  if (!platform || !playerId) {
-    return null;
-  }
-
-  // Normalize platform to lowercase for comparison
-  const normalizedPlatform = platform.toLowerCase();
-
-  const normalizedPlayerId = normalizePlayerId(normalizedPlatform, playerId);
-
-  // If normalization failed, return null
-  if (!normalizedPlayerId) {
-    return null;
-  }
-
-  for (const entry of trackerDatabase) {
-    const parsed = parseTrackerLink(entry.trackerLink);
-    if (!parsed) continue;
-
-    // Compare normalized platforms
-    if (parsed.platform === normalizedPlatform) {
-      const dbId = normalizePlayerId(parsed.platform, parsed.id);
-      if (dbId && dbId === normalizedPlayerId) {
-        return entry.discordId;
+        const platform = m[1];
+        const username = decodeURIComponent(m[2]);
+        map.set(makePlatformKey(platform, username), String(discordId).trim());
       }
     }
-  }
 
-  return null;
+    console.log(`Loaded ${map.size} tracker-link keys from Admissions tab`);
+    return map;
+  } catch (error) {
+    console.error("Error reading Admissions tracker links:", error);
+    return new Map();
+  }
 }
+
 // Update the function signature to accept interaction
 async function getStats(
   matchGroupID,
@@ -549,14 +594,25 @@ async function getStats(
 ) {
   const spreadsheetId = process.env.enrollmentSheetId;
   const statsArray = [];
+  const subUps = []; // Discord IDs flagged as sub-ups this series (to count on success)
   const matchGroupURL = `https://ballchasing.com/api/groups/${matchGroupID}`;
 
   try {
-    // Fetch tracker database from sheet if spreadsheetId provided
-    let trackerDatabase = [];
+    // Build the combined lookup: Platform IDs (epic/steam/xbox by real id) plus
+    // tracker-link usernames (covers PSN, which ballchasing only gives by name).
+    let lookup = new Map();
     if (spreadsheetId) {
-      console.log("Fetching tracker database from Google Sheet...");
-      trackerDatabase = await getTrackerDataFromSheet(spreadsheetId);
+      console.log("Fetching player lookup tables from Google Sheet...");
+      const [idMap, linkMap] = await Promise.all([
+        getPlatformIdMap(spreadsheetId),
+        getTrackerLinkMap(spreadsheetId),
+      ]);
+      lookup = idMap;
+      // Add tracker-link keys that the Platform IDs table doesn't already cover
+      for (const [k, v] of linkMap) {
+        if (!lookup.has(k)) lookup.set(k, v);
+      }
+      console.log(`Combined lookup has ${lookup.size} keys`);
     }
 
     // Initial request
@@ -573,71 +629,11 @@ async function getStats(
 
     console.log(`Found ${matchData.players.length} players to process`);
 
-    // Check if any Steam players exist
-    const hasSteamPlayers = matchData.players.some(
-      (p) => p.platform && p.platform.toLowerCase() === "steam",
-    );
-
-    // Build a map of player names to their actual Steam64 IDs (only if needed)
-    const steamIdMap = new Map();
-
-    if (hasSteamPlayers) {
-      console.log(
-        "Steam players detected - fetching replay data for Steam64 IDs...",
-      );
-      const replaysURL = `https://ballchasing.com/api/replays?group=${matchGroupID}`;
-      const replaysResponse = await axios.get(replaysURL, {
-        headers: getHeaders(),
-      });
-      const replays = replaysResponse.data.list;
-
-      replays.forEach((replay) => {
-        ["blue", "orange"].forEach((team) => {
-          if (replay[team] && replay[team].players) {
-            replay[team].players.forEach((player) => {
-              // Safety check: ensure player exists
-              if (!player) {
-                return;
-              }
-
-              let platform = null;
-              let playerId = null;
-
-              // Try to extract platform and ID from various structures
-              if (
-                player.id &&
-                typeof player.id === "object" &&
-                player.id.platform
-              ) {
-                // Nested structure: player.id.platform and player.id.id
-                platform = player.id.platform;
-                playerId = player.id.id;
-              } else if (player.platform) {
-                // Flat structure: player.platform and player.id as string
-                platform = player.platform;
-                playerId = typeof player.id === "string" ? player.id : null;
-              }
-
-              // Only proceed if we have valid platform and ID
-              if (!platform || !playerId) {
-                return;
-              }
-
-              // Safely check if it's Steam
-              const platformLower = platform.toLowerCase();
-              if (platformLower === "steam") {
-                steamIdMap.set(player.name.toLowerCase(), playerId);
-                console.log(
-                  `Added Steam player: ${player.name} -> ${playerId}`,
-                );
-              }
-            });
-          }
-        });
-      });
-
-      console.log(`Built Steam ID map with ${steamIdMap.size} entries`);
-    }
+    // Resolve the league guild (where tier roles live) for role lookups.
+    // Falls back to the command's guild if that guild isn't reachable.
+    const leagueGuild = await interaction.client.guilds
+      .fetch(LEAGUE_GUILD_ID)
+      .catch(() => interaction.guild);
 
     // Calculate total team goals
     const totalGoals = matchData.players.reduce((sum, player) => {
@@ -648,89 +644,58 @@ async function getStats(
     for (let i = 0; i < matchData.players.length; i++) {
       const player = matchData.players[i];
 
-      // Cross-check player against database
-      let inDatabase = false;
-      let trackerLink = null;
+      // Match player to a Discord ID using their platform + id straight from
+      // the group data (works for everyone, including players who only played a
+      // couple games — no fragile name-join with the replays).
       let discordId = null;
       let discordUsername = null;
+      let subUpMarker = "";
 
-      if (trackerDatabase.length > 0 && player.platform && player.id) {
-        const platform = player.platform.toLowerCase();
-        let playerId;
+      if (lookup.size > 0 && player.platform && player.id) {
+        const key = makePlatformKey(player.platform, player.id);
+        discordId = lookup.get(key) || null;
+        console.log(
+          `Player ${player.name} (${key}): Discord ID ${discordId || "NOT FOUND"}`,
+        );
 
-        // For Steam, use the Steam64 ID from replays
-        if (platform === "steam") {
-          playerId = steamIdMap.get(player.name.toLowerCase());
-          if (!playerId) {
-            console.log(
-              `⚠️ Steam player ${player.name} - No Steam64 ID found in replays`,
-            );
-            // Skip this player for database matching
-            playerId = null;
+        if (discordId) {
+          // Fetch the member from the league guild so we can read roles
+          // (username + sub-up check)
+          const member = await leagueGuild.members
+            .fetch(discordId)
+            .catch(() => null);
+
+          if (member) {
+            discordUsername = `@${member.user.username}`;
+
+            // Sub-up: the player's own league tier is lower than the reported tier
+            const memberTier = getMemberLeagueTier(member);
+            const memberIdx = memberTier ? TIER_ORDER.indexOf(memberTier) : -1;
+            const reportedIdx = TIER_ORDER.indexOf(tier);
+            if (
+              memberIdx !== -1 &&
+              reportedIdx !== -1 &&
+              memberIdx < reportedIdx
+            ) {
+              // Projected count = current + 1 (the actual increment happens in
+              // execute() only once the report is confirmed and written).
+              const projected = subUpTracker.getCount(discordId) + 1;
+              subUpMarker = `Sub Up (${memberTier}) ${projected}/${subUpTracker.SUB_UP_CAP}`;
+              if (projected > subUpTracker.SUB_UP_CAP) {
+                subUpMarker += " ⚠️ OVER CAP";
+              }
+              subUps.push(discordId);
+              console.log(
+                `↑ ${member.user.username} is a SUB UP: ${memberTier} playing in ${tier} (${projected}/${subUpTracker.SUB_UP_CAP})`,
+              );
+            }
           } else {
-            console.log(
-              `Player ${player.name} (Steam): Steam64 ID = ${playerId}`,
-            );
-          }
-        } else {
-          playerId = player.name; // This is their Epic/PSN/Xbox username
-          console.log(
-            `Player ${player.name} (${platform}): Username ID = ${playerId}`,
-          );
-
-          // Add this debug for Epic specifically:
-          if (platform === "epic") {
-            console.log(
-              `  Normalized: "${normalizePlayerId(platform, playerId)}"`,
-            );
-
-            // Check what we have in database
-            const epicEntries = trackerDatabase.filter((entry) => {
-              const parsed = parseTrackerLink(entry.trackerLink);
-              return parsed && parsed.platform === "epic";
-            });
-
-            console.log(
-              `  Found ${epicEntries.length} Epic entries in database`,
-            );
-            epicEntries.slice(0, 3).forEach((entry) => {
-              const parsed = parseTrackerLink(entry.trackerLink);
-            });
-          }
-        }
-
-        if (playerId) {
-          // Find Discord ID from database
-          discordId = findDiscordId(trackerDatabase, platform, playerId);
-
-          console.log(`Discord ID found: ${discordId || "NOT FOUND"}`);
-
-          if (discordId) {
-            inDatabase = true;
-
-            // Try to get username from Discord
-
-            try {
-              const user = await interaction.client.users.fetch(discordId);
-              discordUsername = `@${user.username}`;
-              console.log(`Found user: ${discordUsername}`);
-            } catch (userErr) {
-              console.log(`Could not fetch user for ID ${discordId}`);
-              discordUsername = `<@${discordId}>`;
-            }
-
-            // Find their tracker link
-            const entry = trackerDatabase.find(
-              (e) => e.discordId === discordId,
-            );
-            if (entry) {
-              trackerLink = entry.trackerLink;
-              console.log(`Found tracker link: ${trackerLink}`);
-            }
+            console.log(`Could not fetch member for ID ${discordId}`);
+            discordUsername = `<@${discordId}>`;
           }
         }
       } else {
-        console.log(`⚠️ Player ${player.name} - Missing platform or ID`);
+        console.log(`⚠️ Player ${player.name} - missing platform or id`);
       }
 
       const playerteamName = player.team || "";
@@ -800,56 +765,19 @@ async function getStats(
         tier,
         playerteamName,
         discordUsername || "Not Submitted?",
+        subUpMarker,
       ];
 
       statsArray.push(playerArray);
     }
 
-    return statsArray;
+    return { rows: statsArray, subUps };
   } catch (error) {
     console.error("Error fetching match data:", error);
     throw error;
   }
 }
 // Helper functions
-
-function normalizePlayerId(platform, id) {
-  // Add safety check for undefined/null
-  if (!id) {
-    return null;
-  }
-
-  // Normalize platform to lowercase
-  const normalizedPlatform = platform.toLowerCase();
-
-  // For Epic, PSN, Xbox, Switch - normalize to lowercase for case-insensitive matching
-  // This handles names like "Epic Player" vs "epic player" vs "Epic%20Player"
-  return id.toLowerCase().trim();
-}
-
-// Update parseTrackerLink to ensure lowercase platforms
-function parseTrackerLink(link) {
-  const match = link.match(/profile\/([^\/]+)\/([^\/]+)/);
-  if (match) {
-    let platform = match[1].toLowerCase();
-    let id = decodeURIComponent(match[2]); // This converts %20 to spaces
-
-    const platformMap = {
-      psn: "ps4",
-      xbl: "xbox",
-      epic: "epic",
-      steam: "steam",
-      switch: "switch",
-    };
-
-    return {
-      platform: platformMap[platform] || platform,
-      id: id,
-      originalPlatform: match[1],
-    };
-  }
-  return null;
-}
 
 // Determine the winner of a single game.
 // Returns 1 (team1 wins), 2 (team2 wins), "tie", "invalid", or null (empty slot).
