@@ -374,13 +374,31 @@ module.exports = {
         return null;
       };
 
+      // Ping the specific managers of each team (team role + zookeeper/handler)
+      // instead of the whole team role, so we don't notify every player.
+      const teamManagement = (roleId) => {
+        const role = interaction.guild?.roles?.cache.get(roleId);
+        if (!role) return [];
+        return [...role.members.values()].filter(
+          (m) =>
+            !m.user.bot &&
+            (m.roles.cache.has(zookeeper) || m.roles.cache.has(handler)),
+        );
+      };
+      const mentionManagement = (roleId) => {
+        const managers = teamManagement(roleId);
+        return managers.length
+          ? managers.map((m) => `<@${m.id}>`).join(" ")
+          : "_no management found — assign a manager_";
+      };
+
       const message = await offerChannel.send(
         `🔄 **TRADE PROPOSAL** 🔄\n\n` +
           `**${team1Name}** trades: ${team1PlayerList}\n` +
           `**${team2Name}** trades: ${team2PlayerList}\n\n` +
           `Both teams' management must react ✅ to approve (❌ to cancel). Expires in 12 hours.\n` +
-          `• **${team1Name}**: <@&${team1Data.roleId}>\n` +
-          `• **${team2Name}**: <@&${team2Data.roleId}>`,
+          `• **${team1Name}**: ${mentionManagement(team1Data.roleId)}\n` +
+          `• **${team2Name}**: ${mentionManagement(team2Data.roleId)}`,
       );
 
       await message.react("✅");
@@ -500,17 +518,14 @@ module.exports = {
                 await officialTransaction.send({ embeds: [embed], files });
               }
 
-              // Clean up messages
+              // Clean up the proposal/verification messages. The official embed
+              // in the transactions channel is the record of the completed trade.
               try {
                 if (message.deletable) await message.delete();
                 if (verifyMessage.deletable) await verifyMessage.delete();
               } catch (error) {
                 console.error("Error deleting messages:", error);
               }
-
-              await offerChannel.send(
-                `✅ **TRADE COMPLETED** between **${team1Name}** and **${team2Name}**!`,
-              );
             } catch (error) {
               console.error("Error in trade verification collector:", error);
             }
