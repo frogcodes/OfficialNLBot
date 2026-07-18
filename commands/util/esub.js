@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const teams = require("../../data/teams.json");
+const { teamImage } = require("../../utils/teamImage.js");
 const { faRoles, captainRoles, leagueRoles } = require("../../data/roles.json");
 const esubCap = require("../../utils/esubCap.js");
 
@@ -205,10 +206,11 @@ module.exports = {
             );
             if (official) {
               const now = Math.floor(Date.now() / 1000);
+              const { thumbnail, files } = teamImage(teamName, teamData);
               const embed = new EmbedBuilder()
                 .setColor(teamData.color)
                 .setTitle(`${teamName} ${tier} Emergency Sub`)
-                .setThumbnail(teamData.image)
+                .setThumbnail(thumbnail)
                 .setDescription(
                   `<@${playerIn.id}> **in** for <@${playerOut.id}> (**${tier}**)`,
                 )
@@ -227,7 +229,7 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({ text: `Approved by ${user.username}` });
 
-              await official.send({ embeds: [embed] });
+              await official.send({ embeds: [embed], files });
             }
 
             if (requestMsg.deletable) await requestMsg.delete().catch(() => {});

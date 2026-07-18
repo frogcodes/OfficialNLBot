@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const teams = require("../../data/teams.json");
+const { teamImage } = require("../../utils/teamImage.js");
 const { faRoles, leagueRoles } = require("../../data/roles.json");
 
 // These should be actual channel IDs
@@ -175,12 +176,16 @@ module.exports = {
                         officialTransactionChannel,
                       );
                       if (officialTransaction) {
+                        const { thumbnail, files } = teamImage(
+                          offeringTeamName,
+                          offeringTeamData,
+                        );
                         const embed = new EmbedBuilder()
                           .setColor(offeringTeamData.color)
                           .setTitle(
                             `${offeringTeamName} re-sign ${player.username}`,
                           )
-                          .setThumbnail(offeringTeamData.image)
+                          .setThumbnail(thumbnail)
                           .setDescription(
                             `<@${player.id}> re-signed to ${tierName} League!`,
                           )
@@ -189,7 +194,7 @@ module.exports = {
                             text: `Re-signed by ${transactionCreator.username} | Processed by ${user.username}`,
                           });
 
-                        await officialTransaction.send({ embeds: [embed] });
+                        await officialTransaction.send({ embeds: [embed], files });
 
                         collector2.stop("approved");
                         const member = interaction.guild.members.cache.get(

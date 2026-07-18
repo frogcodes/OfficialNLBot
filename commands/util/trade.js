@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const teams = require("../../data/teams.json");
+const { teamImage } = require("../../utils/teamImage.js");
 const { leagueRoles } = require("../../data/roles.json");
 
 // Configuration
@@ -236,10 +237,12 @@ function createTradeEmbed(
   const team1PlayerList = team1Players.map((p) => `<@${p.user.id}>`).join(", ");
   const team2PlayerList = team2Players.map((p) => `<@${p.user.id}>`).join(", ");
 
-  return new EmbedBuilder()
+  const { thumbnail, files } = teamImage(team1Name, team1Data);
+
+  const embed = new EmbedBuilder()
     .setColor(team1Data.color)
     .setTitle(`${team1Name} ⇄ ${team2Name} Trade`)
-    .setThumbnail(team1Data.image)
+    .setThumbnail(thumbnail)
     .addFields(
       {
         name: `${team1Name} receives:`,
@@ -256,6 +259,8 @@ function createTradeEmbed(
     .setFooter({
       text: `Trade by ${transactionCreator.username} | Processed by ${approver.username}`,
     });
+
+  return { embed, files };
 }
 
 // Main Command
@@ -432,14 +437,14 @@ module.exports = {
                     CONFIG.channels.officialTransaction,
                   );
                   if (officialTransaction) {
-                    const embed = createTradeEmbed(
+                    const { embed, files } = createTradeEmbed(
                       team1Players,
                       team2Players,
                       interaction.user,
                       user,
                     );
 
-                    await officialTransaction.send({ embeds: [embed] });
+                    await officialTransaction.send({ embeds: [embed], files });
                   }
 
                   // Clean up messages

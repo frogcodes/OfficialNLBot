@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const teams = require("../../data/teams.json");
+const { teamImage } = require("../../utils/teamImage.js");
 const { captainRoles, leagueRoles } = require("../../data/roles.json");
 
 // These should be actual channel IDs
@@ -230,12 +231,16 @@ module.exports = {
                           officialTransactionChannel,
                         );
                         if (officialTransaction) {
+                          const { thumbnail, files } = teamImage(
+                            offeringTeamName,
+                            offeringTeamData,
+                          );
                           const embed = new EmbedBuilder()
                             .setColor(0x00ff00)
                             .setTitle(
                               `${offeringTeamName} promote ${player.username}`,
                             )
-                            .setThumbnail(offeringTeamData.image)
+                            .setThumbnail(thumbnail)
                             .setDescription(
                               `<@${player.id}> is promoted to ${offeringTeamName} ${tier} Captain`,
                             )
@@ -244,7 +249,7 @@ module.exports = {
                               text: `Promotion by ${transactionCreator.username} | Processed by ${user.username}`,
                             });
 
-                          await officialTransaction.send({ embeds: [embed] });
+                          await officialTransaction.send({ embeds: [embed], files });
                           collector2.stop();
 
                           await member.roles.add(captainRoles[tier]);
@@ -397,12 +402,16 @@ module.exports = {
                           officialTransactionChannel,
                         );
                         if (officialTransaction) {
+                          const { thumbnail, files } = teamImage(
+                            offeringTeamName,
+                            offeringTeamData,
+                          );
                           const embed = new EmbedBuilder()
                             .setColor(0x00ff00)
                             .setTitle(
                               `${offeringTeamName} promote ${player.username}`,
                             )
-                            .setThumbnail(offeringTeamData.image)
+                            .setThumbnail(thumbnail)
                             .setDescription(
                               `<@${player.id}> is promoted to ${offeringTeamName} ${tier}!`,
                             )
@@ -411,7 +420,7 @@ module.exports = {
                               text: `Promoted by ${transactionCreator.username} | Processed by ${user.username}`,
                             });
 
-                          await officialTransaction.send({ embeds: [embed] });
+                          await officialTransaction.send({ embeds: [embed], files });
                           collector2.stop();
 
                           // Update league roles

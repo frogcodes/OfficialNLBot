@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const teams = require("../../data/teams.json");
+const { teamImage } = require("../../utils/teamImage.js");
 const { captainRoles, leagueRoles } = require("../../data/roles.json");
 
 // These should be actual channel IDs
@@ -210,12 +211,16 @@ module.exports = {
                         officialTransactionChannel,
                       );
                       if (officialTransaction) {
+                        const { thumbnail, files } = teamImage(
+                          offeringTeamName,
+                          offeringTeamData,
+                        );
                         const embed = new EmbedBuilder()
                           .setColor(0xff0000)
                           .setTitle(
                             `${offeringTeamName} demote ${player.username}`,
                           )
-                          .setThumbnail(offeringTeamData.image)
+                          .setThumbnail(thumbnail)
                           .setDescription(
                             `<@${player.id}> is removed from ${offeringTeamName} ${tier} Captain`,
                           )
@@ -224,7 +229,7 @@ module.exports = {
                             text: `Demotion by ${transactionCreator.username} | Processed by ${user.username}`,
                           });
 
-                        await officialTransaction.send({ embeds: [embed] });
+                        await officialTransaction.send({ embeds: [embed], files });
                         collector2.stop();
 
                         await member.roles.remove(captainRoles[tier]);
@@ -334,12 +339,16 @@ module.exports = {
                         officialTransactionChannel,
                       );
                       if (officialTransaction) {
+                        const { thumbnail, files } = teamImage(
+                          offeringTeamName,
+                          offeringTeamData,
+                        );
                         const embed = new EmbedBuilder()
                           .setColor(0xff0000)
                           .setTitle(
                             `${offeringTeamName} demote ${player.username}`,
                           )
-                          .setThumbnail(offeringTeamData.image)
+                          .setThumbnail(thumbnail)
                           .setDescription(
                             `<@${player.id}> is demoted to ${offeringTeamName} ${tier}!`,
                           )
@@ -348,7 +357,7 @@ module.exports = {
                             text: `Demoted by ${transactionCreator.username} | Processed by ${user.username}`,
                           });
 
-                        await officialTransaction.send({ embeds: [embed] });
+                        await officialTransaction.send({ embeds: [embed], files });
                         collector2.stop();
 
                         // Update league roles
