@@ -18,7 +18,7 @@
     "bannerImage": "images/drafted/cheetahs_banner.png",
     "color": "#af761b",
     "roleId": "1181050438909444117",
-    "emoji": ""
+    "emoji": "<:Cheetahs:1201232832803111014>"
   },
   "Eagles": {
     "image": "https://i.imgur.com/UzIyaUU.png",
@@ -39,7 +39,7 @@
     "bannerImage": "images/drafted/huskies_banner.png",
     "color": "#4a4dff",
     "roleId": "1336434110721163358",
-    "emoji": ""
+    "emoji": "<:Huskies:1343335563352084560>"
   },
   "Kangaroos": {
     "image": "https://i.imgur.com/opGzAKX.png",
@@ -74,7 +74,7 @@
     "bannerImage": "images/drafted/pandas_banner.png",
     "color": "#74b847",
     "roleId": "1519127852291723304",
-    "emoji": ""
+    "emoji": "<:Pandas:1527973184760975370>"
   },
   "Panthers": {
     "image": "https://i.imgur.com/kTZEWyD.png",

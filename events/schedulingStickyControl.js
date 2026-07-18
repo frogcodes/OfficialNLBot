@@ -16,41 +16,16 @@ const ACTIVE_STATUSES = new Set([
   "MANUAL_PROPOSED",
 ]);
 
-// Coalesce bursts of chat per thread so the panel is re-posted at most once per
-// quiet window instead of on every message, which keeps us clear of Discord's
-// per-channel rate limits while still landing the panel at the bottom.
-const REPOST_DEBOUNCE_MS = 1500;
-const pendingReposts = new Map();
+// The panel used to re-post on EVERY message, and because its text contains team
+// role mentions, each re-post pinged the teams again — spammy. Instead we bump it
+// on activity at most once per this interval, so an unscheduled thread gets a
+// periodic nudge (and at most one ping per window) rather than a ping per message.
+// Note: the panel still refreshes IMMEDIATELY on real scheduling actions
+// (submit/propose/confirm) via the interaction handlers — this throttle only
+// governs the "keep it at the bottom" chat bumps. Tune this one value to taste.
+const STICKY_REPOST_INTERVAL_MS = 12 * 60 * 60 * 1000; // 12 hours
 
-function scheduleRepost(threadChannel, threadId) {
-  const existing = pendingReposts.get(threadId);
-  if (existing) {
-    clearTimeout(existing);
-  }
-
-  pendingReposts.set(
-    threadId,
-    setTimeout(async () => {
-      pendingReposts.delete(threadId);
-
-      // Re-check on the trailing edge in case the match was confirmed (or the
-      // session cleared) while people were still chatting.
-      const session = getAvailabilitySession(threadId);
-      if (!session || !ACTIVE_STATUSES.has(session.status)) {
-        return;
-      }
-
-      try {
-        await refreshSchedulingControlMessage(threadChannel, threadId);
-      } catch (error) {
-        console.error(
-          `Failed to bump scheduling control panel in thread ${threadId}:`,
-          error,
-        );
-      }
-    }, REPOST_DEBOUNCE_MS),
-  );
-}
+const lastBumpAt = new Map(); // threadId -> timestamp of last chat-driven bump
 
 module.exports = {
   name: Events.MessageCreate,
@@ -72,6 +47,21 @@ module.exports = {
       return;
     }
 
-    scheduleRepost(message.channel, threadId);
+    // Throttle: only bump if it's been at least a full window since the last one.
+    const now = Date.now();
+    const last = lastBumpAt.get(threadId) ?? 0;
+    if (now - last < STICKY_REPOST_INTERVAL_MS) {
+      return;
+    }
+    lastBumpAt.set(threadId, now);
+
+    try {
+      await refreshSchedulingControlMessage(message.channel, threadId);
+    } catch (error) {
+      console.error(
+        `Failed to bump scheduling control panel in thread ${threadId}:`,
+        error,
+      );
+    }
   },
 };
