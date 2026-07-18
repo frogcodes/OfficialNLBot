@@ -392,25 +392,52 @@ module.exports = {
               throw new TradeError("Verification channel not found!");
             }
 
-            const verifyMessage = await transactionVerify.send(
-              `🔄 **TRADE VERIFICATION** 🔄\n\n` +
+            // Both teams' management (team role + zookeeper/handler) AND the
+            // transaction team must each approve before the trade executes.
+            const team1Data = team1Players[0].teamData;
+            const team2Data = team2Players[0].teamData;
+            const { zookeeper, handler, transactionTeam } = CONFIG.roles;
+
+            // Which approvals a member is allowed to give (they may hold more
+            // than one; a team's manager can only approve for their own team).
+            const approvalKeysFor = (member) => {
+              const keys = [];
+              const isManagement =
+                member.roles.cache.has(zookeeper) ||
+                member.roles.cache.has(handler);
+              if (isManagement && member.roles.cache.has(team1Data.roleId))
+                keys.push("team1");
+              if (isManagement && member.roles.cache.has(team2Data.roleId))
+                keys.push("team2");
+              if (member.roles.cache.has(transactionTeam)) keys.push("staff");
+              return keys;
+            };
+
+            const approvals = { team1: null, team2: null, staff: null };
+            const statusText = () => {
+              const mark = (key) => (approvals[key] ? `✅ ${approvals[key]}` : "⏳ pending");
+              return (
+                `🔄 **TRADE VERIFICATION** 🔄\n\n` +
                 `**${team1Name}** trades: ${team1PlayerList}\n` +
                 `**${team2Name}** trades: ${team2PlayerList}\n\n` +
-                `Transaction team members, react to approve or deny.`,
-            );
+                `All three must approve (react ✅ to approve, ❌ to deny):\n` +
+                `• **${team1Name}** management: ${mark("team1")}\n` +
+                `• **${team2Name}** management: ${mark("team2")}\n` +
+                `• Transaction team: ${mark("staff")}`
+              );
+            };
 
+            const verifyMessage = await transactionVerify.send(statusText());
             await verifyMessage.react("✅");
             await verifyMessage.react("❌");
 
             const verifyFilter = async (reaction, user) => {
+              if (!["✅", "❌"].includes(reaction.emoji.name) || user.bot) {
+                return false;
+              }
               try {
-                const member = await reaction.message.guild.members.fetch(
-                  user.id,
-                );
-                return (
-                  ["✅", "❌"].includes(reaction.emoji.name) &&
-                  member.roles.cache.has(CONFIG.roles.transactionTeam)
-                );
+                const member = await reaction.message.guild.members.fetch(user.id);
+                return approvalKeysFor(member).length > 0;
               } catch (error) {
                 console.error("Error in verification filter:", error);
                 return false;
@@ -425,55 +452,74 @@ module.exports = {
             verifyCollector.on("collect", async (reaction, user) => {
               try {
                 if (user.bot) return;
+                const member = await reaction.message.guild.members.fetch(user.id);
+                const keys = approvalKeysFor(member);
+                if (keys.length === 0) return;
 
-                if (reaction.emoji.name === "✅") {
-                  verifyCollector.stop();
-
-                  // Execute the trade
-                  await executePlayerTrade(team1Players, team2Players);
-
-                  // Post to official transaction channel
-                  const officialTransaction = client.channels.cache.get(
-                    CONFIG.channels.officialTransaction,
-                  );
-                  if (officialTransaction) {
-                    const { embed, files } = createTradeEmbed(
-                      team1Players,
-                      team2Players,
-                      interaction.user,
-                      user,
-                    );
-
-                    await officialTransaction.send({ embeds: [embed], files });
-                  }
-
-                  // Clean up messages
-                  try {
-                    if (message.deletable) await message.delete();
-                    if (verifyMessage.deletable) await verifyMessage.delete();
-                  } catch (error) {
-                    console.error("Error deleting messages:", error);
-                  }
-
+                if (reaction.emoji.name === "❌") {
+                  verifyCollector.stop("denied");
                   await offerChannel.send(
-                    `✅ **TRADE COMPLETED** between **${team1Name}** and **${team2Name}**!`,
+                    `❌ The trade between **${team1Name}** and **${team2Name}** was **denied** by ${user.username}.`,
                   );
-                } else if (reaction.emoji.name === "❌") {
-                  verifyCollector.stop();
-                  await offerChannel.send(
-                    `❌ The trade between **${team1Name}** and **${team2Name}** has been **denied** by ${user.username}!`,
-                  );
+                  return;
                 }
+
+                // Record this member's approval for each role they hold.
+                let changed = false;
+                for (const key of keys) {
+                  if (!approvals[key]) {
+                    approvals[key] = user.username;
+                    changed = true;
+                  }
+                }
+                if (changed && verifyMessage.editable) {
+                  await verifyMessage.edit(statusText()).catch(() => {});
+                }
+
+                if (!(approvals.team1 && approvals.team2 && approvals.staff)) {
+                  return; // still waiting on other approvals
+                }
+
+                verifyCollector.stop("approved");
+
+                // Execute the trade
+                await executePlayerTrade(team1Players, team2Players);
+
+                // Post to official transaction channel
+                const officialTransaction = client.channels.cache.get(
+                  CONFIG.channels.officialTransaction,
+                );
+                if (officialTransaction) {
+                  const { embed, files } = createTradeEmbed(
+                    team1Players,
+                    team2Players,
+                    interaction.user,
+                    user,
+                  );
+
+                  await officialTransaction.send({ embeds: [embed], files });
+                }
+
+                // Clean up messages
+                try {
+                  if (message.deletable) await message.delete();
+                  if (verifyMessage.deletable) await verifyMessage.delete();
+                } catch (error) {
+                  console.error("Error deleting messages:", error);
+                }
+
+                await offerChannel.send(
+                  `✅ **TRADE COMPLETED** between **${team1Name}** and **${team2Name}**!`,
+                );
               } catch (error) {
                 console.error("Error in trade verification collector:", error);
-                verifyCollector.stop();
               }
             });
 
             verifyCollector.on("end", async (collected, reason) => {
               if (reason === "time") {
                 await offerChannel.send(
-                  `⏰ Trade verification between **${team1Name}** and **${team2Name}** has **expired**.`,
+                  `⏰ Trade verification between **${team1Name}** and **${team2Name}** **expired** before all approvals were collected.`,
                 );
               }
             });

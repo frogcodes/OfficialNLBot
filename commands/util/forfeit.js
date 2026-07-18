@@ -5,6 +5,7 @@ const {
   MessageFlags,
 } = require("discord.js");
 const teams = require("../../data/teams.json");
+const { teamImage } = require("../../utils/teamImage.js");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -46,24 +47,24 @@ module.exports = {
         .setName("tier")
         .setDescription("The tier of the match")
         .setRequired(true)
-        .addChoices(...tierChoices)
+        .addChoices(...tierChoices),
     )
     .addStringOption((option) =>
       option
         .setName("winner")
         .setDescription("winner via ff")
         .setRequired(true)
-        .addChoices(...teamChoices)
+        .addChoices(...teamChoices),
     )
     .addStringOption((option) =>
       option
         .setName("loser")
         .setDescription("ff loser")
         .setRequired(true)
-        .addChoices(...teamChoices)
+        .addChoices(...teamChoices),
     )
     .addStringOption((option) =>
-      option.setName("reason").setDescription("loser via ff").setRequired(true)
+      option.setName("reason").setDescription("loser via ff").setRequired(true),
     )
     .addStringOption((option) =>
       option
@@ -71,6 +72,8 @@ module.exports = {
         .setDescription("Gameday Number of the match")
         .setRequired(true)
         .addChoices(
+          { name: "Preseason 1", value: "P1" },
+          { name: "Preseason 2", value: "P2" },
           { name: "Gameday 1", value: "1" },
           { name: "Gameday 2", value: "2" },
           { name: "Gameday 3", value: "3" },
@@ -94,8 +97,8 @@ module.exports = {
           { name: "Gameday 21", value: "21" },
           { name: "Gameday 22", value: "22" },
           { name: "Gameday 23", value: "23" },
-          { name: "Playoffs", value: "Playoffs" }
-        )
+          { name: "Playoffs", value: "Playoffs" },
+        ),
     ),
   async execute(interaction) {
     await interaction.deferReply({
@@ -134,11 +137,18 @@ module.exports = {
       const reason = interaction.options.getString("reason");
 
       let winnerData = teams[winner];
+      const { thumbnail: image, files } = teamImage(winner, winnerData);
 
       // Create embed with match info
       const matchEmbed = new EmbedBuilder()
         .setTitle(`Forfeit in ${tier} Tier`)
-        .setDescription(`Gameday ${gameday}`)
+        .setDescription(
+          gameday === "P1"
+            ? "Preseason 1"
+            : gameday === "P2"
+              ? "Preseason 2"
+              : `Gameday ${gameday}`,
+        )
         .setThumbnail(`https://i.imgur.com/0IGk0bh.png`)
         .addFields(
           {
@@ -148,10 +158,10 @@ module.exports = {
           {
             name: "⚠️ FF Reason ⚠️",
             value: reason,
-          }
+          },
         )
         .setColor(tierColors[tier] || 0x000000) // Also fix the color to use the team's color
-        .setImage(winnerData.image) // Fix: add .image to access the image URL
+        .setImage(image)
         .setTimestamp()
         .setFooter({ text: `${interaction.user.tag} is a fraud` });
 
@@ -176,7 +186,7 @@ module.exports = {
       }
 
       if (tierChannel) {
-        await tierChannel.send({ embeds: [matchEmbed] });
+        await tierChannel.send({ embeds: [matchEmbed], files });
       }
 
       return interaction.editReply({
