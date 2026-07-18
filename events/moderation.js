@@ -14,7 +14,7 @@ const blacklistedWords = [
 // Utility function for logging
 async function logModAction(
   guild,
-  { action, moderator, target, reason, duration = null, messageContent = null }
+  { action, moderator, target, reason, duration = null, messageContent = null },
 ) {
   const logsChannel = guild.channels.cache.get(logsChannelID);
   if (!logsChannel) {
@@ -65,7 +65,7 @@ module.exports = {
 
     // Check for blacklisted words
     const containsBlacklistedWord = blacklistedWords.some((word) =>
-      message.content.toLowerCase().includes(word)
+      message.content.toLowerCase().includes(word),
     );
 
     if (containsBlacklistedWord) {
@@ -95,7 +95,7 @@ module.exports = {
       const moderationEmbed = new EmbedBuilder()
         .setTitle("Message Review Required")
         .setDescription(
-          `Message from <@${message.author.id}>:\n\n"${messageContent}"`
+          `Message from <@${message.author.id}>:\n\n"${messageContent}"`,
         )
         .setColor("#ffcc00")
         .setFooter({
@@ -112,7 +112,7 @@ module.exports = {
       } catch (error) {
         console.error(
           "Failed to send moderation message or add reactions:",
-          error
+          error,
         );
         return;
       }
@@ -146,17 +146,17 @@ module.exports = {
 
           const flaggedChannel = await message.client.channels.fetch(channelID);
           const flaggedMessage = await flaggedChannel.messages.fetch(
-            parts[1].split(": ")[1]
+            parts[1].split(": ")[1],
           );
           const flaggedUser = await message.guild.members.fetch(flaggedUserID);
 
           if (reaction.emoji.name === "✅") {
             message.client.users.send(
               `${flaggedUserID}`,
-              `<@${flaggedUserID}> Your message, "${message}", was flagged but deemed acceptable.`
+              `<@${flaggedUserID}> Your message, "${message}", was flagged but deemed acceptable.`,
             );
             await moderationChannel.send(
-              `Message from <@${flaggedUserID}> was reviewed and deemed acceptable. The user was warned.`
+              `Message from <@${flaggedUserID}> was reviewed and deemed acceptable. The user was warned.`,
             );
 
             // Log warning
@@ -182,13 +182,13 @@ module.exports = {
             } catch (error) {
               console.error("Failed to delete message:", error);
               await moderationChannel.send(
-                "Failed to delete the flagged message."
+                "Failed to delete the flagged message.",
               );
               return;
             }
 
             await moderationChannel.send(
-              `<@${user.id}> How long should the flagged user be muted? Respond with a duration in minutes (1-10080).`
+              `<@${user.id}> How long should the flagged user be muted? Respond with a duration in minutes (1-10080).`,
             );
 
             const filter = (response) => response.author.id === user.id;
@@ -207,7 +207,7 @@ module.exports = {
                 muteDuration > 10080
               ) {
                 await moderationChannel.send(
-                  "Invalid duration provided. Please provide a number between 1 and 10080 minutes."
+                  "Invalid duration provided. Please provide a number between 1 and 10080 minutes.",
                 );
                 return;
               }
@@ -217,7 +217,7 @@ module.exports = {
               try {
                 await flaggedUser.timeout(
                   muteDurationInMs,
-                  "Violation of server rules."
+                  "Violation of server rules.",
                 );
 
                 // Log timeout
@@ -231,19 +231,19 @@ module.exports = {
                 });
 
                 await moderationChannel.send(
-                  `${flaggedUser} has been muted for ${muteDuration} minutes.`
+                  `${flaggedUser} has been muted for ${muteDuration} minutes.`,
                 );
 
                 message.client.users.send(
                   `${flaggedUserID}`,
-                  `<@${flaggedUserID}> You have been muted for ${muteDuration} minutes. For message "${message}". Please adhere to the rules.`
+                  `<@${flaggedUserID}> You have been muted for ${muteDuration} minutes. For message "${message}". Please adhere to the rules.`,
                 );
 
                 setTimeout(async () => {
                   try {
                     message.clientclient.users.send(
                       `${flaggedUserID}`,
-                      `<@${flaggedUserID}> You have been unmuted. Please maintain respectful behavior.`
+                      `<@${flaggedUserID}> You have been unmuted. Please maintain respectful behavior.`,
                     );
 
                     // Log unmute
@@ -269,7 +269,7 @@ module.exports = {
         } catch (error) {
           console.error("Error in reaction handling:", error);
           await moderationChannel.send(
-            "An error occurred while processing the moderation action."
+            "An error occurred while processing the moderation action.",
           );
         }
       });
