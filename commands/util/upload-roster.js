@@ -142,22 +142,25 @@ async function uploadRoster(guild, { skipFetch = false } = {}) {
 
   const allRows = [header, ...dataRows];
   const authClient = await auth.getClient();
-
-  // Clear existing data across all columns we use (grows with ROLE_COLUMNS)
   const lastCol = columnLetter(header.length);
-  await sheets.spreadsheets.values.clear({
-    auth: authClient,
-    spreadsheetId: ROSTER_SHEET_ID,
-    range: `${SHEET_TAB}!A:${lastCol}`,
-  });
 
-  // Write fresh data starting at A1
+  // Write first (overwrites in place), THEN clear leftovers. Clearing first would
+  // leave the sheet blank between the two calls — and permanently wiped if the
+  // write failed. This order means readers always see a complete roster.
   await sheets.spreadsheets.values.update({
     auth: authClient,
     spreadsheetId: ROSTER_SHEET_ID,
     range: `${SHEET_TAB}!A1`,
     valueInputOption: "RAW",
     resource: { values: allRows },
+  });
+
+  // Drop any rows left over from a previously longer roster. Worst case this
+  // fails and we keep a few stale trailing rows — never a blank sheet.
+  await sheets.spreadsheets.values.clear({
+    auth: authClient,
+    spreadsheetId: ROSTER_SHEET_ID,
+    range: `${SHEET_TAB}!A${allRows.length + 1}:${lastCol}`,
   });
 
   const timestamp = new Date().toLocaleString("en-US", {
