@@ -4,12 +4,535 @@
       "weekNumber": 0,
       "gamedays": [
         {
-          "gamedayNum": "0",
+          "gamedayNum": "P1",
           "matches": [
             {
-              "teams": ["Squirrels", "Squirrels"],
+              "teams": [
+                "Capybaras",
+                "Narwhals"
+              ],
               "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
                 "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Eagles",
+                "Yetis"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Elephants",
+                "Turtles"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Cheetahs",
+                "Stingrays"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Raccoons",
+                "Pandas"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Huskies",
+                "Cardinals"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Wolves",
+                "Owls"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Lynx",
+                "Squirrels"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "gamedayNum": "P2",
+          "matches": [
+            {
+              "teams": [
+                "Capybaras",
+                "Squirrels"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Eagles",
+                "Owls"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Elephants",
+                "Cardinals"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Cheetahs",
+                "Pandas"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Raccoons",
+                "Stingrays"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Huskies",
+                "Turtles"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Wolves",
+                "Yetis"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Lynx",
+                "Narwhals"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
                   "scheduled": false,
                   "threadID": "",
                   "reported": false
@@ -27,7 +550,10 @@
           "gamedayNum": "1",
           "matches": [
             {
-              "teams": ["Kangaroos", "Stingrays"],
+              "teams": [
+                "Capybaras",
+                "Wolves"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -57,7 +583,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Turtles"],
+              "teams": [
+                "Eagles",
+                "Lynx"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -87,7 +616,10 @@
               }
             },
             {
-              "teams": ["Raccoons", "Yetis"],
+              "teams": [
+                "Elephants",
+                "Raccoons"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -117,7 +649,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Lynx"],
+              "teams": [
+                "Cheetahs",
+                "Huskies"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -147,7 +682,10 @@
               }
             },
             {
-              "teams": ["Owls", "Wolves"],
+              "teams": [
+                "Stingrays",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -177,7 +715,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Capybaras"],
+              "teams": [
+                "Turtles",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -207,7 +748,10 @@
               }
             },
             {
-              "teams": ["Panthers", "Narwhals"],
+              "teams": [
+                "Yetis",
+                "Squirrels"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -237,7 +781,279 @@
               }
             },
             {
-              "teams": ["Sharks", "Eagles"],
+              "teams": [
+                "Narwhals",
+                "Owls"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "gamedayNum": "2",
+          "matches": [
+            {
+              "teams": [
+                "Capybaras",
+                "Turtles"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Eagles",
+                "Stingrays"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Elephants",
+                "Narwhals"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Cheetahs",
+                "Yetis"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Raccoons",
+                "Owls"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Huskies",
+                "Squirrels"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Wolves",
+                "Pandas"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Lynx",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -274,10 +1090,13 @@
       "weekNumber": 2,
       "gamedays": [
         {
-          "gamedayNum": "2",
+          "gamedayNum": "3",
           "matches": [
             {
-              "teams": ["Narwhals", "Lynx"],
+              "teams": [
+                "Capybaras",
+                "Cheetahs"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -307,7 +1126,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Sharks"],
+              "teams": [
+                "Eagles",
+                "Elephants"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -337,7 +1159,10 @@
               }
             },
             {
-              "teams": ["Kangaroos", "Yetis"],
+              "teams": [
+                "Raccoons",
+                "Lynx"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -367,7 +1192,10 @@
               }
             },
             {
-              "teams": ["Owls", "Panthers"],
+              "teams": [
+                "Huskies",
+                "Wolves"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -397,7 +1225,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Eagles"],
+              "teams": [
+                "Stingrays",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -427,7 +1258,10 @@
               }
             },
             {
-              "teams": ["Raccoons", "Turtles"],
+              "teams": [
+                "Turtles",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -457,7 +1291,10 @@
               }
             },
             {
-              "teams": ["Capybaras", "Wolves"],
+              "teams": [
+                "Squirrels",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -487,7 +1324,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Stingrays"],
+              "teams": [
+                "Owls",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -519,10 +1359,13 @@
           ]
         },
         {
-          "gamedayNum": "3",
+          "gamedayNum": "4",
           "matches": [
             {
-              "teams": ["Lynx", "Wolves"],
+              "teams": [
+                "Capybaras",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -552,7 +1395,10 @@
               }
             },
             {
-              "teams": ["Owls", "Raccoons"],
+              "teams": [
+                "Eagles",
+                "Squirrels"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -582,7 +1428,10 @@
               }
             },
             {
-              "teams": ["Kangaroos", "Panthers"],
+              "teams": [
+                "Elephants",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -612,7 +1461,10 @@
               }
             },
             {
-              "teams": ["Stingrays", "Sharks"],
+              "teams": [
+                "Cheetahs",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -642,7 +1494,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Capybaras"],
+              "teams": [
+                "Raccoons",
+                "Turtles"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -672,7 +1527,10 @@
               }
             },
             {
-              "teams": ["Eagles", "Yetis"],
+              "teams": [
+                "Huskies",
+                "Stingrays"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -702,7 +1560,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Squirrels"],
+              "teams": [
+                "Wolves",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -732,7 +1593,10 @@
               }
             },
             {
-              "teams": ["Narwhals", "Turtles"],
+              "teams": [
+                "Lynx",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -769,10 +1633,13 @@
       "weekNumber": 3,
       "gamedays": [
         {
-          "gamedayNum": "4",
+          "gamedayNum": "5",
           "matches": [
             {
-              "teams": ["Cardinals", "Elephants"],
+              "teams": [
+                "Capybaras",
+                "Raccoons"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -802,7 +1669,10 @@
               }
             },
             {
-              "teams": ["Capybaras", "Narwhals"],
+              "teams": [
+                "Eagles",
+                "Huskies"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -832,7 +1702,10 @@
               }
             },
             {
-              "teams": ["Sharks", "Wolves"],
+              "teams": [
+                "Elephants",
+                "Wolves"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -862,7 +1735,10 @@
               }
             },
             {
-              "teams": ["Stingrays", "Eagles"],
+              "teams": [
+                "Cheetahs",
+                "Lynx"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -892,7 +1768,10 @@
               }
             },
             {
-              "teams": ["Raccoons", "Lynx"],
+              "teams": [
+                "Stingrays",
+                "Squirrels"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -922,7 +1801,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Yetis"],
+              "teams": [
+                "Turtles",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -952,7 +1834,10 @@
               }
             },
             {
-              "teams": ["Panthers", "Turtles"],
+              "teams": [
+                "Yetis",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -982,7 +1867,10 @@
               }
             },
             {
-              "teams": ["Owls", "Kangaroos"],
+              "teams": [
+                "Narwhals",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1014,10 +1902,13 @@
           ]
         },
         {
-          "gamedayNum": "5",
+          "gamedayNum": "6",
           "matches": [
             {
-              "teams": ["Capybaras", "Lynx"],
+              "teams": [
+                "Capybaras",
+                "Eagles"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1047,7 +1938,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Stingrays"],
+              "teams": [
+                "Elephants",
+                "Cheetahs"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1077,7 +1971,10 @@
               }
             },
             {
-              "teams": ["Owls", "Sharks"],
+              "teams": [
+                "Raccoons",
+                "Huskies"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1107,7 +2004,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Eagles"],
+              "teams": [
+                "Wolves",
+                "Lynx"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1137,7 +2037,10 @@
               }
             },
             {
-              "teams": ["Raccoons", "Panthers"],
+              "teams": [
+                "Stingrays",
+                "Turtles"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1167,7 +2070,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Turtles"],
+              "teams": [
+                "Yetis",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1197,7 +2103,10 @@
               }
             },
             {
-              "teams": ["Narwhals", "Yetis"],
+              "teams": [
+                "Squirrels",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1227,7 +2136,10 @@
               }
             },
             {
-              "teams": ["Kangaroos", "Wolves"],
+              "teams": [
+                "Cardinals",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1264,10 +2176,13 @@
       "weekNumber": 4,
       "gamedays": [
         {
-          "gamedayNum": "6",
+          "gamedayNum": "7",
           "matches": [
             {
-              "teams": ["Wolves", "Eagles"],
+              "teams": [
+                "Capybaras",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1297,7 +2212,10 @@
               }
             },
             {
-              "teams": ["Turtles", "Sharks"],
+              "teams": [
+                "Eagles",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1327,7 +2245,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Owls"],
+              "teams": [
+                "Elephants",
+                "Stingrays"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1357,7 +2278,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Raccoons"],
+              "teams": [
+                "Cheetahs",
+                "Turtles"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1387,7 +2311,10 @@
               }
             },
             {
-              "teams": ["Capybaras", "Kangaroos"],
+              "teams": [
+                "Raccoons",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1417,7 +2344,10 @@
               }
             },
             {
-              "teams": ["Narwhals", "Stingrays"],
+              "teams": [
+                "Huskies",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1447,7 +2377,10 @@
               }
             },
             {
-              "teams": ["Lynx", "Yetis"],
+              "teams": [
+                "Wolves",
+                "Squirrels"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1477,7 +2410,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Panthers"],
+              "teams": [
+                "Lynx",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1509,10 +2445,13 @@
           ]
         },
         {
-          "gamedayNum": "7",
+          "gamedayNum": "8",
           "matches": [
             {
-              "teams": ["Cardinals", "Yetis"],
+              "teams": [
+                "Capybaras",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1542,7 +2481,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Wolves"],
+              "teams": [
+                "Eagles",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1572,7 +2514,10 @@
               }
             },
             {
-              "teams": ["Owls", "Eagles"],
+              "teams": [
+                "Elephants",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1602,7 +2547,10 @@
               }
             },
             {
-              "teams": ["Raccoons", "Narwhals"],
+              "teams": [
+                "Cheetahs",
+                "Squirrels"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1632,7 +2580,10 @@
               }
             },
             {
-              "teams": ["Capybaras", "Stingrays"],
+              "teams": [
+                "Raccoons",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1662,7 +2613,10 @@
               }
             },
             {
-              "teams": ["Panthers", "Sharks"],
+              "teams": [
+                "Huskies",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1692,7 +2646,10 @@
               }
             },
             {
-              "teams": ["Kangaroos", "Turtles"],
+              "teams": [
+                "Wolves",
+                "Turtles"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1722,7 +2679,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Lynx"],
+              "teams": [
+                "Lynx",
+                "Stingrays"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1759,10 +2719,13 @@
       "weekNumber": 5,
       "gamedays": [
         {
-          "gamedayNum": "8",
+          "gamedayNum": "9",
           "matches": [
             {
-              "teams": ["Owls", "Stingrays"],
+              "teams": [
+                "Capybaras",
+                "Elephants"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1792,7 +2755,10 @@
               }
             },
             {
-              "teams": ["Capybaras", "Yetis"],
+              "teams": [
+                "Eagles",
+                "Cheetahs"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1822,7 +2788,10 @@
               }
             },
             {
-              "teams": ["Sharks", "Lynx"],
+              "teams": [
+                "Raccoons",
+                "Wolves"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1852,7 +2821,10 @@
               }
             },
             {
-              "teams": ["Raccoons", "Kangaroos"],
+              "teams": [
+                "Huskies",
+                "Lynx"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1882,7 +2854,10 @@
               }
             },
             {
-              "teams": ["Panthers", "Wolves"],
+              "teams": [
+                "Stingrays",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1912,7 +2887,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Narwhals"],
+              "teams": [
+                "Turtles",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1942,7 +2920,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Turtles"],
+              "teams": [
+                "Squirrels",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -1972,7 +2953,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Eagles"],
+              "teams": [
+                "Owls",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2004,10 +2988,13 @@
           ]
         },
         {
-          "gamedayNum": "9",
+          "gamedayNum": "10",
           "matches": [
             {
-              "teams": ["Narwhals", "Turtles"],
+              "teams": [
+                "Capybaras",
+                "Lynx"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2037,7 +3024,10 @@
               }
             },
             {
-              "teams": ["Owls", "Squirrels"],
+              "teams": [
+                "Eagles",
+                "Wolves"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2067,7 +3057,10 @@
               }
             },
             {
-              "teams": ["Lynx", "Eagles"],
+              "teams": [
+                "Elephants",
+                "Huskies"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2097,7 +3090,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Raccoons"],
+              "teams": [
+                "Cheetahs",
+                "Raccoons"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2127,7 +3123,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Capybaras"],
+              "teams": [
+                "Stingrays",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2157,7 +3156,10 @@
               }
             },
             {
-              "teams": ["Kangaroos", "Panthers"],
+              "teams": [
+                "Turtles",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2187,7 +3189,10 @@
               }
             },
             {
-              "teams": ["Stingrays", "Sharks"],
+              "teams": [
+                "Yetis",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2217,7 +3222,10 @@
               }
             },
             {
-              "teams": ["Wolves", "Yetis"],
+              "teams": [
+                "Narwhals",
+                "Squirrels"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2254,10 +3262,13 @@
       "weekNumber": 6,
       "gamedays": [
         {
-          "gamedayNum": "10",
+          "gamedayNum": "11",
           "matches": [
             {
-              "teams": ["Turtles", "Eagles"],
+              "teams": [
+                "Capybaras",
+                "Stingrays"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2287,7 +3298,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Elephants"],
+              "teams": [
+                "Eagles",
+                "Turtles"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2317,7 +3331,10 @@
               }
             },
             {
-              "teams": ["Stingrays", "Wolves"],
+              "teams": [
+                "Elephants",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2347,7 +3364,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Panthers"],
+              "teams": [
+                "Cheetahs",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2377,7 +3397,10 @@
               }
             },
             {
-              "teams": ["Kangaroos", "Lynx"],
+              "teams": [
+                "Raccoons",
+                "Squirrels"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2407,7 +3430,10 @@
               }
             },
             {
-              "teams": ["Owls", "Narwhals"],
+              "teams": [
+                "Huskies",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2437,7 +3463,10 @@
               }
             },
             {
-              "teams": ["Raccoons", "Capybaras"],
+              "teams": [
+                "Wolves",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2467,7 +3496,10 @@
               }
             },
             {
-              "teams": ["Sharks", "Yetis"],
+              "teams": [
+                "Lynx",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2499,10 +3531,13 @@
           ]
         },
         {
-          "gamedayNum": "11",
+          "gamedayNum": "12",
           "matches": [
             {
-              "teams": ["Panthers", "Eagles"],
+              "teams": [
+                "Capybaras",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2532,7 +3567,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Wolves"],
+              "teams": [
+                "Eagles",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2562,7 +3600,10 @@
               }
             },
             {
-              "teams": ["Raccoons", "Sharks"],
+              "teams": [
+                "Elephants",
+                "Squirrels"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2592,7 +3633,10 @@
               }
             },
             {
-              "teams": ["Kangaroos", "Narwhals"],
+              "teams": [
+                "Cheetahs",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2622,7 +3666,10 @@
               }
             },
             {
-              "teams": ["Capybaras", "Turtles"],
+              "teams": [
+                "Raccoons",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2652,7 +3699,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Stingrays"],
+              "teams": [
+                "Huskies",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2682,7 +3732,10 @@
               }
             },
             {
-              "teams": ["Owls", "Lynx"],
+              "teams": [
+                "Wolves",
+                "Stingrays"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2712,7 +3765,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Yetis"],
+              "teams": [
+                "Lynx",
+                "Turtles"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2749,10 +3805,13 @@
       "weekNumber": 7,
       "gamedays": [
         {
-          "gamedayNum": "12",
+          "gamedayNum": "13",
           "matches": [
             {
-              "teams": ["Raccoons", "Eagles"],
+              "teams": [
+                "Capybaras",
+                "Huskies"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2782,7 +3841,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Sharks"],
+              "teams": [
+                "Eagles",
+                "Raccoons"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2812,7 +3874,10 @@
               }
             },
             {
-              "teams": ["Panthers", "Stingrays"],
+              "teams": [
+                "Elephants",
+                "Lynx"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2842,7 +3907,10 @@
               }
             },
             {
-              "teams": ["Owls", "Yetis"],
+              "teams": [
+                "Cheetahs",
+                "Wolves"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2872,7 +3940,10 @@
               }
             },
             {
-              "teams": ["Narwhals", "Wolves"],
+              "teams": [
+                "Stingrays",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2902,7 +3973,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Kangaroos"],
+              "teams": [
+                "Turtles",
+                "Squirrels"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2932,7 +4006,10 @@
               }
             },
             {
-              "teams": ["Turtles", "Lynx"],
+              "teams": [
+                "Yetis",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2962,7 +4039,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Capybaras"],
+              "teams": [
+                "Narwhals",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -2994,10 +4074,13 @@
           ]
         },
         {
-          "gamedayNum": "13",
+          "gamedayNum": "14",
           "matches": [
             {
-              "teams": ["Cardinals", "Narwhals"],
+              "teams": [
+                "Capybaras",
+                "Cheetahs"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3027,7 +4110,10 @@
               }
             },
             {
-              "teams": ["Owls", "Elephants"],
+              "teams": [
+                "Eagles",
+                "Elephants"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3057,7 +4143,10 @@
               }
             },
             {
-              "teams": ["Stingrays", "Lynx"],
+              "teams": [
+                "Raccoons",
+                "Lynx"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3087,7 +4176,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Panthers"],
+              "teams": [
+                "Huskies",
+                "Wolves"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3117,7 +4209,10 @@
               }
             },
             {
-              "teams": ["Turtles", "Yetis"],
+              "teams": [
+                "Stingrays",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3147,7 +4242,10 @@
               }
             },
             {
-              "teams": ["Capybaras", "Eagles"],
+              "teams": [
+                "Turtles",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3177,7 +4275,10 @@
               }
             },
             {
-              "teams": ["Kangaroos", "Sharks"],
+              "teams": [
+                "Squirrels",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3207,7 +4308,10 @@
               }
             },
             {
-              "teams": ["Raccoons", "Wolves"],
+              "teams": [
+                "Owls",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3244,10 +4348,13 @@
       "weekNumber": 8,
       "gamedays": [
         {
-          "gamedayNum": "14",
+          "gamedayNum": "15",
           "matches": [
             {
-              "teams": ["Squirrels", "Raccoons"],
+              "teams": [
+                "Capybaras",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3277,7 +4384,10 @@
               }
             },
             {
-              "teams": ["Wolves", "Eagles"],
+              "teams": [
+                "Eagles",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3307,7 +4417,10 @@
               }
             },
             {
-              "teams": ["Capybaras", "Kangaroos"],
+              "teams": [
+                "Elephants",
+                "Turtles"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3337,7 +4450,10 @@
               }
             },
             {
-              "teams": ["Turtles", "Stingrays"],
+              "teams": [
+                "Cheetahs",
+                "Stingrays"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3367,7 +4483,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Owls"],
+              "teams": [
+                "Raccoons",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3397,7 +4516,10 @@
               }
             },
             {
-              "teams": ["Lynx", "Yetis"],
+              "teams": [
+                "Huskies",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3427,7 +4549,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Panthers"],
+              "teams": [
+                "Wolves",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3457,7 +4582,279 @@
               }
             },
             {
-              "teams": ["Narwhals", "Sharks"],
+              "teams": [
+                "Lynx",
+                "Squirrels"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "gamedayNum": "16",
+          "matches": [
+            {
+              "teams": [
+                "Capybaras",
+                "Eagles"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Elephants",
+                "Cheetahs"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Raccoons",
+                "Huskies"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Wolves",
+                "Lynx"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Stingrays",
+                "Turtles"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Yetis",
+                "Narwhals"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Squirrels",
+                "Owls"
+              ],
+              "tiers": {
+                "Apex": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Alpha": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Beta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Delta": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                },
+                "Omega": {
+                  "scheduled": false,
+                  "threadID": "",
+                  "reported": false
+                }
+              }
+            },
+            {
+              "teams": [
+                "Cardinals",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3494,10 +4891,13 @@
       "weekNumber": 9,
       "gamedays": [
         {
-          "gamedayNum": "15",
+          "gamedayNum": "17",
           "matches": [
             {
-              "teams": ["Elephants", "Wolves"],
+              "teams": [
+                "Capybaras",
+                "Squirrels"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3527,7 +4927,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Lynx"],
+              "teams": [
+                "Eagles",
+                "Owls"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3557,7 +4960,10 @@
               }
             },
             {
-              "teams": ["Owls", "Turtles"],
+              "teams": [
+                "Elephants",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3587,7 +4993,10 @@
               }
             },
             {
-              "teams": ["Narwhals", "Eagles"],
+              "teams": [
+                "Cheetahs",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3617,7 +5026,10 @@
               }
             },
             {
-              "teams": ["Panthers", "Yetis"],
+              "teams": [
+                "Raccoons",
+                "Stingrays"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3647,7 +5059,10 @@
               }
             },
             {
-              "teams": ["Raccoons", "Stingrays"],
+              "teams": [
+                "Huskies",
+                "Turtles"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3677,7 +5092,10 @@
               }
             },
             {
-              "teams": ["Squirrels", "Kangaroos"],
+              "teams": [
+                "Wolves",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3707,252 +5125,10 @@
               }
             },
             {
-              "teams": ["Capybaras", "Sharks"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            }
-          ]
-        },
-        {
-          "gamedayNum": "16",
-          "matches": [
-            {
-              "teams": ["Owls", "Raccoons"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Capybaras", "Panthers"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Lynx", "Eagles"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Elephants", "Kangaroos"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Narwhals", "Sharks"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Wolves", "Yetis"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Cardinals", "Squirrels"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Turtles", "Stingrays"],
+              "teams": [
+                "Lynx",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -3989,255 +5165,13 @@
       "weekNumber": 10,
       "gamedays": [
         {
-          "gamedayNum": "17",
-          "matches": [
-            {
-              "teams": ["Panthers", "Lynx"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Kangaroos", "Eagles"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Owls", "Capybaras"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Raccoons", "Elephants"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Cardinals", "Sharks"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Squirrels", "Narwhals"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Turtles", "Wolves"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            },
-            {
-              "teams": ["Stingrays", "Yetis"],
-              "tiers": {
-                "Apex": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Alpha": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Beta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Delta": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                },
-                "Omega": {
-                  "scheduled": false,
-                  "threadID": "",
-                  "reported": false
-                }
-              }
-            }
-          ]
-        },
-        {
           "gamedayNum": "18",
           "matches": [
             {
-              "teams": ["Owls", "Squirrels"],
+              "teams": [
+                "Capybaras",
+                "Elephants"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -4267,7 +5201,10 @@
               }
             },
             {
-              "teams": ["Elephants", "Kangaroos"],
+              "teams": [
+                "Eagles",
+                "Cheetahs"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -4297,7 +5234,10 @@
               }
             },
             {
-              "teams": ["Capybaras", "Panthers"],
+              "teams": [
+                "Raccoons",
+                "Wolves"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -4327,7 +5267,10 @@
               }
             },
             {
-              "teams": ["Narwhals", "Stingrays"],
+              "teams": [
+                "Huskies",
+                "Lynx"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -4357,7 +5300,10 @@
               }
             },
             {
-              "teams": ["Eagles", "Yetis"],
+              "teams": [
+                "Stingrays",
+                "Yetis"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -4387,7 +5333,10 @@
               }
             },
             {
-              "teams": ["Lynx", "Wolves"],
+              "teams": [
+                "Turtles",
+                "Narwhals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -4417,7 +5366,10 @@
               }
             },
             {
-              "teams": ["Turtles", "Sharks"],
+              "teams": [
+                "Squirrels",
+                "Cardinals"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
@@ -4447,7 +5399,10 @@
               }
             },
             {
-              "teams": ["Cardinals", "Raccoons"],
+              "teams": [
+                "Owls",
+                "Pandas"
+              ],
               "tiers": {
                 "Apex": {
                   "scheduled": false,
