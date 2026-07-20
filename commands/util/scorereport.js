@@ -220,32 +220,32 @@ module.exports = {
     const omegaReportID = "1183463475687723008";
 
     try {
-      // const statsChannel =
-      //   await interaction.guild.channels.fetch(statsChannelID);
-      // const apexReport = await interaction.guild.channels.fetch(apexReportID);
-      // const alphaReport = await interaction.guild.channels.fetch(alphaReportID);
-      // const betaReport = await interaction.guild.channels.fetch(betaReportID);
-      // const deltaReport = await interaction.guild.channels.fetch(deltaReportID);
-      // const omegaReport = await interaction.guild.channels.fetch(omegaReportID);
+      const statsChannel =
+        await interaction.guild.channels.fetch(statsChannelID);
+      const apexReport = await interaction.guild.channels.fetch(apexReportID);
+      const alphaReport = await interaction.guild.channels.fetch(alphaReportID);
+      const betaReport = await interaction.guild.channels.fetch(betaReportID);
+      const deltaReport = await interaction.guild.channels.fetch(deltaReportID);
+      const omegaReport = await interaction.guild.channels.fetch(omegaReportID);
 
-      // if (
-      //   !statsChannel ||
-      //   !apexReport ||
-      //   !alphaReport ||
-      //   !betaReport ||
-      //   !deltaReport ||
-      //   !omegaReport
-      // ) {
-      //   try {
-      //     return await interaction.editReply({
-      //       content: "Error: A channel was not found. :(",
-      //       flags: MessageFlags.Ephemeral,
-      //     });
-      //   } catch (error) {
-      //     console.error("Error sending channel not found reply:", error);
-      //     return;
-      //   }
-      // }
+      if (
+        !statsChannel ||
+        !apexReport ||
+        !alphaReport ||
+        !betaReport ||
+        !deltaReport ||
+        !omegaReport
+      ) {
+        try {
+          return await interaction.editReply({
+            content: "Error: A channel was not found. :(",
+            flags: MessageFlags.Ephemeral,
+          });
+        } catch (error) {
+          console.error("Error sending channel not found reply:", error);
+          return;
+        }
+      }
 
       // Get command options
       const ballchasing = interaction.options.getString("ballchasing-link");
