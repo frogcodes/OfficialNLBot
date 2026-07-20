@@ -3,6 +3,7 @@ const { captainRoles } = require("../../data/roles.json");
 const {
   AVAILABILITY_DAYS,
   AVAILABILITY_TIMES,
+  MANAGEMENT_ROLE_IDS,
   SCHEDULING_TEAM_ROLE_ID,
 } = require("./constants.js");
 const {
@@ -190,11 +191,19 @@ function getAvailabilityTeamRoleId(session, member) {
   return teamRoleIds.find((roleId) => memberRoleIds.includes(roleId)) ?? null;
 }
 
+// The tier captain OR the team's management (zookeeper/handler) may submit
+// availability and confirm times — but either way they must be on one of the two
+// teams in this match, so a manager can't act for the opposing team.
 function canUseAvailabilityForm(session, interaction) {
   const memberRoleIds = getMemberRoleIds(interaction.member);
   const captainRoleId = captainRoles[session.tier];
 
-  if (captainRoleId && !memberRoleIds.includes(captainRoleId)) {
+  const isCaptain = captainRoleId ? memberRoleIds.includes(captainRoleId) : true;
+  const isManagement = MANAGEMENT_ROLE_IDS.some((roleId) =>
+    memberRoleIds.includes(roleId),
+  );
+
+  if (!isCaptain && !isManagement) {
     return false;
   }
 

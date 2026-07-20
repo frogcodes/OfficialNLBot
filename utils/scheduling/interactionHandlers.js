@@ -140,7 +140,9 @@ async function refreshControlMessageForInteraction(interaction) {
   const channel = await getInteractionChannel(interaction);
 
   if (channel?.send) {
-    await refreshSchedulingControlMessage(channel, interaction.channelId);
+    await refreshSchedulingControlMessage(channel, interaction.channelId, {
+    silent: true,
+  });
   }
 
   return channel;
@@ -177,7 +179,9 @@ async function finalizeMatchFromInteraction({
     );
   }
 
-  await refreshSchedulingControlMessage(channel, interaction.channelId);
+  await refreshSchedulingControlMessage(channel, interaction.channelId, {
+    silent: true,
+  });
 
   return result;
 }
@@ -260,16 +264,16 @@ async function handleAvailabilityDaySelect(interaction, day) {
     0,
   );
 
-  await interaction.reply({
-    content:
-      selectedTimes.length === 0
-        ? `Cleared availability for ${day}. You now have ${totalSelected} total time(s) saved.`
-        : [
-            `Saved ${day}: ${selectedTimes.join(", ")}.`,
-            `You now have ${totalSelected} total time(s) saved.`,
-            "Click Submit Availability when finished.",
-          ].join(" "),
-    ephemeral: true,
+  // Update THIS ephemeral in place (keeping its dropdowns) instead of replying
+  // with a brand new one, so picking 7 days doesn't stack up 7 messages.
+  await interaction.update({
+    content: [
+      selectedTimes.length === 0 ? `Cleared **${day}**.` : `Saved **${day}**.`,
+      `**${totalSelected}** time(s) selected so far:`,
+      formatCaptainAvailability(captainAvailability),
+      "Click **Submit Availability** when you're finished.",
+    ].join("\n"),
+    components: interaction.message.components,
   });
 
   if (shouldRefreshControl) {
@@ -330,7 +334,9 @@ async function handleAvailabilitySubmit(interaction) {
       );
     }
 
-    await refreshSchedulingControlMessage(channel, interaction.channelId);
+    await refreshSchedulingControlMessage(channel, interaction.channelId, {
+    silent: true,
+  });
   }
 
   return await interaction.editReply({
@@ -467,7 +473,9 @@ async function handleFinalOverlapTimeSelect(interaction, day) {
       ].join(" "),
     );
 
-    await refreshSchedulingControlMessage(channel, interaction.channelId);
+    await refreshSchedulingControlMessage(channel, interaction.channelId, {
+    silent: true,
+  });
   }
 
   return await interaction.editReply({
@@ -584,7 +592,9 @@ async function handleManualTimeTimeSelect(interaction, day) {
       `<@${interaction.user.id}> proposed **${day} at ${time}**.`,
     );
 
-    await refreshSchedulingControlMessage(channel, interaction.channelId);
+    await refreshSchedulingControlMessage(channel, interaction.channelId, {
+    silent: true,
+  });
   }
 
   return await interaction.reply({
@@ -673,7 +683,9 @@ async function handleManualTimeAgree(interaction) {
       ].join(" "),
     );
 
-    await refreshSchedulingControlMessage(channel, interaction.channelId);
+    await refreshSchedulingControlMessage(channel, interaction.channelId, {
+    silent: true,
+  });
   }
 
   return await interaction.editReply({
