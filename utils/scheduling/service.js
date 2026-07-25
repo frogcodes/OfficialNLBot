@@ -1,8 +1,6 @@
 const { PermissionFlagsBits } = require("discord.js");
 const { captainRoles } = require("../../data/roles.json");
 const {
-  AVAILABILITY_DAYS,
-  AVAILABILITY_TIMES,
   MANAGEMENT_ROLE_IDS,
   SCHEDULING_TEAM_ROLE_ID,
 } = require("./constants.js");
@@ -10,6 +8,14 @@ const {
   getCurrentWeekStartDate,
   getWeekStartDateFromIso,
 } = require("./dateUtils.js");
+const {
+  computeOverlapByDay,
+  countIntervals,
+  formatAvailabilityByDay,
+  getOverlapDays: getOverlapDaysFromMap,
+  isTimeWithinOverlap: isTimeWithinOverlapMap,
+  overlapHasAny,
+} = require("./timeRange.js");
 const {
   getAvailabilitySession,
   loadSchedulingState,
@@ -45,7 +51,7 @@ function ensureAvailabilitySession({
     weekStartDate: resolvedWeekStartDate,
     availability: {},
     controlMessageId: null,
-    overlap: [],
+    overlapByDay: {},
     status: "COLLECTING_AVAILABILITY",
     createdAt: timestamp,
     updatedAt: timestamp,
@@ -57,7 +63,7 @@ function ensureAvailabilitySession({
   session.homeRoleId = homeRoleId ?? session.homeRoleId ?? null;
   session.weekStartDate ??= resolvedWeekStartDate ?? getCurrentWeekStartDate();
   session.availability ??= {};
-  session.overlap ??= [];
+  session.overlapByDay ??= {};
   session.status ??= "COLLECTING_AVAILABILITY";
   session.updatedAt = timestamp;
 
@@ -115,56 +121,67 @@ function setSchedulingControlMessageId(threadId, messageId) {
   return session;
 }
 
-function saveCaptainAvailability({
+// Store a captain's full availability (typed as time ranges, one submission)
+// and immediately mark it submitted, then recompute overlap/status.
+function submitAvailabilityRanges({
   threadId,
   tier,
   userId,
   displayName,
   teamRoleId,
-  day,
-  selectedTimes,
+  availabilityByDay,
 }) {
   const state = loadSchedulingState();
-  const timestamp = new Date().toISOString();
+  const session = state.sessions?.[threadId];
 
-  state.sessions ??= {};
-  state.sessions[threadId] ??= {
-    threadId,
-    tier,
-    availability: {},
-    createdAt: timestamp,
-  };
-
-  const session = state.sessions[threadId];
-  session.tier ??= tier;
-  session.availability ??= {};
-  session.overlap = [];
-  session.status = "COLLECTING_AVAILABILITY";
-  session.availability[userId] ??= {
-    userId,
-    displayName,
-    teamRoleId,
-    days: {},
-    updatedAt: timestamp,
-  };
-
-  const captainAvailability = session.availability[userId];
-  captainAvailability.displayName = displayName;
-  captainAvailability.teamRoleId = teamRoleId ?? captainAvailability.teamRoleId ?? null;
-  captainAvailability.days ??= {};
-  delete captainAvailability.submittedAt;
-
-  if (selectedTimes.length === 0) {
-    delete captainAvailability.days[day];
-  } else {
-    captainAvailability.days[day] = selectedTimes;
+  if (!session) {
+    return {
+      ok: false,
+      reason: "No scheduling session exists for this thread.",
+    };
   }
 
-  captainAvailability.updatedAt = timestamp;
+  if (countIntervals(availabilityByDay) === 0) {
+    return {
+      ok: false,
+      reason: "Enter at least one time range before submitting.",
+    };
+  }
+
+  const timestamp = new Date().toISOString();
+  session.tier ??= tier;
+  session.availability ??= {};
+  session.availability[userId] = {
+    userId,
+    displayName,
+    teamRoleId:
+      teamRoleId ?? session.availability[userId]?.teamRoleId ?? null,
+    intervals: availabilityByDay,
+    submittedAt: timestamp,
+    updatedAt: timestamp,
+  };
   session.updatedAt = timestamp;
 
+  const status = getAvailabilitySubmissionStatus(session);
+
+  if (status.complete) {
+    session.overlapByDay = calculateAvailabilityOverlap(session);
+    session.status = overlapHasAny(session.overlapByDay)
+      ? "OVERLAP_FOUND"
+      : "NO_OVERLAP";
+  } else {
+    session.overlapByDay = {};
+    session.status = "AWAITING_AVAILABILITY";
+  }
+
   saveSchedulingState(state);
-  return captainAvailability;
+
+  return {
+    ok: true,
+    session,
+    captainAvailability: session.availability[userId],
+    ...status,
+  };
 }
 
 function getMemberRoleIds(member) {
@@ -214,64 +231,14 @@ function canUseAvailabilityForm(session, interaction) {
   return true;
 }
 
-function getSelectedAvailabilityCount(captainAvailability) {
-  return Object.values(captainAvailability.days ?? {}).reduce(
-    (total, times) => total + times.length,
-    0,
+// The direct "Propose Time" button is open to the same people who can submit
+// availability (captains + team management on either team) PLUS the scheduling
+// lead, who can propose a time for any match even without a team role.
+function canProposeTime(session, interaction) {
+  return (
+    isSchedulingStaff(interaction) ||
+    canUseAvailabilityForm(session, interaction)
   );
-}
-
-function submitCaptainAvailability({
-  threadId,
-  userId,
-  displayName,
-  teamRoleId,
-}) {
-  const state = loadSchedulingState();
-  const session = state.sessions?.[threadId];
-
-  if (!session) {
-    return { ok: false, reason: "No availability session exists for this thread." };
-  }
-
-  session.availability ??= {};
-  const captainAvailability = session.availability[userId];
-
-  if (!captainAvailability || getSelectedAvailabilityCount(captainAvailability) === 0) {
-    return { ok: false, reason: "Pick at least one available time before submitting." };
-  }
-
-  if (captainAvailability.submittedAt) {
-    return { ok: true, alreadySubmitted: true, session, captainAvailability };
-  }
-
-  const timestamp = new Date().toISOString();
-  captainAvailability.displayName = displayName;
-  captainAvailability.teamRoleId = teamRoleId ?? captainAvailability.teamRoleId ?? null;
-  captainAvailability.submittedAt = timestamp;
-  captainAvailability.updatedAt = timestamp;
-  session.updatedAt = timestamp;
-
-  const status = getAvailabilitySubmissionStatus(session);
-
-  if (status.complete) {
-    session.overlap = calculateAvailabilityOverlap(session);
-    session.status = session.overlap.length > 0 ? "OVERLAP_FOUND" : "NO_OVERLAP";
-  } else {
-    session.overlap = [];
-    session.status = "AWAITING_AVAILABILITY";
-  }
-
-  saveSchedulingState(state);
-
-  return {
-    ok: true,
-    alreadySubmitted: false,
-    session,
-    captainAvailability,
-    ...status,
-    overlap: session.overlap,
-  };
 }
 
 function getAvailabilitySubmissionStatus(session) {
@@ -329,37 +296,18 @@ function calculateAvailabilityOverlap(session) {
   const captains = getCaptainsForOverlap(session);
 
   if (captains.length < 2) {
-    return [];
+    return {};
   }
 
-  return AVAILABILITY_DAYS.flatMap((day) =>
-    AVAILABILITY_TIMES.filter((time) =>
-      captains.every((captainAvailability) =>
-        (captainAvailability.days?.[day] ?? []).includes(time),
-      ),
-    ).map((time) => ({ day, time })),
-  );
+  return computeOverlapByDay(captains[0].intervals, captains[1].intervals);
 }
 
 function formatCaptainAvailability(captainAvailability) {
-  const lines = AVAILABILITY_DAYS.map((day) => {
-    const times = captainAvailability.days?.[day] ?? [];
-    return times.length > 0 ? `- ${day}: ${times.join(", ")}` : null;
-  }).filter(Boolean);
-
-  return lines.length > 0 ? lines.join("\n") : "- No times selected.";
+  return formatAvailabilityByDay(captainAvailability?.intervals);
 }
 
-function formatOverlap(overlap) {
-  const lines = AVAILABILITY_DAYS.map((day) => {
-    const times = overlap
-      .filter((slot) => slot.day === day)
-      .map((slot) => slot.time);
-
-    return times.length > 0 ? `- ${day}: ${times.join(", ")}` : null;
-  }).filter(Boolean);
-
-  return lines.length > 0 ? lines.join("\n") : "- No overlapping times.";
+function formatOverlap(overlapByDay) {
+  return formatAvailabilityByDay(overlapByDay);
 }
 
 function formatMissingAvailability(session, missingTeamRoleIds) {
@@ -379,15 +327,11 @@ function isHomeCaptain(session, interaction) {
 }
 
 function getOverlapDays(session) {
-  return AVAILABILITY_DAYS.filter((day) =>
-    (session.overlap ?? []).some((slot) => slot.day === day),
-  );
+  return getOverlapDaysFromMap(session?.overlapByDay);
 }
 
-function getOverlapTimesForDay(session, day) {
-  return (session.overlap ?? [])
-    .filter((slot) => slot.day === day)
-    .map((slot) => slot.time);
+function isTimeWithinOverlap(session, day, normalizedMinutes) {
+  return isTimeWithinOverlapMap(session?.overlapByDay, day, normalizedMinutes);
 }
 
 function confirmFinalTime({ threadId, day, time, selectedByUserId, source }) {
@@ -413,13 +357,23 @@ function confirmFinalTime({ threadId, day, time, selectedByUserId, source }) {
   return { ok: true, session };
 }
 
-function createManualTimeProposal({
+// Create a proposed match time that the other team must confirm. When the
+// proposer is on one of the teams, their team implicitly agrees (pre-confirmed),
+// so only the opposing team still needs to confirm. When a scheduling lead who
+// isn't on either team proposes, both teams must confirm.
+//
+// `source` distinguishes an overlap-derived proposal ("overlap", from the home
+// captain picking within shared availability) from a direct proposal ("manual").
+// The resulting status drives which control panel/agreement buttons show.
+function createTimeProposal({
   threadId,
   userId,
   displayName,
   teamRoleId,
   day,
   time,
+  timeNormalized,
+  source = "manual",
 }) {
   const state = loadSchedulingState();
   const session = state.sessions?.[threadId];
@@ -429,42 +383,6 @@ function createManualTimeProposal({
   }
 
   const timestamp = new Date().toISOString();
-  session.manualProposal = {
-    id: Date.now().toString(36),
-    day,
-    time,
-    proposedByUserId: userId,
-    proposedByDisplayName: displayName,
-    proposedByTeamRoleId: teamRoleId,
-    confirmations: {},
-    createdAt: timestamp,
-    updatedAt: timestamp,
-  };
-  session.status = "MANUAL_PROPOSED";
-  session.updatedAt = timestamp;
-
-  saveSchedulingState(state);
-  return { ok: true, session, proposal: session.manualProposal };
-}
-
-function createOverlapTimeProposal({
-  threadId,
-  userId,
-  displayName,
-  teamRoleId,
-  day,
-  time,
-}) {
-  const state = loadSchedulingState();
-  const session = state.sessions?.[threadId];
-
-  if (!session) {
-    return { ok: false, reason: "No scheduling session exists for this thread." };
-  }
-
-  const timestamp = new Date().toISOString();
-
-  // The proposing (home) captain implicitly agrees, so pre-confirm their team.
   const confirmations = teamRoleId
     ? { [teamRoleId]: { userId, displayName, confirmedAt: timestamp } }
     : {};
@@ -473,7 +391,8 @@ function createOverlapTimeProposal({
     id: Date.now().toString(36),
     day,
     time,
-    source: "overlap",
+    timeNormalized,
+    source,
     proposedByUserId: userId,
     proposedByDisplayName: displayName,
     proposedByTeamRoleId: teamRoleId,
@@ -481,7 +400,7 @@ function createOverlapTimeProposal({
     createdAt: timestamp,
     updatedAt: timestamp,
   };
-  session.status = "OVERLAP_PROPOSED";
+  session.status = source === "overlap" ? "OVERLAP_PROPOSED" : "MANUAL_PROPOSED";
   session.updatedAt = timestamp;
 
   saveSchedulingState(state);
@@ -538,6 +457,7 @@ function confirmManualTimeProposal({
     session.confirmedTime = {
       day: session.manualProposal.day,
       time: session.manualProposal.time,
+      timeNormalized: session.manualProposal.timeNormalized,
       source: session.manualProposal.source ?? "manual",
       selectedByUserId: session.manualProposal.proposedByUserId,
       confirmedAt: timestamp,
@@ -580,7 +500,7 @@ function resetSchedulingSession(threadId) {
 
   const timestamp = new Date().toISOString();
   session.availability = {};
-  session.overlap = [];
+  session.overlapByDay = {};
   delete session.manualProposal;
   delete session.confirmedTime;
   delete session.scheduleMatch;
@@ -593,11 +513,11 @@ function resetSchedulingSession(threadId) {
 }
 
 module.exports = {
+  canProposeTime,
   canUseAvailabilityForm,
   confirmFinalTime,
   confirmManualTimeProposal,
-  createManualTimeProposal,
-  createOverlapTimeProposal,
+  createTimeProposal,
   ensureAvailabilitySession,
   formatCaptainAvailability,
   formatMissingAvailability,
@@ -607,12 +527,11 @@ module.exports = {
   getCleanAvailabilityTier,
   getMemberRoleIds,
   getOverlapDays,
-  getOverlapTimesForDay,
   isHomeCaptain,
   isSchedulingStaff,
+  isTimeWithinOverlap,
   markSchedulingFinalized,
   resetSchedulingSession,
-  saveCaptainAvailability,
   setSchedulingControlMessageId,
-  submitCaptainAvailability,
+  submitAvailabilityRanges,
 };

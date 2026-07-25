@@ -248,7 +248,7 @@ module.exports = {
       }
 
       if (
-        (interaction.isButton() || interaction.isStringSelectMenu()) &&
+        (interaction.isButton() || interaction.isModalSubmit()) &&
         schedulingInteractions.isSchedulingInteraction(interaction)
       ) {
         return await schedulingInteractions.handle(interaction);

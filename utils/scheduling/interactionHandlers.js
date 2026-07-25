@@ -1,9 +1,6 @@
-const { AVAILABILITY_DAYS, AVAILABILITY_TIMES } = require("./constants.js");
 const {
-  buildAvailabilityRows,
-  buildAvailabilitySubmitRow,
-  buildDaySelectRow,
-  buildTimeSelectRow,
+  buildAvailabilityModal,
+  buildTimeEntryModal,
 } = require("./components.js");
 const {
   refreshSchedulingControlMessage,
@@ -12,43 +9,44 @@ const {
   finalizeScheduledMatchFromThread,
 } = require("./finalizeSchedule.js");
 const {
+  buildAvailabilityTemplate,
+  formatDayTime,
+  formatDayTimeFromProposal,
+  parseAvailabilityText,
+  parseDayName,
+  parseTimeToken,
+  toCanonicalTime,
+} = require("./timeRange.js");
+const {
+  canProposeTime,
   canUseAvailabilityForm,
   confirmManualTimeProposal,
-  createManualTimeProposal,
-  createOverlapTimeProposal,
+  createTimeProposal,
   ensureAvailabilitySession,
   formatCaptainAvailability,
   formatMissingAvailability,
+  formatOverlap,
   getAvailabilitySession,
   getAvailabilityTeamRoleId,
   getCleanAvailabilityTier,
-  getOverlapDays,
-  getOverlapTimesForDay,
   isHomeCaptain,
   isSchedulingStaff,
-  saveCaptainAvailability,
-  submitCaptainAvailability,
+  isTimeWithinOverlap,
+  submitAvailabilityRanges,
 } = require("./service.js");
 
-const SCHEDULING_BUTTON_PREFIXES = [
-  "availability_start",
-  "manual_time_agree",
-];
+const SCHEDULING_BUTTON_PREFIXES = ["availability_start", "manual_time_agree"];
 
 const SCHEDULING_BUTTON_IDS = new Set([
-  "availability_submit",
+  "propose_time_start",
   "final_overlap_start",
-  "manual_time_start",
 ]);
 
-const SCHEDULING_SELECT_PREFIXES = new Set([
-  "availability_day",
-  "final_overlap_day",
-  "final_overlap_time",
-  "manual_time_day",
-  "manual_time_time",
-  "staff_set_day",
-  "staff_set_time",
+const SCHEDULING_MODAL_IDS = new Set([
+  "availability_modal",
+  "propose_time_modal",
+  "final_time_modal",
+  "staff_time_modal",
 ]);
 
 // The home captain may pick a final overlap time while none is proposed yet
@@ -59,13 +57,14 @@ function isSchedulingInteraction(interaction) {
   if (interaction.isButton()) {
     return (
       SCHEDULING_BUTTON_IDS.has(interaction.customId) ||
-      SCHEDULING_BUTTON_PREFIXES.some((prefix) => interaction.customId.startsWith(prefix))
+      SCHEDULING_BUTTON_PREFIXES.some((prefix) =>
+        interaction.customId.startsWith(prefix),
+      )
     );
   }
 
-  if (interaction.isStringSelectMenu()) {
-    const [prefix] = interaction.customId.split(":");
-    return SCHEDULING_SELECT_PREFIXES.has(prefix);
+  if (interaction.isModalSubmit()) {
+    return SCHEDULING_MODAL_IDS.has(interaction.customId);
   }
 
   return false;
@@ -76,8 +75,8 @@ async function handle(interaction) {
     return await handleSchedulingButton(interaction);
   }
 
-  if (interaction.isStringSelectMenu()) {
-    return await handleSchedulingSelect(interaction);
+  if (interaction.isModalSubmit()) {
+    return await handleSchedulingModal(interaction);
   }
 }
 
@@ -88,16 +87,12 @@ async function handleSchedulingButton(interaction) {
     return await handleAvailabilityStart(interaction);
   }
 
-  if (customId === "availability_submit") {
-    return await handleAvailabilitySubmit(interaction);
+  if (customId === "propose_time_start") {
+    return await handleProposeTimeStart(interaction);
   }
 
   if (customId === "final_overlap_start") {
     return await handleFinalOverlapStart(interaction);
-  }
-
-  if (customId === "manual_time_start") {
-    return await handleManualTimeStart(interaction);
   }
 
   if (customId.startsWith("manual_time_agree")) {
@@ -105,26 +100,18 @@ async function handleSchedulingButton(interaction) {
   }
 }
 
-async function handleSchedulingSelect(interaction) {
-  const [prefix, extra] = interaction.customId.split(":");
-
-  switch (prefix) {
-    case "availability_day":
-      return await handleAvailabilityDaySelect(interaction, extra);
-    case "final_overlap_day":
-      return await handleFinalOverlapDaySelect(interaction);
-    case "final_overlap_time":
-      return await handleFinalOverlapTimeSelect(interaction, extra);
-    case "manual_time_day":
-      return await handleManualTimeDaySelect(interaction);
-    case "manual_time_time":
-      return await handleManualTimeTimeSelect(interaction, extra);
-    case "staff_set_day":
-      return await handleStaffSetDaySelect(interaction);
-    case "staff_set_time":
-      return await handleStaffSetTimeSelect(interaction, extra);
+async function handleSchedulingModal(interaction) {
+  switch (interaction.customId) {
+    case "availability_modal":
+      return await handleAvailabilityModalSubmit(interaction);
+    case "propose_time_modal":
+      return await handleProposeTimeModalSubmit(interaction);
+    case "final_time_modal":
+      return await handleFinalTimeModalSubmit(interaction);
+    case "staff_time_modal":
+      return await handleStaffTimeModalSubmit(interaction);
     default:
-      console.log(`Unhandled scheduling select menu interaction: ${interaction.customId}`);
+      console.log(`Unhandled scheduling modal: ${interaction.customId}`);
       return;
   }
 }
@@ -132,7 +119,9 @@ async function handleSchedulingSelect(interaction) {
 async function getInteractionChannel(interaction) {
   return (
     interaction.channel ??
-    (await interaction.client.channels.fetch(interaction.channelId).catch(() => null))
+    (await interaction.client.channels
+      .fetch(interaction.channelId)
+      .catch(() => null))
   );
 }
 
@@ -141,19 +130,14 @@ async function refreshControlMessageForInteraction(interaction) {
 
   if (channel?.send) {
     await refreshSchedulingControlMessage(channel, interaction.channelId, {
-    silent: true,
-  });
+      silent: true,
+    });
   }
 
   return channel;
 }
 
-async function finalizeMatchFromInteraction({
-  day,
-  interaction,
-  source,
-  time,
-}) {
+async function finalizeMatchFromInteraction({ day, interaction, source, time }) {
   const channel = await getInteractionChannel(interaction);
 
   if (!channel?.send) {
@@ -186,6 +170,21 @@ async function finalizeMatchFromInteraction({
   return result;
 }
 
+// Mention the teams that still need to confirm a proposal (a proposer's own team
+// is pre-confirmed inside createTimeProposal, so it's excluded here).
+function formatPendingConfirmations(session) {
+  const confirmations = session.manualProposal?.confirmations ?? {};
+  const pending = (session.teamRoleIds ?? []).filter(
+    (teamRoleId) => !confirmations[teamRoleId],
+  );
+
+  if (pending.length === 0) {
+    return "the other captain";
+  }
+
+  return pending.map((teamRoleId) => `<@&${teamRoleId}>`).join(", ");
+}
+
 async function handleAvailabilityStart(interaction) {
   const [, tierValue, team1RoleId, team2RoleId, homeRoleId] =
     interaction.customId.split(":");
@@ -204,91 +203,27 @@ async function handleAvailabilityStart(interaction) {
     });
   }
 
-  const firstFiveDays = AVAILABILITY_DAYS.slice(0, 5);
-  const remainingDays = AVAILABILITY_DAYS.slice(5);
-
-  await interaction.reply({
-    content: `Submit your ${tier} availability. Pick every time you can play.`,
-    components: buildAvailabilityRows(firstFiveDays),
-    ephemeral: true,
-  });
-
-  await interaction.followUp({
-    content:
-      "Weekend availability. When all of your selections look right, click Submit Availability.",
-    components: [...buildAvailabilityRows(remainingDays), buildAvailabilitySubmitRow()],
-    ephemeral: true,
-  });
-
-  await refreshControlMessageForInteraction(interaction);
-}
-
-async function handleAvailabilityDaySelect(interaction, day) {
-  const session = getAvailabilitySession(interaction.channelId);
-
-  if (!session) {
-    return await interaction.reply({
-      content: "No availability session exists for this thread. Use the thread availability button first.",
-      ephemeral: true,
-    });
-  }
-
-  if (session.status === "CONFIRMED") {
-    return await interaction.reply({
-      content: "This match already has a confirmed time.",
-      ephemeral: true,
-    });
-  }
-
-  if (!canUseAvailabilityForm(session, interaction)) {
-    return await interaction.reply({
-      content: "Only captains for this match can submit availability.",
-      ephemeral: true,
-    });
-  }
-
-  const shouldRefreshControl = session.status !== "COLLECTING_AVAILABILITY";
-  const selectedTimes = interaction.values;
-  const teamRoleId = getAvailabilityTeamRoleId(session, interaction.member);
-  const captainAvailability = saveCaptainAvailability({
-    threadId: interaction.channelId,
-    tier: session.tier,
-    userId: interaction.user.id,
-    displayName: interaction.member?.displayName || interaction.user.username,
-    teamRoleId,
-    day,
-    selectedTimes,
-  });
-  const totalSelected = Object.values(captainAvailability.days).reduce(
-    (total, times) => total + times.length,
-    0,
+  const existing = session.availability?.[interaction.user.id]?.intervals;
+  return await interaction.showModal(
+    buildAvailabilityModal(buildAvailabilityTemplate(existing)),
   );
-
-  // Update THIS ephemeral in place (keeping its dropdowns) instead of replying
-  // with a brand new one, so picking 7 days doesn't stack up 7 messages.
-  await interaction.update({
-    content: [
-      selectedTimes.length === 0 ? `Cleared **${day}**.` : `Saved **${day}**.`,
-      `**${totalSelected}** time(s) selected so far:`,
-      formatCaptainAvailability(captainAvailability),
-      "Click **Submit Availability** when you're finished.",
-    ].join("\n"),
-    components: interaction.message.components,
-  });
-
-  if (shouldRefreshControl) {
-    await refreshControlMessageForInteraction(interaction);
-  }
 }
 
-async function handleAvailabilitySubmit(interaction) {
+async function handleAvailabilityModalSubmit(interaction) {
   await interaction.deferReply({ ephemeral: true });
 
   const session = getAvailabilitySession(interaction.channelId);
 
   if (!session) {
     return await interaction.editReply({
-      content: "No availability session exists for this thread. Use the thread availability button first.",
+      content:
+        "No availability session exists for this thread. Use the thread availability button first.",
+    });
+  }
+
+  if (session.status === "CONFIRMED") {
+    return await interaction.editReply({
+      content: "This match already has a confirmed time.",
     });
   }
 
@@ -298,24 +233,31 @@ async function handleAvailabilitySubmit(interaction) {
     });
   }
 
+  const text = interaction.fields.getTextInputValue("availability_text");
+  const { availabilityByDay, errors } = parseAvailabilityText(text);
+
   const teamRoleId = getAvailabilityTeamRoleId(session, interaction.member);
-  const result = submitCaptainAvailability({
+  const result = submitAvailabilityRanges({
     threadId: interaction.channelId,
+    tier: session.tier,
     userId: interaction.user.id,
     displayName: interaction.member?.displayName || interaction.user.username,
     teamRoleId,
+    availabilityByDay,
   });
 
   if (!result.ok) {
-    return await interaction.editReply({ content: result.reason });
-  }
-
-  if (result.alreadySubmitted) {
     return await interaction.editReply({
-      content: "Your availability was already submitted.",
+      content: [
+        result.reason,
+        errors.length > 0 ? `\nCouldn't read:\n- ${errors.join("\n- ")}` : "",
+      ]
+        .join("")
+        .trim(),
     });
   }
 
+  const echo = formatCaptainAvailability(result.captainAvailability);
   const channel = await getInteractionChannel(interaction);
 
   if (channel?.send) {
@@ -324,25 +266,142 @@ async function handleAvailabilitySubmit(interaction) {
         `<@${interaction.user.id}> submitted availability${
           teamRoleId ? ` for <@&${teamRoleId}>` : ""
         }.`,
-        formatCaptainAvailability(result.captainAvailability),
+        echo,
       ].join("\n"),
     );
 
     if (!result.complete) {
       await channel.send(
-        `Waiting on ${formatMissingAvailability(result.session, result.missingTeamRoleIds)} to submit availability.`,
+        `Waiting on ${formatMissingAvailability(
+          result.session,
+          result.missingTeamRoleIds,
+        )} to submit availability.`,
       );
     }
 
     await refreshSchedulingControlMessage(channel, interaction.channelId, {
-    silent: true,
-  });
+      silent: true,
+    });
   }
 
   return await interaction.editReply({
-    content: result.complete
-      ? "Availability submitted. Both teams have submitted, so I refreshed the scheduling controls."
-      : "Availability submitted. I posted a thread update with who is still needed.",
+    content: [
+      "Availability submitted:",
+      echo,
+      errors.length > 0
+        ? `\n⚠️ Ignored lines I couldn't read:\n- ${errors.join("\n- ")}`
+        : "",
+      result.complete
+        ? "\nBoth teams are in — I refreshed the scheduling controls."
+        : "\nI posted a thread update with who is still needed.",
+    ]
+      .join("\n")
+      .trim(),
+  });
+}
+
+async function handleProposeTimeStart(interaction) {
+  const session = getAvailabilitySession(interaction.channelId);
+
+  if (!session) {
+    return await interaction.reply({
+      content: "No scheduling session exists for this thread.",
+      ephemeral: true,
+    });
+  }
+
+  if (session.status === "CONFIRMED") {
+    const confirmedTime = session.confirmedTime
+      ? (session.confirmedTime.display ??
+        formatDayTimeFromProposal(session.confirmedTime))
+      : "a final time";
+
+    return await interaction.reply({
+      content: `This match is already confirmed for ${confirmedTime}.`,
+      ephemeral: true,
+    });
+  }
+
+  if (!canProposeTime(session, interaction)) {
+    return await interaction.reply({
+      content:
+        "Only captains, team management, or the scheduling lead can propose a time.",
+      ephemeral: true,
+    });
+  }
+
+  return await interaction.showModal(
+    buildTimeEntryModal({
+      customId: "propose_time_modal",
+      title: "Propose Match Time",
+    }),
+  );
+}
+
+async function handleProposeTimeModalSubmit(interaction) {
+  await interaction.deferReply({ ephemeral: true });
+
+  const session = getAvailabilitySession(interaction.channelId);
+
+  if (!session) {
+    return await interaction.editReply({
+      content: "No scheduling session exists for this thread.",
+    });
+  }
+
+  if (session.status === "CONFIRMED") {
+    return await interaction.editReply({
+      content: "This match already has a confirmed time.",
+    });
+  }
+
+  if (!canProposeTime(session, interaction)) {
+    return await interaction.editReply({
+      content:
+        "Only captains, team management, or the scheduling lead can propose a time.",
+    });
+  }
+
+  const parsed = parseTimeEntry(interaction);
+
+  if (!parsed.ok) {
+    return await interaction.editReply({ content: parsed.reason });
+  }
+
+  const { day, normalized } = parsed;
+  const teamRoleId = getAvailabilityTeamRoleId(session, interaction.member);
+  const result = createTimeProposal({
+    threadId: interaction.channelId,
+    userId: interaction.user.id,
+    displayName: interaction.member?.displayName || interaction.user.username,
+    teamRoleId,
+    day,
+    time: toCanonicalTime(normalized),
+    timeNormalized: normalized,
+    source: "manual",
+  });
+
+  if (!result.ok) {
+    return await interaction.editReply({ content: result.reason });
+  }
+
+  const label = formatDayTime(day, normalized);
+  const channel = await getInteractionChannel(interaction);
+
+  if (channel?.send) {
+    await channel.send(
+      `<@${interaction.user.id}> proposed **${label}**. ${formatPendingConfirmations(
+        result.session,
+      )}, confirm in the scheduling controls below.`,
+    );
+
+    await refreshSchedulingControlMessage(channel, interaction.channelId, {
+      silent: true,
+    });
+  }
+
+  return await interaction.editReply({
+    content: `Proposed ${label}. Waiting on the other team to confirm.`,
   });
 }
 
@@ -363,243 +422,81 @@ async function handleFinalOverlapStart(interaction) {
     });
   }
 
-  const overlapDays = getOverlapDays(session);
-
-  if (overlapDays.length === 0) {
-    return await interaction.reply({
-      content: "No overlapping days are available to select.",
-      ephemeral: true,
-    });
-  }
-
-  await interaction.reply({
-    content: "Choose the day for the final match time.",
-    components: [buildDaySelectRow("final_overlap_day", overlapDays, "Choose final day")],
-    ephemeral: true,
-  });
-
-  await refreshControlMessageForInteraction(interaction);
+  return await interaction.showModal(
+    buildTimeEntryModal({
+      customId: "final_time_modal",
+      title: "Select Final Match Time",
+    }),
+  );
 }
 
-async function handleFinalOverlapDaySelect(interaction) {
-  const session = getAvailabilitySession(interaction.channelId);
-
-  if (!session || !OVERLAP_SELECTION_STATUSES.includes(session.status)) {
-    return await interaction.reply({
-      content: "This match is not ready for final-time selection.",
-      ephemeral: true,
-    });
-  }
-
-  if (!isHomeCaptain(session, interaction)) {
-    return await interaction.reply({
-      content: "Only the home team captain can select the final match time.",
-      ephemeral: true,
-    });
-  }
-
-  const day = interaction.values[0];
-  const times = getOverlapTimesForDay(session, day);
-
-  if (times.length === 0) {
-    return await interaction.reply({
-      content: "That day no longer has overlapping times.",
-      ephemeral: true,
-    });
-  }
-
-  return await interaction.reply({
-    content: `Choose the final time for ${day}.`,
-    components: [buildTimeSelectRow(`final_overlap_time:${day}`, times, "Choose final time")],
-    ephemeral: true,
-  });
-}
-
-async function handleFinalOverlapTimeSelect(interaction, day) {
-  const session = getAvailabilitySession(interaction.channelId);
-
-  if (!session || !OVERLAP_SELECTION_STATUSES.includes(session.status)) {
-    return await interaction.reply({
-      content: "This match is not ready for final-time selection.",
-      ephemeral: true,
-    });
-  }
-
-  if (!isHomeCaptain(session, interaction)) {
-    return await interaction.reply({
-      content: "Only the home team captain can select the final match time.",
-      ephemeral: true,
-    });
-  }
-
-  const time = interaction.values[0];
-  const allowedTimes = getOverlapTimesForDay(session, day);
-
-  if (!allowedTimes.includes(time)) {
-    return await interaction.reply({
-      content: "That time is no longer part of the shared availability.",
-      ephemeral: true,
-    });
-  }
-
+async function handleFinalTimeModalSubmit(interaction) {
   await interaction.deferReply({ ephemeral: true });
 
+  const session = getAvailabilitySession(interaction.channelId);
+
+  if (!session || !OVERLAP_SELECTION_STATUSES.includes(session.status)) {
+    return await interaction.editReply({
+      content: "This match is not ready for final-time selection.",
+    });
+  }
+
+  if (!isHomeCaptain(session, interaction)) {
+    return await interaction.editReply({
+      content: "Only the home team captain can select the final match time.",
+    });
+  }
+
+  const parsed = parseTimeEntry(interaction);
+
+  if (!parsed.ok) {
+    return await interaction.editReply({ content: parsed.reason });
+  }
+
+  const { day, normalized } = parsed;
+
+  if (!isTimeWithinOverlap(session, day, normalized)) {
+    return await interaction.editReply({
+      content: [
+        "That time isn't part of the shared availability. Pick a time inside the overlap:",
+        formatOverlap(session.overlapByDay),
+      ].join("\n"),
+    });
+  }
+
   const teamRoleId = getAvailabilityTeamRoleId(session, interaction.member);
-  const result = createOverlapTimeProposal({
+  const result = createTimeProposal({
     threadId: interaction.channelId,
     userId: interaction.user.id,
     displayName: interaction.member?.displayName || interaction.user.username,
     teamRoleId,
     day,
-    time,
+    time: toCanonicalTime(normalized),
+    timeNormalized: normalized,
+    source: "overlap",
   });
 
   if (!result.ok) {
     return await interaction.editReply({ content: result.reason });
   }
 
-  const otherTeamRoleId = (session.teamRoleIds ?? []).find(
-    (roleId) => roleId !== teamRoleId,
-  );
+  const label = formatDayTime(day, normalized);
   const channel = await getInteractionChannel(interaction);
 
   if (channel?.send) {
     await channel.send(
-      [
-        `<@${interaction.user.id}> proposed **${day} at ${time}**.`,
-        `${
-          otherTeamRoleId ? `<@&${otherTeamRoleId}>` : "The other captain"
-        }, confirm in the scheduling controls below.`,
-      ].join(" "),
+      `<@${interaction.user.id}> proposed **${label}**. ${formatPendingConfirmations(
+        result.session,
+      )}, confirm in the scheduling controls below.`,
     );
 
     await refreshSchedulingControlMessage(channel, interaction.channelId, {
-    silent: true,
-  });
+      silent: true,
+    });
   }
 
   return await interaction.editReply({
-    content: `Proposed ${day} at ${time}. Waiting on the other captain to confirm.`,
-  });
-}
-
-async function handleManualTimeStart(interaction) {
-  const session = getAvailabilitySession(interaction.channelId);
-
-  if (!session) {
-    return await interaction.reply({
-      content: "No scheduling session exists for this thread.",
-      ephemeral: true,
-    });
-  }
-
-  if (session.status === "CONFIRMED") {
-    const confirmedTime = session.confirmedTime
-      ? `${session.confirmedTime.day} at ${session.confirmedTime.time}`
-      : "a final time";
-
-    return await interaction.reply({
-      content: `This match is already confirmed for ${confirmedTime}.`,
-      ephemeral: true,
-    });
-  }
-
-  if (!["NO_OVERLAP", "MANUAL_PROPOSED"].includes(session.status)) {
-    return await interaction.reply({
-      content: "Manual time proposals are only available when there is no shared availability.",
-      ephemeral: true,
-    });
-  }
-
-  if (!canUseAvailabilityForm(session, interaction)) {
-    return await interaction.reply({
-      content: "Only captains for this match can propose a manual time.",
-      ephemeral: true,
-    });
-  }
-
-  await interaction.reply({
-    content: "Choose the day for the proposed match time.",
-    components: [buildDaySelectRow("manual_time_day", AVAILABILITY_DAYS, "Choose proposed day")],
-    ephemeral: true,
-  });
-
-  await refreshControlMessageForInteraction(interaction);
-}
-
-async function handleManualTimeDaySelect(interaction) {
-  const session = getAvailabilitySession(interaction.channelId);
-
-  if (!session || !["NO_OVERLAP", "MANUAL_PROPOSED"].includes(session.status)) {
-    return await interaction.reply({
-      content: "Manual time proposals are only available when there is no shared availability.",
-      ephemeral: true,
-    });
-  }
-
-  if (!canUseAvailabilityForm(session, interaction)) {
-    return await interaction.reply({
-      content: "Only captains for this match can propose a manual time.",
-      ephemeral: true,
-    });
-  }
-
-  const day = interaction.values[0];
-
-  return await interaction.reply({
-    content: `Choose the proposed time for ${day}.`,
-    components: [buildTimeSelectRow(`manual_time_time:${day}`, AVAILABILITY_TIMES, "Choose proposed time")],
-    ephemeral: true,
-  });
-}
-
-async function handleManualTimeTimeSelect(interaction, day) {
-  const session = getAvailabilitySession(interaction.channelId);
-
-  if (!session || !["NO_OVERLAP", "MANUAL_PROPOSED"].includes(session.status)) {
-    return await interaction.reply({
-      content: "Manual time proposals are only available when there is no shared availability.",
-      ephemeral: true,
-    });
-  }
-
-  if (!canUseAvailabilityForm(session, interaction)) {
-    return await interaction.reply({
-      content: "Only captains for this match can propose a manual time.",
-      ephemeral: true,
-    });
-  }
-
-  const time = interaction.values[0];
-  const teamRoleId = getAvailabilityTeamRoleId(session, interaction.member);
-  const result = createManualTimeProposal({
-    threadId: interaction.channelId,
-    userId: interaction.user.id,
-    displayName: interaction.member?.displayName || interaction.user.username,
-    teamRoleId,
-    day,
-    time,
-  });
-
-  if (!result.ok) {
-    return await interaction.reply({ content: result.reason, ephemeral: true });
-  }
-
-  const channel = await getInteractionChannel(interaction);
-
-  if (channel?.send) {
-    await channel.send(
-      `<@${interaction.user.id}> proposed **${day} at ${time}**.`,
-    );
-
-    await refreshSchedulingControlMessage(channel, interaction.channelId, {
-    silent: true,
-  });
-  }
-
-  return await interaction.reply({
-    content: `Manual time proposed: ${day} at ${time}. Both teams must agree in the thread.`,
-    ephemeral: true,
+    content: `Proposed ${label}. Waiting on the other captain to confirm.`,
   });
 }
 
@@ -617,7 +514,8 @@ async function handleManualTimeAgree(interaction) {
 
   if (session.status === "CONFIRMED") {
     const confirmedTime = session.confirmedTime
-      ? `${session.confirmedTime.day} at ${session.confirmedTime.time}`
+      ? (session.confirmedTime.display ??
+        formatDayTimeFromProposal(session.confirmedTime))
       : "a final time";
 
     return await interaction.editReply({
@@ -678,14 +576,17 @@ async function handleManualTimeAgree(interaction) {
   if (channel?.send) {
     await channel.send(
       [
-        `<@${interaction.user.id}> agreed to **${result.proposal.day} at ${result.proposal.time}**.`,
-        `Waiting on ${formatMissingAvailability(result.session, result.missingTeamRoleIds)}.`,
+        `<@${interaction.user.id}> agreed to **${formatDayTimeFromProposal(result.proposal)}**.`,
+        `Waiting on ${formatMissingAvailability(
+          result.session,
+          result.missingTeamRoleIds,
+        )}.`,
       ].join(" "),
     );
 
     await refreshSchedulingControlMessage(channel, interaction.channelId, {
-    silent: true,
-  });
+      silent: true,
+    });
   }
 
   return await interaction.editReply({
@@ -693,42 +594,27 @@ async function handleManualTimeAgree(interaction) {
   });
 }
 
-async function handleStaffSetDaySelect(interaction) {
-  if (!isSchedulingStaff(interaction)) {
-    return await interaction.reply({
-      content: "Only scheduling staff or admins can set a match time.",
-      ephemeral: true,
-    });
-  }
-
-  const day = interaction.values[0];
-
-  return await interaction.reply({
-    content: `Choose the match time for ${day}.`,
-    components: [
-      buildTimeSelectRow(`staff_set_time:${day}`, AVAILABILITY_TIMES, "Choose match time"),
-    ],
-    ephemeral: true,
-  });
-}
-
-async function handleStaffSetTimeSelect(interaction, day) {
-  if (!isSchedulingStaff(interaction)) {
-    return await interaction.reply({
-      content: "Only scheduling staff or admins can set a match time.",
-      ephemeral: true,
-    });
-  }
-
-  const time = interaction.values[0];
-
+async function handleStaffTimeModalSubmit(interaction) {
   await interaction.deferReply({ ephemeral: true });
 
+  if (!isSchedulingStaff(interaction)) {
+    return await interaction.editReply({
+      content: "Only scheduling staff or admins can set a match time.",
+    });
+  }
+
+  const parsed = parseTimeEntry(interaction);
+
+  if (!parsed.ok) {
+    return await interaction.editReply({ content: parsed.reason });
+  }
+
+  const { day, normalized } = parsed;
   const result = await finalizeMatchFromInteraction({
     day,
     interaction,
     source: "staff",
-    time,
+    time: toCanonicalTime(normalized),
   });
 
   if (!result.ok) {
@@ -740,6 +626,27 @@ async function handleStaffSetTimeSelect(interaction, day) {
   return await interaction.editReply({
     content: `Match time set: ${result.scheduledDate.display}.`,
   });
+}
+
+// Shared parsing for the day + time entry modals. Returns { ok, day, normalized }
+// or { ok: false, reason }.
+function parseTimeEntry(interaction) {
+  const dayInput = interaction.fields.getTextInputValue("day");
+  const timeInput = interaction.fields.getTextInputValue("time");
+  const day = parseDayName(dayInput);
+
+  if (!day) {
+    return {
+      ok: false,
+      reason: `Couldn't read the day "${dayInput}". Use a weekday name like Saturday.`,
+    };
+  }
+
+  try {
+    return { ok: true, day, normalized: parseTimeToken(timeInput) };
+  } catch (error) {
+    return { ok: false, reason: error.message };
+  }
 }
 
 module.exports = {

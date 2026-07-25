@@ -12,6 +12,7 @@ const {
   getAvailabilitySession,
   setSchedulingControlMessageId,
 } = require("./service.js");
+const { formatDayTimeFromProposal } = require("./timeRange.js");
 
 function getMissingAvailabilityTeamRoleIds(session) {
   const teamRoleIds = session.teamRoleIds ?? [];
@@ -27,14 +28,14 @@ function getMissingAvailabilityTeamRoleIds(session) {
   );
 }
 
-function formatOverlapForControl(overlap) {
-  const formattedOverlap = formatOverlap(overlap);
+function formatOverlapForControl(overlapByDay) {
+  const formattedOverlap = formatOverlap(overlapByDay);
 
   if (formattedOverlap.length <= 1000) {
     return formattedOverlap;
   }
 
-  return `${overlap.length} common slot(s) found. Click Select Final Time to choose.`;
+  return "Common availability found. Click Select Final Time to choose.";
 }
 
 function formatManualConfirmations(session) {
@@ -65,7 +66,8 @@ function buildAvailabilityControlPayload(session) {
     content: [
       "**Scheduling Controls**",
       missingText,
-      "Click Submit Availability, choose every time you can play, then submit the form.",
+      "Click **Submit Availability** and type the times you can play (ET), e.g. `Monday: 6:15-7:45, 9-11:15`.",
+      "Or use **Propose Time** to put a specific time up for the other team to confirm.",
     ].join("\n"),
     components: [buildAvailabilityStartRow(session)],
   };
@@ -81,7 +83,7 @@ function buildSchedulingControlPayload(session) {
       content: [
         "**Scheduling Controls**",
         "Common availability found.",
-        formatOverlapForControl(session.overlap ?? []),
+        formatOverlapForControl(session.overlapByDay ?? {}),
         "",
         session.homeRoleId
           ? `<@&${session.homeRoleId}> selects the final match time.`
@@ -95,7 +97,7 @@ function buildSchedulingControlPayload(session) {
     return {
       content: [
         "**Scheduling Controls**",
-        `Proposed time: **${session.manualProposal.day} at ${session.manualProposal.time}**`,
+        `Proposed time: **${formatDayTimeFromProposal(session.manualProposal)}**`,
         "The other captain must confirm before this time is final.",
         formatManualConfirmations(session),
       ].join("\n"),
@@ -109,7 +111,7 @@ function buildSchedulingControlPayload(session) {
         "**Scheduling Controls**",
         "No common availability was found.",
         "Captains should discuss a workable time in this thread.",
-        "Once you have one, use Propose Manual Time for both teams to approve.",
+        "Once you have one, use Propose Time for both teams to approve.",
       ].join("\n"),
       components: [buildManualProposalRow()],
     };
@@ -119,7 +121,7 @@ function buildSchedulingControlPayload(session) {
     return {
       content: [
         "**Scheduling Controls**",
-        `Proposed time: **${session.manualProposal.day} at ${session.manualProposal.time}**`,
+        `Proposed time: **${formatDayTimeFromProposal(session.manualProposal)}**`,
         "Both teams must agree before this time is confirmed.",
         formatManualConfirmations(session),
       ].join("\n"),
@@ -129,8 +131,8 @@ function buildSchedulingControlPayload(session) {
 
   if (session.status === "CONFIRMED") {
     const confirmedTime = session.confirmedTime
-      ? session.confirmedTime.display ??
-        `${session.confirmedTime.day} at ${session.confirmedTime.time}`
+      ? (session.confirmedTime.display ??
+        formatDayTimeFromProposal(session.confirmedTime))
       : "the selected time";
 
     return {

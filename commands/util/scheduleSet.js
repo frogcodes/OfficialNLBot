@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { AVAILABILITY_DAYS } = require("../../utils/scheduling/constants.js");
-const { buildDaySelectRow } = require("../../utils/scheduling/components.js");
+const { buildTimeEntryModal } = require("../../utils/scheduling/components.js");
 const { isSchedulingStaff } = require("../../utils/scheduling/service.js");
 const {
   findMatchByThreadId,
@@ -38,13 +37,11 @@ module.exports = {
       });
     }
 
-    return await interaction.reply({
-      content:
-        "Choose the match day, then the time. This overrides the current time for this match.",
-      components: [
-        buildDaySelectRow("staff_set_day", AVAILABILITY_DAYS, "Choose match day"),
-      ],
-      ephemeral: true,
-    });
+    return await interaction.showModal(
+      buildTimeEntryModal({
+        customId: "staff_time_modal",
+        title: "Set Match Time",
+      }),
+    );
   },
 };

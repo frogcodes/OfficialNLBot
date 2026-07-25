@@ -583,6 +583,60 @@ async function getTrackerLinkMap(spreadsheetId) {
   }
 }
 
+// The group endpoint reports each player's *display name* in the `id` field
+// instead of their real platform account id. That means Steam players never
+// match the Platform IDs tab (which stores the numeric SteamID64), and Epic/Xbox
+// players only match by coincidence via the tracker-link username fallback.
+//
+// Replay-level data DOES carry the real id (`player.id.platform` / `player.id.id`).
+// Since the display name is identical between the replay and group payloads, we
+// fetch each replay in the group, resolve every player by their real id, and key
+// the result by display name so the group loop can join on `player.name`.
+async function buildNameToDiscordMap(matchGroupID, lookup) {
+  const nameToDiscord = new Map(); // display name -> Discord ID
+  if (!lookup || lookup.size === 0) return nameToDiscord;
+
+  try {
+    const listURL = `https://ballchasing.com/api/replays?group=${matchGroupID}`;
+    const listResp = await axios.get(listURL, { headers: getHeaders() });
+    const replays = listResp.data.list || [];
+    console.log(`Resolving real platform IDs from ${replays.length} replays`);
+
+    for (const summary of replays) {
+      try {
+        const replayResp = await axios.get(
+          `https://ballchasing.com/api/replays/${summary.id}`,
+          { headers: getHeaders() },
+        );
+        const replay = replayResp.data;
+
+        for (const color of ["blue", "orange"]) {
+          const teamPlayers = (replay[color] && replay[color].players) || [];
+          for (const p of teamPlayers) {
+            if (!p.name || nameToDiscord.has(p.name)) continue; // already resolved
+            if (!p.id || !p.id.platform || !p.id.id) continue;
+
+            const key = makePlatformKey(p.id.platform, p.id.id);
+            const discordId = lookup.get(key);
+            if (discordId) {
+              nameToDiscord.set(p.name, discordId);
+              console.log(`  ${p.name} (${key}) -> ${discordId}`);
+            }
+          }
+        }
+      } catch (err) {
+        console.error(`Error fetching replay ${summary.id}:`, err.message);
+      }
+
+      await sleep(500); // stay under the ballchasing rate limit
+    }
+  } catch (error) {
+    console.error("Error building name->Discord map from replays:", error);
+  }
+
+  return nameToDiscord;
+}
+
 // Update the function signature to accept interaction
 async function getStats(
   matchGroupID,
@@ -615,6 +669,10 @@ async function getStats(
       console.log(`Combined lookup has ${lookup.size} keys`);
     }
 
+    // Resolve real platform IDs (esp. Steam) from replay-level data, keyed by
+    // display name so the group loop below can match on player.name.
+    const nameToDiscord = await buildNameToDiscordMap(matchGroupID, lookup);
+
     // Initial request
     let response = await axios.get(matchGroupURL, { headers: getHeaders() });
     let matchData = response.data;
@@ -644,18 +702,27 @@ async function getStats(
     for (let i = 0; i < matchData.players.length; i++) {
       const player = matchData.players[i];
 
-      // Match player to a Discord ID using their platform + id straight from
-      // the group data (works for everyone, including players who only played a
-      // couple games — no fragile name-join with the replays).
+      // Match player to a Discord ID: first via the replay-resolved real IDs
+      // (needed for Steam, whose real id the group endpoint hides), then via the
+      // group platform/id key as a fallback for Epic/Xbox tracker-link matches.
       let discordId = null;
       let discordUsername = null;
       let subUpMarker = "";
 
-      if (lookup.size > 0 && player.platform && player.id) {
+      // Prefer the replay-resolved match (real platform IDs, keyed by display
+      // name). Fall back to the group platform/id key, which still covers
+      // Epic/Xbox players via the tracker-link username map.
+      if (nameToDiscord.has(player.name)) {
+        discordId = nameToDiscord.get(player.name);
+      }
+      if (!discordId && lookup.size > 0 && player.platform && player.id) {
         const key = makePlatformKey(player.platform, player.id);
         discordId = lookup.get(key) || null;
+      }
+
+      if (lookup.size > 0 && player.platform && player.id) {
         console.log(
-          `Player ${player.name} (${key}): Discord ID ${discordId || "NOT FOUND"}`,
+          `Player ${player.name} (${makePlatformKey(player.platform, player.id)}): Discord ID ${discordId || "NOT FOUND"}`,
         );
 
         if (discordId) {

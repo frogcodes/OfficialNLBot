@@ -2,10 +2,17 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
-  StringSelectMenuBuilder,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
 } = require("discord.js");
 
-const { AVAILABILITY_TIMES } = require("./constants.js");
+function buildProposeTimeButton() {
+  return new ButtonBuilder()
+    .setCustomId("propose_time_start")
+    .setLabel("Propose Time")
+    .setStyle(ButtonStyle.Secondary);
+}
 
 function buildAvailabilityStartRow({
   tier,
@@ -21,34 +28,52 @@ function buildAvailabilityStartRow({
       )
       .setLabel("Submit Availability")
       .setStyle(ButtonStyle.Primary),
+    buildProposeTimeButton(),
   );
 }
 
-function buildAvailabilityRows(days) {
-  return days.map((day) =>
-    new ActionRowBuilder().addComponents(
-      new StringSelectMenuBuilder()
-        .setCustomId(`availability_day:${day}`)
-        .setPlaceholder(`${day} availability`)
-        .setMinValues(0)
-        .setMaxValues(AVAILABILITY_TIMES.length)
-        .addOptions(
-          AVAILABILITY_TIMES.map((time) => ({
-            label: time,
-            value: time,
-          })),
-        ),
-    ),
-  );
+// Modal for typing availability as time ranges — one line per day, prefilled with
+// the day labels (or the captain's existing ranges) so they just type after each.
+function buildAvailabilityModal(prefillText) {
+  return new ModalBuilder()
+    .setCustomId("availability_modal")
+    .setTitle("Submit Availability (all times ET)")
+    .addComponents(
+      new ActionRowBuilder().addComponents(
+        new TextInputBuilder()
+          .setCustomId("availability_text")
+          .setLabel("Ranges per day, e.g. Mon: 6:15-7:45, 9-11")
+          .setStyle(TextInputStyle.Paragraph)
+          .setRequired(true)
+          .setValue(prefillText ?? ""),
+      ),
+    );
 }
 
-function buildAvailabilitySubmitRow() {
-  return new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setCustomId("availability_submit")
-      .setLabel("Submit Availability")
-      .setStyle(ButtonStyle.Success),
-  );
+// Modal for entering a single day + time (used by Propose Time, the home
+// captain's final-time selection, and staff schedule-set).
+function buildTimeEntryModal({ customId, title, dayValue = "", timeValue = "" }) {
+  const dayInput = new TextInputBuilder()
+    .setCustomId("day")
+    .setLabel("Day (e.g. Saturday)")
+    .setStyle(TextInputStyle.Short)
+    .setRequired(true)
+    .setValue(dayValue);
+
+  const timeInput = new TextInputBuilder()
+    .setCustomId("time")
+    .setLabel("Time ET (e.g. 8:30 PM)")
+    .setStyle(TextInputStyle.Short)
+    .setRequired(true)
+    .setValue(timeValue);
+
+  return new ModalBuilder()
+    .setCustomId(customId)
+    .setTitle(title)
+    .addComponents(
+      new ActionRowBuilder().addComponents(dayInput),
+      new ActionRowBuilder().addComponents(timeInput),
+    );
 }
 
 function buildHomeFinalTimeRow() {
@@ -57,16 +82,12 @@ function buildHomeFinalTimeRow() {
       .setCustomId("final_overlap_start")
       .setLabel("Select Final Time")
       .setStyle(ButtonStyle.Primary),
+    buildProposeTimeButton(),
   );
 }
 
 function buildManualProposalRow() {
-  return new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setCustomId("manual_time_start")
-      .setLabel("Propose Manual Time")
-      .setStyle(ButtonStyle.Primary),
-  );
+  return new ActionRowBuilder().addComponents(buildProposeTimeButton());
 }
 
 function buildOverlapAgreementRow(proposalId) {
@@ -89,7 +110,7 @@ function buildManualAgreementRow(proposalId) {
       .setLabel("Agree To Time")
       .setStyle(ButtonStyle.Success),
     new ButtonBuilder()
-      .setCustomId("manual_time_start")
+      .setCustomId("propose_time_start")
       .setLabel("Propose Different Time")
       .setStyle(ButtonStyle.Secondary),
   );
@@ -105,47 +126,14 @@ function buildConfirmedControlRow() {
   );
 }
 
-function buildDaySelectRow(customId, days, placeholder) {
-  return new ActionRowBuilder().addComponents(
-    new StringSelectMenuBuilder()
-      .setCustomId(customId)
-      .setPlaceholder(placeholder)
-      .setMinValues(1)
-      .setMaxValues(1)
-      .addOptions(
-        days.map((day) => ({
-          label: day,
-          value: day,
-        })),
-      ),
-  );
-}
-
-function buildTimeSelectRow(customId, times, placeholder) {
-  return new ActionRowBuilder().addComponents(
-    new StringSelectMenuBuilder()
-      .setCustomId(customId)
-      .setPlaceholder(placeholder)
-      .setMinValues(1)
-      .setMaxValues(1)
-      .addOptions(
-        times.map((time) => ({
-          label: time,
-          value: time,
-        })),
-      ),
-  );
-}
-
 module.exports = {
-  buildAvailabilityRows,
+  buildAvailabilityModal,
   buildAvailabilityStartRow,
-  buildAvailabilitySubmitRow,
   buildConfirmedControlRow,
-  buildDaySelectRow,
   buildHomeFinalTimeRow,
   buildManualAgreementRow,
   buildManualProposalRow,
   buildOverlapAgreementRow,
-  buildTimeSelectRow,
+  buildProposeTimeButton,
+  buildTimeEntryModal,
 };

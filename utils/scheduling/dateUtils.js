@@ -3,6 +3,11 @@ const { AVAILABILITY_DAYS } = require("./constants.js");
 
 const SCHEDULING_TIME_ZONE = "America/New_York";
 
+// Times before this hour belong to the following calendar day of a night that
+// starts on `day`'s evening (e.g. availability listed under "Saturday" that runs
+// to 1:00 AM is really Sunday 1:00 AM). Keep in sync with timeRange.NIGHT_ROLL_HOUR.
+const NIGHT_ROLL_HOUR = 5;
+
 function getCurrentWeekStartDate() {
   const now = DateTime.now().setZone(SCHEDULING_TIME_ZONE).startOf("day");
   return now.minus({ days: now.weekday - 1 }).toISODate();
@@ -68,12 +73,17 @@ function buildScheduledDateTime({ weekStartDate, day, time }) {
   }
 
   const parsedTime = parseAvailabilityTime(time);
-  const scheduledDateTime = startDate.plus({ days: dayIndex }).set({
-    hour: parsedTime.hour,
-    minute: parsedTime.minute,
-    second: 0,
-    millisecond: 0,
-  });
+  // An early-morning time (before 5 AM) attached to a day label is the tail end
+  // of that day's night, so it falls on the next calendar day.
+  const dayRollOffset = parsedTime.hour < NIGHT_ROLL_HOUR ? 1 : 0;
+  const scheduledDateTime = startDate
+    .plus({ days: dayIndex + dayRollOffset })
+    .set({
+      hour: parsedTime.hour,
+      minute: parsedTime.minute,
+      second: 0,
+      millisecond: 0,
+    });
 
   return {
     date: scheduledDateTime.toISODate(),
