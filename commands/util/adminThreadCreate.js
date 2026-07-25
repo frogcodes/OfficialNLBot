@@ -170,11 +170,19 @@ module.exports = {
               "- The **HOME** team creates the lobby.",
               "- The **AWAY** team must report the match within 24 hours of finishing.",
               "*The game window is Monday–Sunday. All games are due by Sunday.",
-              "IMPORTANT: Games must be scheduled by **WEDNESDAY**.",
               "",
-              "If you need an extension, you must request it by **WEDNESDAY**.",
+              "If you need an extension, you must request it by **FRIDAY**.",
               "",
-              "Use the scheduling controls below to submit availability.",
+              "__**How scheduling works**__ (use the controls below):",
+              "",
+              "**1. Submit Availability** — click the button and type the times you can play, one day per line. All times are **ET** and on 15-minute marks.",
+              "> `Monday: 6:15-7:45, 9-11:15`",
+              "> `Saturday: 7-1`  ← 7 PM Saturday to 1 AM Sunday",
+              "Leave a day blank if you can't play it. A bare number reads as PM for 5–11 and AM for 12–4 (so `8` = 8 PM, `1` = 1 AM); add `am`/`pm` to be explicit. I'll reply with the times I recorded so you can double-check.",
+              "",
+              "**2. Find a time** — once **both** teams submit, I show the times you share. The **HOME** captain clicks **Select Final Time** and picks one; the other team confirms and the match locks in.",
+              "",
+              "**3. Propose Time** — Anyone on either team can click **Propose Time**, enter a day and time, and the **other team confirms** to lock it in.",
             ].join("\n");
 
             // send welcome message
