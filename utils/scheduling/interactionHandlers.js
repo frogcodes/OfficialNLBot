@@ -32,7 +32,6 @@ const {
   isHomeCaptain,
   isSchedulingStaff,
   isTimeWithinOverlap,
-  reopenTimeSelection,
   submitAvailabilityRanges,
 } = require("./service.js");
 
@@ -106,46 +105,35 @@ async function handleSchedulingButton(interaction) {
   }
 }
 
-// The always-present "Reschedule" button: re-opens time selection so the teams
-// can agree on a NEW time — but leaves the currently scheduled time (and its
-// announcement / thread state) untouched until a new time is actually confirmed.
-// When that new time is confirmed, the normal finalize flow replaces the old
-// announcement. Allowed for the two teams' captains/management or staff.
+// The always-present "Reschedule" button: opens the Propose Time modal even after
+// the match is confirmed, so a new time can be put up. Nothing else changes — the
+// old time stays scheduled until the new proposal is confirmed, at which point the
+// normal finalize flow replaces the old announcement. No ping, no panel change.
+// Allowed for captains, team management, or the scheduling lead.
 async function handleReschedule(interaction) {
-  await interaction.deferReply({ ephemeral: true });
-
   const session = getAvailabilitySession(interaction.channelId);
+
   if (!session) {
-    return await interaction.editReply({
+    return await interaction.reply({
       content: "No scheduling session exists for this thread.",
+      ephemeral: true,
     });
   }
 
-  if (!canUseAvailabilityForm(session, interaction) && !isSchedulingStaff(interaction)) {
-    return await interaction.editReply({
+  if (!canProposeTime(session, interaction)) {
+    return await interaction.reply({
       content:
-        "Only captains/management for this match or scheduling staff can reschedule.",
+        "Only captains, team management, or the scheduling lead can reschedule.",
+      ephemeral: true,
     });
   }
 
-  // Re-open time selection from the existing availability. Does NOT unschedule
-  // the match — the current time stands until both teams confirm a new one.
-  reopenTimeSelection(interaction.channelId);
-
-  const channel = await getInteractionChannel(interaction);
-  if (channel?.send) {
-    await refreshSchedulingControlMessage(channel, interaction.channelId);
-    await channel
-      .send(
-        `<@${interaction.user.id}> reopened this match to change the time. The current time stays scheduled until both teams agree on a new one — pick a new time using the controls below.`,
-      )
-      .catch(() => {});
-  }
-
-  return await interaction.editReply({
-    content:
-      "Reschedule opened — the old time stays until a new one is confirmed.",
-  });
+  return await interaction.showModal(
+    buildTimeEntryModal({
+      customId: "propose_time_modal",
+      title: "Propose New Match Time",
+    }),
+  );
 }
 
 async function handleSchedulingModal(interaction) {
@@ -397,11 +385,9 @@ async function handleProposeTimeModalSubmit(interaction) {
     });
   }
 
-  if (session.status === "CONFIRMED") {
-    return await interaction.editReply({
-      content: "This match already has a confirmed time.",
-    });
-  }
+  // Note: no CONFIRMED guard here. A confirmed match can only reach this modal via
+  // the Reschedule button, where proposing a new time is the whole point. (The
+  // regular Propose Time button still blocks confirmed matches before opening.)
 
   if (!canProposeTime(session, interaction)) {
     return await interaction.editReply({

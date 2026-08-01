@@ -1,7 +1,4 @@
-const {
-  SlashCommandBuilder,
-  PermissionFlagsBits,
-} = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const { captainRoles } = require("../../data/roles.json");
 const teams = require("../../data/teams.json");
 const {
@@ -10,7 +7,9 @@ const {
 const {
   normalizeWeekStartDate,
 } = require("../../utils/scheduling/dateUtils.js");
-const { ensureAvailabilitySession } = require("../../utils/scheduling/service.js");
+const {
+  ensureAvailabilitySession,
+} = require("../../utils/scheduling/service.js");
 const {
   loadSchedule,
   setMatchThreadId,
@@ -169,9 +168,9 @@ module.exports = {
               "",
               "- The **HOME** team creates the lobby.",
               "- The **AWAY** team must report the match within 24 hours of finishing.",
-              "*The game window is Monday–Sunday. All games are due by Sunday.",
+              "- The game window is Monday–Sunday. All games are **due Sunday night**.",
               "",
-              "If you need an extension, you must request it by **FRIDAY**.",
+              "If you need an extension, you must request it by the end of**FRIDAY**.",
               "",
               "__**How scheduling works**__ (use the controls below):",
               "",
@@ -180,9 +179,9 @@ module.exports = {
               "> `Saturday: 7-1`  ← 7 PM Saturday to 1 AM Sunday",
               "Leave a day blank if you can't play it. A bare number reads as PM for 5–11 and AM for 12–4 (so `8` = 8 PM, `1` = 1 AM); add `am`/`pm` to be explicit. I'll reply with the times I recorded so you can double-check.",
               "",
-              "**2. Find a time** — once **both** teams submit, I show the times you share. The **HOME** captain clicks **Select Final Time** and picks one; the other team confirms and the match locks in.",
+              "**2. Find a time**  once **both** teams submit, I show the times you share. The **HOME** captain clicks **Select Final Time** and picks one; the other team confirms and the match locks in.",
               "",
-              "**3. Propose Time** — Anyone on either team can click **Propose Time**, enter a day and time, and the **other team confirms** to lock it in.",
+              "**3. Propose Time** Anyone on either team can click **Propose Time**, enter a day and time, and the **other team confirms** to lock it in.",
             ].join("\n");
 
             // send welcome message
