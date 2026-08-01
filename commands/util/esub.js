@@ -5,7 +5,7 @@ const { faRoles, captainRoles, leagueRoles } = require("../../data/roles.json");
 const esubCap = require("../../utils/esubCap.js");
 
 // Channel / role IDs
-const transactionRequestChannel = "1363033776648622120"; // transactions request
+const transactionRequestChannel = "1363033838841757817"; // transactions request (offer)
 const officialTransactionChannel = "1181050441845457037"; // transactions channel
 const rfaRole = "1198452739378786324";
 const zookeeper = "1181050438926209076";
