@@ -126,7 +126,35 @@ function buildConfirmedControlRow() {
   );
 }
 
+// "Change Availability" reuses the availability_start flow (opens the modal to
+// enter/update times). Kept off the status rows so its customId isn't duplicated.
+function buildChangeAvailabilityButton({ tier, teamRoleIds = [], homeRoleId = null }) {
+  const [team1RoleId = "", team2RoleId = ""] = teamRoleIds;
+  return new ButtonBuilder()
+    .setCustomId(
+      `availability_start:${tier}:${team1RoleId}:${team2RoleId}:${homeRoleId ?? ""}`,
+    )
+    .setLabel("Change Availability")
+    .setStyle(ButtonStyle.Secondary);
+}
+
+function buildRescheduleButton() {
+  return new ButtonBuilder()
+    .setCustomId("scheduling_reschedule")
+    .setLabel("Reschedule")
+    .setStyle(ButtonStyle.Danger);
+}
+
+// Controls present on EVERY panel state (Change Availability + Reschedule).
+function buildAlwaysControlsRow(session) {
+  return new ActionRowBuilder().addComponents(
+    buildChangeAvailabilityButton(session),
+    buildRescheduleButton(),
+  );
+}
+
 module.exports = {
+  buildAlwaysControlsRow,
   buildAvailabilityModal,
   buildAvailabilityStartRow,
   buildConfirmedControlRow,
@@ -135,5 +163,6 @@ module.exports = {
   buildManualProposalRow,
   buildOverlapAgreementRow,
   buildProposeTimeButton,
+  buildRescheduleButton,
   buildTimeEntryModal,
 };

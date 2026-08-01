@@ -198,7 +198,11 @@ module.exports = {
               weekStartDate,
             });
 
-            await refreshSchedulingControlMessage(thread, thread.id);
+            // Silent: the welcome message above already pinged both teams, so the
+            // initial control panel shouldn't ping them a second time.
+            await refreshSchedulingControlMessage(thread, thread.id, {
+              silent: true,
+            });
             await new Promise((resolve) => setTimeout(resolve, 500));
           }
         }

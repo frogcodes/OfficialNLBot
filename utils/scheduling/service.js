@@ -512,6 +512,38 @@ function resetSchedulingSession(threadId) {
   return session;
 }
 
+// Re-open time selection WITHOUT clearing availability — used by the Reschedule
+// button so the teams can just pick a new time from their existing availability.
+// Recomputes the status the same way a fresh availability submission would.
+function reopenTimeSelection(threadId) {
+  const state = loadSchedulingState();
+  const session = state.sessions?.[threadId];
+
+  if (!session) {
+    return null;
+  }
+
+  delete session.manualProposal;
+  delete session.confirmedTime;
+  delete session.scheduleMatch;
+  delete session.scheduleFinalizedAt;
+
+  const status = getAvailabilitySubmissionStatus(session);
+  if (status.complete) {
+    session.overlapByDay = calculateAvailabilityOverlap(session);
+    session.status = overlapHasAny(session.overlapByDay)
+      ? "OVERLAP_FOUND"
+      : "NO_OVERLAP";
+  } else {
+    session.overlapByDay = {};
+    session.status = "AWAITING_AVAILABILITY";
+  }
+
+  session.updatedAt = new Date().toISOString();
+  saveSchedulingState(state);
+  return session;
+}
+
 module.exports = {
   canProposeTime,
   canUseAvailabilityForm,
@@ -531,6 +563,7 @@ module.exports = {
   isSchedulingStaff,
   isTimeWithinOverlap,
   markSchedulingFinalized,
+  reopenTimeSelection,
   resetSchedulingSession,
   setSchedulingControlMessageId,
   submitAvailabilityRanges,

@@ -1,5 +1,5 @@
 const {
-  buildAvailabilityStartRow,
+  buildAlwaysControlsRow,
   buildConfirmedControlRow,
   buildHomeFinalTimeRow,
   buildManualAgreementRow,
@@ -66,10 +66,10 @@ function buildAvailabilityControlPayload(session) {
     content: [
       "**Scheduling Controls**",
       missingText,
-      "Click **Submit Availability** and type the times you can play (ET), e.g. `Monday: 6:15-7:45, 9-11:15`.",
+      "Click **Change Availability** and type the times you can play (ET), e.g. `Monday: 6:15-7:45, 9-11:15`.",
       "Or use **Propose Time** to put a specific time up for the other team to confirm.",
     ].join("\n"),
-    components: [buildAvailabilityStartRow(session)],
+    components: [buildManualProposalRow(), buildAlwaysControlsRow(session)],
   };
 }
 
@@ -89,7 +89,7 @@ function buildSchedulingControlPayload(session) {
           ? `<@&${session.homeRoleId}> selects the final match time.`
           : "The home team selects the final match time.",
       ].join("\n"),
-      components: [buildHomeFinalTimeRow()],
+      components: [buildHomeFinalTimeRow(), buildAlwaysControlsRow(session)],
     };
   }
 
@@ -101,7 +101,10 @@ function buildSchedulingControlPayload(session) {
         "The other captain must confirm before this time is final.",
         formatManualConfirmations(session),
       ].join("\n"),
-      components: [buildOverlapAgreementRow(session.manualProposal.id)],
+      components: [
+        buildOverlapAgreementRow(session.manualProposal.id),
+        buildAlwaysControlsRow(session),
+      ],
     };
   }
 
@@ -113,7 +116,7 @@ function buildSchedulingControlPayload(session) {
         "Captains should discuss a workable time in this thread.",
         "Once you have one, use Propose Time for both teams to approve.",
       ].join("\n"),
-      components: [buildManualProposalRow()],
+      components: [buildManualProposalRow(), buildAlwaysControlsRow(session)],
     };
   }
 
@@ -125,7 +128,10 @@ function buildSchedulingControlPayload(session) {
         "Both teams must agree before this time is confirmed.",
         formatManualConfirmations(session),
       ].join("\n"),
-      components: [buildManualAgreementRow(session.manualProposal.id)],
+      components: [
+        buildManualAgreementRow(session.manualProposal.id),
+        buildAlwaysControlsRow(session),
+      ],
     };
   }
 
@@ -140,7 +146,7 @@ function buildSchedulingControlPayload(session) {
         "**Scheduling Controls**",
         `Match confirmed for **${confirmedTime}**.`,
       ].join("\n"),
-      components: [buildConfirmedControlRow()],
+      components: [buildConfirmedControlRow(), buildAlwaysControlsRow(session)],
     };
   }
 
