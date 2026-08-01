@@ -13,7 +13,10 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const { loadSchedule } = require("../../utils/scheduling/scheduleStore.js");
+const {
+  loadSchedule,
+  mutateSchedule,
+} = require("../../utils/scheduling/scheduleStore.js");
 
 const { google } = require("googleapis");
 
@@ -386,6 +389,15 @@ module.exports = {
         }
       }
 
+      // Block double-reports: a scheduled match/tier that's already been reported
+      // can't be reported again. (Playoffs have no match record, so they're exempt.)
+      if (foundMatch !== true && foundMatch.tiers[tier]?.reported) {
+        return await interaction.editReply({
+          content: `⚠️ The **${tier}** match (${team1} vs ${team2}, ${formatGameday(gameday)}) has already been reported. Open a Bot problem ticket if a resubmission is needed.`,
+          flags: MessageFlags.Ephemeral,
+        });
+      }
+
       let thread = null;
 
       if (gameday !== "Playoffs" && foundMatch !== true) {
@@ -408,6 +420,33 @@ module.exports = {
           values: statsValues,
         },
       });
+
+      // Mark this match/tier reported so it can't be reported again. Located by
+      // gameday + both teams + tier, written under the schedule lock.
+      if (gameday !== "Playoffs") {
+        try {
+          await mutateSchedule((schedule) => {
+            for (const week of schedule.weeks || []) {
+              for (const gd of week.gamedays || []) {
+                if (gd.gamedayNum.toString() !== gameday) continue;
+                for (const m of gd.matches || []) {
+                  if (
+                    Array.isArray(m.teams) &&
+                    m.teams.includes(team1) &&
+                    m.teams.includes(team2) &&
+                    m.tiers?.[tier]
+                  ) {
+                    m.tiers[tier].reported = true;
+                    return;
+                  }
+                }
+              }
+            }
+          });
+        } catch (error) {
+          console.error("Failed to mark match reported:", error);
+        }
+      }
 
       // Now that the series is recorded, count each sub-up toward that player's
       // team+tier season total (cap enforced by whoever reviews the sheet).
@@ -852,12 +891,10 @@ async function getStats(
         subUpMarker,
       ];
 
-      // Sub-ups don't count toward stats: clear the stat columns (D–R) and leave
-      // the V column (the @) blank so nothing is attributed to them. The sub-up
-      // note stays in the W column (index 21).
+      // Sub-ups: keep the stats, but blank the V column (the @) so the game
+      // isn't attributed to them. The sub-up note stays in the W column.
       if (isSubUp) {
-        for (let c = 2; c <= 16; c++) playerArray[c] = "";
-        playerArray[20] = ""; // V column: don't type the @ for sub-ups
+        playerArray[20] = ""; // V column: blank the @ for sub-ups
       }
 
       statsArray.push(playerArray);
