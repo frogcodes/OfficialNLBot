@@ -13,7 +13,7 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const schedule = require("../../data/schedule.json");
+const { loadSchedule } = require("../../utils/scheduling/scheduleStore.js");
 
 const { google } = require("googleapis");
 
@@ -345,6 +345,8 @@ module.exports = {
       if (gameday === "Playoffs") {
         foundMatch = true; //skip logic basically
       } else {
+        // Read fresh so threads created after the bot started are found.
+        const schedule = loadSchedule();
         outer: for (const week of schedule.weeks) {
           for (const gamedayData of week.gamedays) {
             if (gamedayData.gamedayNum.toString() !== gameday) continue;

@@ -6,6 +6,7 @@ const {
 } = require("discord.js");
 const teams = require("../../data/teams.json");
 const { teamImage } = require("../../utils/teamImage.js");
+const { loadSchedule } = require("../../utils/scheduling/scheduleStore.js");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -182,6 +183,46 @@ module.exports = {
 
       if (tierChannel) {
         await tierChannel.send({ embeds: [matchEmbed], files });
+      }
+
+      // Close the scheduling thread for this match/tier via its stored threadID.
+      // Read the schedule fresh (not the module cache) so threads created after
+      // startup are still found. Playoffs have no scheduled thread.
+      if (gameday !== "Playoffs") {
+        try {
+          const schedule = loadSchedule();
+          let threadId = null;
+          outer: for (const week of schedule.weeks || []) {
+            for (const gd of week.gamedays || []) {
+              if (gd.gamedayNum.toString() !== gameday) continue;
+              for (const m of gd.matches || []) {
+                if (
+                  Array.isArray(m.teams) &&
+                  m.teams.includes(winner) &&
+                  m.teams.includes(loser) &&
+                  m.tiers?.[tier]
+                ) {
+                  threadId = m.tiers[tier].threadID;
+                  break outer;
+                }
+              }
+            }
+          }
+          if (threadId) {
+            const thread = await interaction.client.channels
+              .fetch(threadId)
+              .catch(() => null);
+            if (thread) {
+              await thread
+                .delete("Match forfeited and thread closed.")
+                .catch((e) =>
+                  console.error("Failed to delete forfeit thread:", e),
+                );
+            }
+          }
+        } catch (error) {
+          console.error("Error closing forfeit thread:", error);
+        }
       }
 
       return interaction.editReply({
