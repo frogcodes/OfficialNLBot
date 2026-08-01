@@ -74,6 +74,15 @@ function getMemberLeagueTier(member) {
   return null;
 }
 
+// The NL team a member is on (the team they'd be subbing up FOR).
+function getMemberTeam(member) {
+  if (!member) return null;
+  for (const roleId of member.roles.cache.keys()) {
+    if (roleIdToTeam[roleId]) return roleIdToTeam[roleId];
+  }
+  return null;
+}
+
 // Helper function to sleep for a specified time
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -400,13 +409,13 @@ module.exports = {
         },
       });
 
-      // Now that the series is recorded, count each sub-up toward the player's
-      // season total (cap enforced by whoever reviews the sheet).
-      for (const subUpId of subUps) {
-        const total = subUpTracker.increment(subUpId);
+      // Now that the series is recorded, count each sub-up toward that player's
+      // team+tier season total (cap enforced by whoever reviews the sheet).
+      for (const { userId, team, tier: subTier } of subUps) {
+        const total = subUpTracker.increment(userId, team, subTier);
         if (total > subUpTracker.SUB_UP_CAP) {
           console.warn(
-            `⚠️ Player ${subUpId} is over the sub-up cap: ${total}/${subUpTracker.SUB_UP_CAP}`,
+            `⚠️ Player ${userId} is over the sub-up cap for ${team} ${subTier}: ${total}/${subUpTracker.SUB_UP_CAP}`,
           );
         }
       }
@@ -710,6 +719,7 @@ async function getStats(
       let discordId = null;
       let discordUsername = null;
       let subUpMarker = "";
+      let isSubUp = false;
 
       // Prefer the replay-resolved match (real platform IDs, keyed by display
       // name). Fall back to the group platform/id key, which still covers
@@ -746,14 +756,19 @@ async function getStats(
               reportedIdx !== -1 &&
               memberIdx < reportedIdx
             ) {
+              // Cap is per team + tier: a player may sub up for the same team in
+              // the same tier at most SUB_UP_CAP times per season.
+              const memberTeam = getMemberTeam(member);
               // Projected count = current + 1 (the actual increment happens in
               // execute() only once the report is confirmed and written).
-              const projected = subUpTracker.getCount(discordId) + 1;
+              const projected =
+                subUpTracker.getCount(discordId, memberTeam, tier) + 1;
               subUpMarker = `Sub Up (${memberTier}) ${projected}/${subUpTracker.SUB_UP_CAP}`;
               if (projected > subUpTracker.SUB_UP_CAP) {
                 subUpMarker += " ⚠️ OVER CAP";
               }
-              subUps.push(discordId);
+              subUps.push({ userId: discordId, team: memberTeam, tier });
+              isSubUp = true;
               console.log(
                 `↑ ${member.user.username} is a SUB UP: ${memberTier} playing in ${tier} (${projected}/${subUpTracker.SUB_UP_CAP})`,
               );
@@ -836,6 +851,14 @@ async function getStats(
         discordUsername || "Not Submitted?",
         subUpMarker,
       ];
+
+      // Sub-ups don't count toward stats: clear the stat columns (D–R) and leave
+      // the V column (the @) blank so nothing is attributed to them. The sub-up
+      // note stays in the W column (index 21).
+      if (isSubUp) {
+        for (let c = 2; c <= 16; c++) playerArray[c] = "";
+        playerArray[20] = ""; // V column: don't type the @ for sub-ups
+      }
 
       statsArray.push(playerArray);
     }
