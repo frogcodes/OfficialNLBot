@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { DateTime } = require("luxon");
 const fs = require("fs");
 const path = require("path");
 const { faRoles, leagueRoles } = require("../../data/roles.json");
@@ -91,16 +92,14 @@ module.exports = {
     await player.roles.remove(noReqsRole);
     //await player.roles.add(FArole);
 
-    const today = new Date();
-    const day = today.getDay(); // 0=Sunday, 1=Monday, ...
-    const daysUntilMonday = (8 - day) % 7 || 7; // always pushes to the *next* Monday
-    const nextMonday = new Date(today);
-    nextMonday.setDate(today.getDate() + daysUntilMonday);
+    // Compute the next Monday in ET (not the host's local zone) so the RFA date
+    // is correct regardless of the server's timezone (the Pi runs in UTC).
+    const nowET = DateTime.now().setZone("America/New_York").startOf("day");
+    const daysUntilMonday = (8 - nowET.weekday) % 7 || 7; // always the *next* Monday
+    const nextMonday = nowET.plus({ days: daysUntilMonday });
 
     // Format as MM/DD with leading zeros
-    const month = String(nextMonday.getMonth() + 1).padStart(2, "0");
-    const date = String(nextMonday.getDate()).padStart(2, "0");
-    const formatted = `${month}/${date}`;
+    const formatted = nextMonday.toFormat("MM/dd");
 
     // Remove any existing RFA tag, preserve everything else
     const withoutRFA = player.displayName.replace(

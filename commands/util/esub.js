@@ -135,20 +135,20 @@ module.exports = {
       }
 
       const requestMsg = await requestChannel.send(
-        `🆘 **ESUB REQUEST** 🆘\n\n` +
-          `**${teamName}** want to emergency-sub <@${playerIn.id}> **IN** for <@${playerOut.id}> in **${tier}**.\n\n` +
-          `<@${playerIn.id}> react ✅ to accept, and a **${tier} captain / handler / zookeeper** react ✅ to approve. ❌ to cancel.\n` +
-          `(${currentCount}/${esubCap.ESUB_CAP} ${tier} esubs used) — expires in 12 hours.`,
+        `🆘 **ESUB** · **${teamName}** ${tier} — <@${playerIn.id}> in for <@${playerOut.id}>\n` +
+          `Needs ✅ from the player **and** a ${tier} captain/manager (${currentCount}/${esubCap.ESUB_CAP} used). ❌ to cancel.`,
       );
 
       await requestMsg.react("✅");
       await requestMsg.react("❌");
 
-      // A user counts as "management" for this esub if they are the tier's
-      // captain or an org handler/zookeeper.
+      // Management for THIS esub = the tier captain / handler / zookeeper who is
+      // actually on the initiating team. The team-role requirement means another
+      // team's captain or manager can't approve OR deny this request.
       const isManagement = async (user) => {
         const m = await guild.members.fetch(user.id).catch(() => null);
         if (!m) return false;
+        if (!m.roles.cache.has(teamData.roleId)) return false;
         return (
           m.roles.cache.has(handler) ||
           m.roles.cache.has(zookeeper) ||
