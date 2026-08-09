@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { DateTime } = require("luxon");
 const teams = require("../../data/teams.json");
 const { teamImage } = require("../../utils/teamImage.js");
 const { faRoles, leagueRoles } = require("../../data/roles.json");
@@ -13,10 +14,14 @@ const zookeeper = "1181050438926209076";
 const handler = "1181050438926209074";
 const FA_LEAGUE_ROLE_ID = "1470322091902373909";
 
+// 3 weeks out, in ET (not the host's local zone), zero-padded MM/DD so the
+// nickname tag matches the RFA auto-release check in events/ready.js.
 function threeWeekFromToday() {
-  const now = new Date();
-  const nextWeek = new Date(now.getTime() + 21 * 24 * 60 * 60 * 1000);
-  return `${nextWeek.getMonth() + 1}/${nextWeek.getDate()}`;
+  return DateTime.now()
+    .setZone("America/New_York")
+    .startOf("day")
+    .plus({ days: 21 })
+    .toFormat("MM/dd");
 }
 
 module.exports = {

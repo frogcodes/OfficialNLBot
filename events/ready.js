@@ -55,7 +55,6 @@ module.exports = {
 
     console.log("✅ Year Check Scheduler started.");
 
-    startLeaderboardUpdater(client);
 
     const checkAnniversaries = async () => {
       const guild = client.guilds.cache.get(GUILD_ID);
