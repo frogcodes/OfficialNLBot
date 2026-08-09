@@ -1,8 +1,12 @@
 const { Events } = require("discord.js");
+const { DateTime } = require("luxon");
 const { enrollmentTracker } = require("../utils/enrollmentTracker.js");
 const { startLeaderboardUpdater } = require("../utils/leaderboard.js");
 const { startAwardScheduler } = require("../utils/awardSync.js");
 const { uploadRoster } = require("../commands/util/upload-roster.js");
+const {
+  scheduleIllegalRosterCheck,
+} = require("../commands/util/illegalRosterCheck.js");
 
 async function cacheGuildMembers(guild) {
   let lastMemberId = undefined;
@@ -107,6 +111,7 @@ module.exports = {
     scheduleMidnightCheck(client);
     startAwardScheduler(client);
     scheduleRosterUpload(client);
+    scheduleIllegalRosterCheck(client);
 
     // Then every 24 hours
     setInterval(checkAnniversaries, 1000 * 60 * 60 * 24); // 24 hrs
@@ -139,10 +144,9 @@ const CONFIG = {
  * Returns today's date as "MM/DD" (e.g. "02/23")
  */
 function getTodayTag() {
-  const now = new Date();
-  const mm = String(now.getMonth() + 1).padStart(2, "0");
-  const dd = String(now.getDate()).padStart(2, "0");
-  return `${mm}/${dd}`;
+  // ET, not the host's local zone (the Pi runs in UTC), so the release date
+  // lines up with the ET date shown in players' RFA nicknames.
+  return DateTime.now().setZone("America/New_York").toFormat("MM/dd");
 }
 
 /**
@@ -183,14 +187,20 @@ async function checkAndReleaseRFA(client) {
 
   const releasedPlayers = [];
 
+  // Build the date matcher once. Allow an optional leading zero on each part so
+  // legacy nicknames written as "RFA 9/5" still match today's "09/05", and use
+  // digit boundaries so e.g. today 9/2 doesn't match an "RFA 9/29" nickname.
+  const [mm, dd] = todayTag.split("/");
+  const m = String(Number(mm));
+  const d = String(Number(dd));
+  const rfaPattern = new RegExp(
+    `RFA\\s*(?<!\\d)0?${m}\\/0?${d}(?!\\d)`,
+    "i",
+  );
+
   for (const [, member] of rfaRole.members) {
     const nickname = member.nickname || member.user.username;
 
-    // Match "RFA MM/DD" anywhere in the nickname (case-insensitive)
-    const rfaPattern = new RegExp(
-      `RFA\\s*${todayTag.replace("/", "\\/")}`,
-      "i",
-    );
     if (!rfaPattern.test(nickname)) continue;
 
     console.log(`[RFA Check] Releasing: ${nickname} (${member.user.tag})`);
