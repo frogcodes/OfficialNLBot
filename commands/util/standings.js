@@ -30,18 +30,20 @@ const divisions = {
     startCol: "R",
     startRow: 11,
     logo: "apex logo.png",
-    name: "SAVANNAH",
+    name: "APEX",
   },
   Alpha: {
     startCol: "D",
     startRow: 29,
     logo: "alpha logo.png",
-    name: "TSUNAMI",
+    name: "ALPHA",
   },
-  Beta: { startCol: "R", startRow: 29, logo: "beta logo.png", name: "VALLEY" },
+  Beta: { startCol: "R", startRow: 29, logo: "beta logo.png", name: "Beta" },
   Delta: { startCol: "D", startRow: 47, logo: "delta logo.png", name: "DELTA" },
   Omega: { startCol: "R", startRow: 47, logo: "omega logo.png", name: "OMEGA" },
 };
+
+const ROSTER_SHEET_ID = process.env.rosterSheetId;
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -113,7 +115,7 @@ async function makeStandingsGraphics(tier, interaction, standingsChannel) {
     });
 
     const sheets = google.sheets({ version: "v4", auth });
-    const spreadsheetId = "187AXnmM3a4pHXJgeb0rzb1mbPiMKLz0qeHUVPm7q2ys";
+    const spreadsheetId = ROSTER_SHEET_ID;
 
     console.log("Using spreadsheet ID:", spreadsheetId);
     console.log("Selected division:", selectedDivision || "All divisions");

@@ -59,6 +59,7 @@ module.exports = {
 
     console.log("✅ Year Check Scheduler started.");
 
+    startLeaderboardUpdater(client);
 
     const checkAnniversaries = async () => {
       const guild = client.guilds.cache.get(GUILD_ID);
@@ -193,10 +194,7 @@ async function checkAndReleaseRFA(client) {
   const [mm, dd] = todayTag.split("/");
   const m = String(Number(mm));
   const d = String(Number(dd));
-  const rfaPattern = new RegExp(
-    `RFA\\s*(?<!\\d)0?${m}\\/0?${d}(?!\\d)`,
-    "i",
-  );
+  const rfaPattern = new RegExp(`RFA\\s*(?<!\\d)0?${m}\\/0?${d}(?!\\d)`, "i");
 
   for (const [, member] of rfaRole.members) {
     const nickname = member.nickname || member.user.username;
